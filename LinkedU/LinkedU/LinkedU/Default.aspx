@@ -33,7 +33,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="index.html" class="navbar-brand"><strong>CLEAN CANVAS</strong></a>
+                <a href="Default.aspx" class="navbar-brand"><strong>LinkedU</strong></a>
             </div>
 
             <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
@@ -48,16 +48,16 @@
                             <li><a href="portfolio.html">Portfolio</a></li>
                             <li><a href="portfolio-item.html">Portfolio Item</a></li>
                             <li><a href="coming-soon.html">Coming Soon</a></li>
-                            <li><a href="sign-in.html">Sign in</a></li>
-                            <li><a href="sign-up.html">Sign up</a></li>
+                            <li><a href="Sign-In.aspx">Sign in</a></li>
+                            <li><a href="Sign-Up.aspx">Sign up</a></li>
                             <li><a href="backgrounds.html">Backgrounds</a></li>
                         </ul>
                     </li>
                     <li><a href="pricing.html">PRICING</a></li>
                     <li><a href="contact.html">CONTACT US</a></li>
                     <li><a href="blog.html">BLOG</a></li>
-                    <li><a href="sign-up.html">Sign up</a></li>
-                    <li><a href="sign-in.html">Sign in</a></li>
+                    <li><a href="Sign-Up.aspx">Sign up</a></li>
+                    <li><a href="Sign-In.aspx">Sign in</a></li>
                 </ul>
             </div>
         </div>

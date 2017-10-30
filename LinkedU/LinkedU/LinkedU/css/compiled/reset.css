@@ -56,6 +56,30 @@
       margin-bottom: 35px;
       width: 100%;
       padding-left: 8px; }
+    .reset_page .box .form input[type="password"] {
+        border-color: #DBDBDB #EAEAEA #EAEAEA #DBDBDB;
+        border-left: 1px solid #DBDBDB;
+        border-style: solid;
+        border-width: 1px;
+        font-size: 16px;
+        height: 40px;
+        margin-bottom: 35px;
+        width: 100%;
+        padding-left: 8px;
+    }
+    .reset_page .box .form input[type="button"] {
+        text-transform: uppercase;
+        color: #fff;
+        background: #CE1126;
+        font-size: 15px;
+        padding: 8px 18px;
+        border: 0 none;
+        border-radius: 3px;
+        -webkit-transition: background linear .2s, box-shadow linear .2s;
+        -moz-transition: background linear .2s, box-shadow linear .2s;
+        -o-transition: background linear .2s, box-shadow linear .2s;
+        transition: background linear .2s, box-shadow linear .2s;
+    }
     .reset_page .box .form input[type="submit"] {
       text-transform: uppercase;
       color: #fff;

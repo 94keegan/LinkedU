@@ -252,6 +252,9 @@
     <Content Include="js\jquery.countdown.min.js" />
     <Content Include="js\jquery.isotope.min.js" />
     <Content Include="js\theme.js" />
+    <Content Include="Reset.aspx" />
+    <Content Include="Sign-In.aspx" />
+    <Content Include="Sign-Up.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -263,6 +266,27 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reset.aspx.cs">
+      <DependentUpon>Reset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reset.aspx.designer.cs">
+      <DependentUpon>Reset.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sign-In.aspx.cs">
+      <DependentUpon>Sign-In.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sign-In.aspx.designer.cs">
+      <DependentUpon>Sign-In.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sign-Up.aspx.cs">
+      <DependentUpon>Sign-Up.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sign-Up.aspx.designer.cs">
+      <DependentUpon>Sign-Up.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
