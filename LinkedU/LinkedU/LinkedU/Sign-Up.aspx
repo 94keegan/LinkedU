@@ -18,10 +18,11 @@
     <link rel="stylesheet" href="css/compiled/sign-up.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="css/compiled/reset.css" type="text/css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/lib/animate.css" media="screen, projection" />
+    <link rel="stylesheet" href="css/LinkedU.css" type="text/css" media="screen" />
 
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -39,25 +40,15 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="Default.aspx">HOME</a></li>
-                    <li><a href="about-us.html">ABOUT US</a></li>
+                    <!--Add more menus here above the Contact Us-->
+
+                    <li><a href="Contact.aspx">CONTACT US</a></li>
                     <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">UserName <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="features.html">Features</a></li>
-                            <li><a href="services.html">Services</a></li>
-                            <li><a href="portfolio.html">Portfolio</a></li>
-                            <li><a href="portfolio-item.html">Portfolio Item</a></li>
-                            <li><a href="coming-soon.html">Coming Soon</a></li>
-                            <li><a href="Sign-In.aspx">Sign in</a></li>
-                            <li><a href="Sign-Up.aspx">Sign up</a></li>
-                            <li><a href="backgrounds.html">Backgrounds</a></li>
+                            <li><a href="#">Logoff</a></li>
                         </ul>
                     </li>
-                    <li><a href="pricing.html">PRICING</a></li>
-                    <li><a href="contact.html">CONTACT US</a></li>
-                    <li><a href="blog.html">BLOG</a></li>
-                    <li class="active"><a href="Sign-Up.aspx">Sign up</a></li>
-                    <li><a href="Sign-In.aspx">Sign in</a></li>
                 </ul>
             </div>
         </div>
@@ -92,59 +83,29 @@
     </div>
 
     <!-- starts footer -->
-    <footer id="footer">
-        <div class="container">
-            <div class="row info">
-                <div class="col-sm-6 residence">
+    <footer id='footer'>
+        <div class='container'>
+            <div class='row info'>
+                <div class='col-sm-6 residence'>
                     <ul>
-                        <li>2301 East Lamar Blvd. Suite 140. City, Arlington.</li>
-                        <li>United States, Zip Code TX 76006.</li>
+                        <li>Illinois State University</li>
+                        <li>Normal, IL</li>
                     </ul>
                 </div>
-                <div class="col-sm-5 touch">
+                <div class='col-sm-5 touch'>
                     <ul>
-                        <li><strong>P.</strong> 1 817 274 2933</li>
-                        <li><strong>E.</strong><a href="#"> bootstrap@twitter.com</a></li>
+                        <li><strong>Contact</strong></li>
+                        <br />
+                        <li><a href='Contact.aspx'>Click Here to Send Us A Note</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="row credits">
-                <div class="col-md-12">
-                    <div class="row social">
-                        <div class="col-md-12">
-                            <a href="#" class="facebook">
-                                <span class="socialicons ico1"></span>
-                                <span class="socialicons_h ico1h"></span>
-                            </a>
-                            <a href="#" class="twitter">
-                                <span class="socialicons ico2"></span>
-                                <span class="socialicons_h ico2h"></span>
-                            </a>
-                            <a href="#" class="gplus">
-                                <span class="socialicons ico3"></span>
-                                <span class="socialicons_h ico3h"></span>
-                            </a>
-                            <a href="#" class="flickr">
-                                <span class="socialicons ico4"></span>
-                                <span class="socialicons_h ico4h"></span>
-                            </a>
-                            <a href="#" class="pinterest">
-                                <span class="socialicons ico5"></span>
-                                <span class="socialicons_h ico5h"></span>
-                            </a>
-                            <a href="#" class="dribble">
-                                <span class="socialicons ico6"></span>
-                                <span class="socialicons_h ico6h"></span>
-                            </a>
-                            <a href="#" class="behance">
-                                <span class="socialicons ico7"></span>
-                                <span class="socialicons_h ico7h"></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row copyright">
-                        <div class="col-md-12">
-                            © 2017 LinkU. All rights reserved. Developed by Team JKMZ.
+            <div class='row credits'>
+                <div class='col-md-12'>
+                    <div class='row copyright'>
+                        <div class='col-md-12'>
+                            2017 CeMaST. All rights reserved.<br>
+                            Development &amp; Design: ISU Spring 2017 IT363 Class
                         </div>
                     </div>
                 </div>

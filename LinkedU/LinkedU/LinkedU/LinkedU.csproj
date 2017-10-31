@@ -70,6 +70,8 @@
     <Content Include="artwork\BANNER-2.psd" />
     <Content Include="artwork\BANNER-3.psd" />
     <Content Include="artwork\BANNER-4.psd" />
+    <Content Include="Contact.aspx" />
+    <Content Include="css\LinkedU.css" />
     <Content Include="css\scss\about.scss" />
     <Content Include="css\scss\backgrounds.scss" />
     <Content Include="css\scss\blog.scss" />
@@ -258,6 +260,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contact.aspx.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contact.aspx.designer.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -1,29 +1,31 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Reset.aspx.cs" Inherits="LinkedU.Reset" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="LinkedU.Contact" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head  runat="server">
-	<title>LinkedU || Reset</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head runat="server">
+	<title>LinkedU || Contact</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Styles -->
-    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/compiled/bootstrap-overrides.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="css/compiled/theme.css" />
+	<!-- Styles -->
+	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="css/compiled/bootstrap-overrides.css" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="css/compiled/theme.css" />
 
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
 
-    <link rel="stylesheet" href="css/compiled/reset.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="css/compiled/contact.css" type="text/css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="css/lib/animate.css" media="screen, projection" />
     <link rel="stylesheet" href="css/LinkedU.css" type="text/css" media="screen" />
 
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+
+	<div class="navbar navbar-inverse navbar-static-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -52,32 +54,43 @@
         </div>
     </div>
 
-    <div id="reset_pwd" class="reset_page">
+    <div id="contact">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12 box_wrapper">
-                    <div class="col-md-12">
-                        <div class="box">
-                            <div class="head">
-								<h1>Reset your Password</h1>
-                                <h4>Enter your email address below to receive instructions on how to reset your password.</h4>
-                                <div class="line"></div>
+            <div class="section_header">
+                <h3>Get in touch</h3>
+            </div>
+            <div class="row contact">
+                <p>What you think is important to us, and we've got you covered 110%. Our team will review your message and reply back as soon as possible.</p>
+                <!--TODO: Convert to ASP
+                    <?php if(isset($error)){ ?><div class="alert alert-danger"><?php  echo $error; ?></div> <?php }
+                else if(isset($success)){ ?><div class="alert alert-success">Email has been sent!</div><?php } ?>-->
+                <form id="form1">
+                    <div class="row form">
+                        <div class="col-sm-6 row-col">
+                            <div class="box">
+                                <input class="name form-control" name="name" type="text" placeholder="Name" required="required" />
+                                <input class="mail form-control" name="email" type="text" placeholder="Email" required="required" />
                             </div>
-                            <div class="form">
-                                <form>
-                                    <input type="text" placeholder="Email" class="control-form" />
-                                    <input type="submit" value="Reset password"/>
-                                </form>
+                        </div>
+                        <div class="col-sm-6 row-col">
+                            <div class="box">
+                                <textarea name="message" style="resize:none;" placeholder="Type a message here..." class="form-control" required="required"></textarea>
                             </div>
                         </div>
                     </div>
-                    <p class="already">Know your password? <a href="Sign-In.aspx">Sign in</a></p>
-                </div>
+
+                    <div class="row submit">
+                        <div class="col-md-3 right">
+                            <br/>
+                            <input type="submit" value="Send your message" />
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- starts footer -->
+	<!-- starts footer -->
     <footer id='footer'>
         <div class='container'>
             <div class='row info'>

@@ -39,25 +39,15 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="index.html">HOME</a></li>
-                    <li><a href="about-us.html">ABOUT US</a></li>
+                    <!--Add more menus here above the Contact Us-->
+
+                    <li><a href="Contact.aspx">CONTACT US</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">UserName <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="features.html">Features</a></li>
-                            <li><a href="services.html">Services</a></li>
-                            <li><a href="portfolio.html">Portfolio</a></li>
-                            <li><a href="portfolio-item.html">Portfolio Item</a></li>
-                            <li><a href="coming-soon.html">Coming Soon</a></li>
-                            <li><a href="Sign-In.aspx">Sign in</a></li>
-                            <li><a href="Sign-Up.aspx">Sign up</a></li>
-                            <li><a href="backgrounds.html">Backgrounds</a></li>
+                            <li><a href="#">LogOff</a></li>
                         </ul>
                     </li>
-                    <li><a href="pricing.html">PRICING</a></li>
-                    <li><a href="contact.html">CONTACT US</a></li>
-                    <li><a href="blog.html">BLOG</a></li>
-                    <li><a href="Sign-Up.aspx">Sign up</a></li>
-                    <li><a href="Sign-In.aspx">Sign in</a></li>
                 </ul>
             </div>
         </div>
@@ -362,105 +352,39 @@
     </div>
 
     <!-- starts footer -->
-    <footer id="footer">
-        <div class="container">
-            <div class="row sections">
-                <div class="col-sm-4 recent_posts">
-                    <h3 class="footer_header">Recent Posts
-                    </h3>
-                    <div class="post">
-                        <a href="blogpost.html">
-                            <img src="img/recent_post1.png" class="img-circle" />
-                        </a>
-                        <div class="date">
-                            Wed, 12 Dec
-                        </div>
-                        <a href="blogpost.html" class="title">Randomised words which don't look embarrasing hidden.
-                        </a>
-                    </div>
-                    <div class="post">
-                        <a href="blogpost.html">
-                            <img src="img/recent_post2.png" class="img-circle" />
-                        </a>
-                        <div class="date">
-                            Mon, 12 Dec
-                        </div>
-                        <a href="blogpost.html" class="title">Randomised words which don't look embarrasing hidden.
-                        </a>
-                    </div>
+    <footer id='footer'>
+        <div class='container'>
+            <div class='row info'>
+                <div class='col-sm-6 residence'>
+                    <ul>
+                        <li>Illinois State University</li>
+                        <li>Normal, IL</li>
+                    </ul>
                 </div>
-                <div class="col-sm-4 testimonials">
-                    <h3 class="footer_header">Testimonials
-                    </h3>
-                    <div class="wrapper">
-                        <div class="quote">
-                            <span>“</span>
-                            There are many variations of passages of randomised words which don't look even slightly believable. You need to be sure there isn't anything embarrassing of text.
-                            <span></span>
-                        </div>
-                        <div class="author">
-                            <img src="img/user-display.png" />
-                            <div class="name">Alejandra Galvan Castillo</div>
-                            <div class="info">
-                                Details Canvas
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 contact">
-                    <h3 class="footer_header">Contact
-                    </h3>
-                    <form action="#" method="post">
-                        <input type="text" placeholder="Your name" />
-                        <input type="text" placeholder="Your email" />
-                        <textarea rows="3" placeholder="Message"></textarea>
-                        <input type="submit" value="Send" />
-                    </form>
+                <div class='col-sm-5 touch'>
+                    <ul>
+                        <li><strong>Contact</strong></li>
+                        <br />
+                        <li><a href='Contact.aspx'>Click Here to Send Us A Note</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="row credits">
-                <div class="col-md-12">
-                    <div class="row social">
-                        <div class="col-md-12">
-                            <a href="#" class="facebook">
-                                <span class="socialicons ico1"></span>
-                                <span class="socialicons_h ico1h"></span>
-                            </a>
-                            <a href="#" class="twitter">
-                                <span class="socialicons ico2"></span>
-                                <span class="socialicons_h ico2h"></span>
-                            </a>
-                            <a href="#" class="gplus">
-                                <span class="socialicons ico3"></span>
-                                <span class="socialicons_h ico3h"></span>
-                            </a>
-                            <a href="#" class="flickr">
-                                <span class="socialicons ico4"></span>
-                                <span class="socialicons_h ico4h"></span>
-                            </a>
-                            <a href="#" class="pinterest">
-                                <span class="socialicons ico5"></span>
-                                <span class="socialicons_h ico5h"></span>
-                            </a>
-                            <a href="#" class="dribble">
-                                <span class="socialicons ico6"></span>
-                                <span class="socialicons_h ico6h"></span>
-                            </a>
-                            <a href="#" class="behance">
-                                <span class="socialicons ico7"></span>
-                                <span class="socialicons_h ico7h"></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row copyright">
-                        <div class="col-md-12">
-                            © 2017 LinkU. All rights reserved. Developed by Team JKMZ.
+            <div class='row credits'>
+                <div class='col-md-12'>
+                    <div class='row copyright'>
+                        <div class='col-md-12'>
+                            2017 CeMaST. All rights reserved.<br>
+                            Development &amp; Design: ISU Spring 2017 IT363 Class
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!--www.scrolltotop.com-->
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script type='text/javascript' src='http://arrow.scrolltotop.com/arrow66.js'></script>
 
     <!-- Scripts -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
