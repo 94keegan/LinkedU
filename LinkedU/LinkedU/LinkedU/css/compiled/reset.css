@@ -94,6 +94,17 @@
       transition: background linear .2s, box-shadow linear .2s; }
       .reset_page .box .form input[type="submit"]:hover {
         background: #252528; }
+    .reset_page .box .form select {
+        border-color: #DBDBDB #EAEAEA #EAEAEA #DBDBDB;
+        border-left: 1px solid #DBDBDB;
+        border-style: solid;
+        border-width: 1px;
+        font-size: 16px;
+        height: 40px;
+        margin-bottom: 35px;
+        width: 100%;
+        padding-left: 8px;
+    }
 .reset_page form {
   margin: 0px; }
 .reset_page .already a {

@@ -43,12 +43,6 @@
                     <!--Add more menus here above the Contact Us-->
 
                     <li><a href="Contact.aspx">CONTACT US</a></li>
-                    <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">UserName <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Logoff</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -66,10 +60,16 @@
                                 <div class="line"></div>
                             </div>
                             <div class="form">
-                                <form runat="server" name="login_form" id="my_form">
-                                    <input type="text" name="email" id="email" placeholder="Email" class="control-form" />
-                                    <input type="password" name="password" id="password" placeholder="Password" class="control-form" />
-                                    <input type="submit" value="Sign in" />
+                                <% if (LoginError) Response.Write("<p style='color:red'>Error Signing In!</p>"); %>
+                                <form runat="server" id="form">
+                                    <asp:TextBox ID="txtUserName" runat="server" placeholder="User Name" class="control-form" required="required" />
+                                    <asp:TextBox ID="txtPassword" runat="server" placeholder="Password" class="control-form" required="required" />
+                                    <div class="col-md-6 remember" id="RememberMe">
+                                        <label class="checkbox">
+                                            <asp:CheckBox ID="chkRememberMe" runat="server" Text="Remember me" class="control-form" />
+                                        </label>
+                                    </div>
+                                    <asp:Button ID="btnSignIn" runat="server" Text="Sign In" OnClick="btnSignIn_Click" />
                                 </form>
                             </div>
                         </div>
@@ -91,10 +91,9 @@
                         <li>Normal, IL</li>
                     </ul>
                 </div>
-                <div class='col-sm-5 touch'>
+                <div class='col-sm-5'>
                     <ul>
                         <li><strong>Contact</strong></li>
-                        <br />
                         <li><a href='Contact.aspx'>Click Here to Send Us A Note</a></li>
                     </ul>
                 </div>
@@ -103,7 +102,7 @@
                 <div class='col-md-12'>
                     <div class='row copyright'>
                         <div class='col-md-12'>
-                            2017 CeMaST. All rights reserved.<br>
+                            2017 CeMaST. All rights reserved.<br />
                             Development &amp; Design: ISU Spring 2017 IT363 Class
                         </div>
                     </div>
@@ -115,7 +114,5 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
-    <script type="text/JavaScript" src="js/sha512.js"></script>
-    <script type="text/JavaScript" src="js/forms.js"></script>
 </body>
 </html>

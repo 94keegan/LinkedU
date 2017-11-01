@@ -42,10 +42,14 @@
                     <!--Add more menus here above the Contact Us-->
 
                     <li><a href="Contact.aspx">CONTACT US</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">UserName <b class="caret"></b></a>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <% if (Request.Cookies["UserName"].Value != null)
+	                            {
+                                    Response.Write(Request.Cookies["UserName"].Value);
+	                            } %> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">LogOff</a></li>
+                            <li><a href="#">Logoff</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -361,10 +365,9 @@
                         <li>Normal, IL</li>
                     </ul>
                 </div>
-                <div class='col-sm-5 touch'>
+                <div class='col-sm-5'>
                     <ul>
                         <li><strong>Contact</strong></li>
-                        <br />
                         <li><a href='Contact.aspx'>Click Here to Send Us A Note</a></li>
                     </ul>
                 </div>
@@ -373,7 +376,7 @@
                 <div class='col-md-12'>
                     <div class='row copyright'>
                         <div class='col-md-12'>
-                            2017 CeMaST. All rights reserved.<br>
+                            2017 CeMaST. All rights reserved.<br />
                             Development &amp; Design: ISU Spring 2017 IT363 Class
                         </div>
                     </div>

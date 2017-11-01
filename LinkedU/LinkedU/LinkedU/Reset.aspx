@@ -87,10 +87,9 @@
                         <li>Normal, IL</li>
                     </ul>
                 </div>
-                <div class='col-sm-5 touch'>
+                <div class='col-sm-5'>
                     <ul>
                         <li><strong>Contact</strong></li>
-                        <br />
                         <li><a href='Contact.aspx'>Click Here to Send Us A Note</a></li>
                     </ul>
                 </div>
@@ -99,7 +98,7 @@
                 <div class='col-md-12'>
                     <div class='row copyright'>
                         <div class='col-md-12'>
-                            2017 CeMaST. All rights reserved.<br>
+                            2017 CeMaST. All rights reserved.<br />
                             Development &amp; Design: ISU Spring 2017 IT363 Class
                         </div>
                     </div>

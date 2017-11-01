@@ -66,12 +66,17 @@
                                 <div class="line"></div>
                             </div>
                             <div class="form">
-                                <form id="form1">
-                                    <input type="text" name="username" id="username" placeholder="Username" class="control-form" required="required" />
-                                    <input type="text" name="email" id="email" placeholder="Email" class="control-form" required="required" />
-                                    <input type="password" name="password" id="password" placeholder="Password" class="control-form" required="required" />
-                                    <input type="password" name="confirmpwd" id="confirmpwd" placeholder="Confirm Password" class="control-form" required="required" />
-                                    <input type="submit" value="Sign Up" />
+                                <% if (SignupError) Response.Write("<p style='color:red'>Error Signing Up!</p>"); %>
+                                <form runat="server" id="form">
+                                    <asp:DropDownList ID="ddlAccountType" runat="server" class="control-form">
+                                        <asp:ListItem Text="Student" />
+                                        <asp:ListItem Text="University" />
+                                    </asp:DropDownList>
+                                    <asp:TextBox ID="txtUserName" runat="server" placeholder="Username" class="control-form" required="required" />
+                                    <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" class="control-form" required="required" />
+                                    <asp:TextBox ID="txtPassword" runat="server" placeholder="Password" class="control-form" required="required" />
+                                    <asp:TextBox ID="txtConfPassword" runat="server" placeholder="Confirm Password" class="control-form" required="required" />
+                                    <asp:Button ID="btnSignUp" runat="server" Text="Sign Up" OnClick="btnSignUp_Click" />
                                 </form>
                             </div>
                         </div>
@@ -92,10 +97,9 @@
                         <li>Normal, IL</li>
                     </ul>
                 </div>
-                <div class='col-sm-5 touch'>
+                <div class='col-sm-5'>
                     <ul>
                         <li><strong>Contact</strong></li>
-                        <br />
                         <li><a href='Contact.aspx'>Click Here to Send Us A Note</a></li>
                     </ul>
                 </div>
@@ -104,7 +108,7 @@
                 <div class='col-md-12'>
                     <div class='row copyright'>
                         <div class='col-md-12'>
-                            2017 CeMaST. All rights reserved.<br>
+                            2017 CeMaST. All rights reserved.<br />
                             Development &amp; Design: ISU Spring 2017 IT363 Class
                         </div>
                     </div>
@@ -116,7 +120,5 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
-    <script type="text/JavaScript" src="js/sha512.js"></script>
-    <script type="text/JavaScript" src="js/forms.js"></script>
 </body>
 </html>
