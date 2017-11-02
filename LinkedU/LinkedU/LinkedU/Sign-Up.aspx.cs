@@ -20,75 +20,64 @@ namespace LinkedU
             bool valid = true;
             bool successful = true;
             string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
-            SqlConnection dbConnection = new SqlConnection(connectionString);
-
-            // Check if UserID has already been taken
-            try
+            using (SqlConnection dbConnection = new SqlConnection(connectionString))
             {
-                dbConnection.Open();
-                dbConnection.ChangeDatabase("kssuth1_Assign4");
-
-                string loginInfo = "SELECT * FROM login WHERE UserName='" + txtUserName.Text + "'";
-                SqlCommand login = new SqlCommand(loginInfo, dbConnection);
-                SqlDataReader records = login.ExecuteReader();
-                if (records.Read())
+                // Check if UserID has already been taken
+                try
                 {
-                    valid = false;
+                    dbConnection.Open();
+
+                    //Changed the query to "SELECT 1" from "SELECT *". Returns less data, and we only need to test existence
+                    string loginInfo = "SELECT 1 FROM login WHERE UserName = @username";
+                    using (SqlCommand login = new SqlCommand(loginInfo, dbConnection))
+                    {
+                        login.Parameters.AddWithValue("@username", txtUserName.Text);
+                        //Changed to execute scalar. Much more efficient for getting a single value, or the existance of a row
+                        if (login.ExecuteScalar() != null)
+                        {
+                            valid = false;
+                            signupError = true;
+                        }
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Response.Write(ex.Message);
+                    successful = false;
+                    signupError = true;
+                    
+                }
+
+                // Insert user into the user and login tables
+                try
+                {
+                    if (valid && successful)
+                    {
+                        // Insert login values
+                        string loginInsert = "INSERT INTO login VALUES(@username, @password)";
+                        SqlCommand login = new SqlCommand(loginInsert, dbConnection);
+                        login.Parameters.AddWithValue("@username", txtUserName.Text);
+                        login.Parameters.AddWithValue("@password", txtPassword.Text);
+                        login.ExecuteNonQuery();
+
+                        // Insert user values
+                        string userInsert = "INSERT INTO users VALUES(@username, @email)";
+                        SqlCommand user = new SqlCommand(userInsert, dbConnection);
+                        user.Parameters.AddWithValue("@username", txtUserName.Text);
+                        user.Parameters.AddWithValue("@email", txtEmail.Text);
+                        user.ExecuteNonQuery();
+                    }
+
+                }
+                catch (SqlException ex)
+                {
+                    successful = false;
                     signupError = true;
                 }
-                records.Close();
-            }
-            catch (SqlException ex)
-            {
-                successful = false;
-                if (ex.Number == 911) // non-existent DB
+                if (valid && successful)
                 {
-                    SqlCommand sqlCommand = new SqlCommand("CREATE DATABASE kssuth1_Assign4", dbConnection);
-                    sqlCommand.ExecuteNonQuery();
-                    dbConnection.ChangeDatabase("kssuth1_Assign4");
+                    signupError = false;
                 }
-                else
-                {
-                    signupError = true;
-                }
-
-            }
-
-            // Insert user into the user and login tables
-            try
-            {
-                if (valid)
-                {
-                    // Insert login values
-                    string loginInsert = "INSERT INTO login VALUES('" + txtUserName.Text + "', '" + txtPassword.Text + "')";
-                    SqlCommand login = new SqlCommand(loginInsert, dbConnection);
-                    login.ExecuteNonQuery();
-
-                    // Insert user values
-                    string userInsert = "INSERT INTO users VALUES('" + txtUserName.Text + "', '" + txtEmail.Text + "')";
-                    SqlCommand user = new SqlCommand(userInsert, dbConnection);
-                    user.ExecuteNonQuery();
-                }
-
-            }
-            catch (SqlException ex)
-            {
-                successful = false;
-                if (ex.Number == 911) // non-existent DB
-                {
-                    SqlCommand sqlCommand = new SqlCommand("CREATE DATABASE kssuth1_Assign4", dbConnection);
-                    sqlCommand.ExecuteNonQuery();
-                    dbConnection.ChangeDatabase("kssuth1_Assign4");
-                }
-                else
-                {
-                    signupError = true;
-
-                }
-            }
-            if (valid && successful)
-            {
-                signupError = false;
             }
         }
     }

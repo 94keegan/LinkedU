@@ -23,7 +23,6 @@ namespace LinkedU
                     try
                     {
                         dbConnection.Open();
-                        dbConnection.ChangeDatabase("kssuth1_Assign5");
 
                         string UsersInfo = "SELECT * FROM Users WHERE UserName='" + Request.Cookies["UserName"].Value + "'";
                         SqlCommand Users = new SqlCommand(UsersInfo, dbConnection);
@@ -40,16 +39,7 @@ namespace LinkedU
                     }
                     catch (SqlException ex)
                     {
-                        if (ex.Number == 911) // non-existent DB
-                        {
-                            SqlCommand sqlCommand = new SqlCommand("CREATE DATABASE kssuth1_Assign5", dbConnection);
-                            sqlCommand.ExecuteNonQuery();
-                            dbConnection.ChangeDatabase("kssuth1_Assign5");
-                        }
-                        else
-                        {
-                            loginError = true;
-                        }
+                           loginError = true;
                     }
                     dbConnection.Close();
                 }
@@ -77,7 +67,6 @@ namespace LinkedU
             try
             {
                 dbConnection.Open();
-                dbConnection.ChangeDatabase("kssuth1_Assign5");
 
                 string usersInfo = "SELECT * FROM Users WHERE UserName='" + txtUserName.Text + "' AND Password='" + txtPassword.Text + "'";
                 SqlCommand users = new SqlCommand(usersInfo, dbConnection);
@@ -105,16 +94,8 @@ namespace LinkedU
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 911) // non-existent DB
-                {
-                    SqlCommand sqlCommand = new SqlCommand("CREATE DATABASE kssuth1_Assign5", dbConnection);
-                    sqlCommand.ExecuteNonQuery();
-                    dbConnection.ChangeDatabase("kssuth1_Assign5");
-                }
-                else
-                {
+
                     loginError = true;
-                }
             }
             dbConnection.Close();
         }
