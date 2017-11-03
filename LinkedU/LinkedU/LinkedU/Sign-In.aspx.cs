@@ -19,29 +19,35 @@ namespace LinkedU
                 {
                     chkRememberMe.Checked = true;
                     string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
-                    SqlConnection dbConnection = new SqlConnection(connectionString);
-                    try
+                    using (SqlConnection dbConnection = new SqlConnection(connectionString))
                     {
-                        dbConnection.Open();
-
-                        string UsersInfo = "SELECT * FROM Users WHERE UserName='" + Request.Cookies["UserName"].Value + "'";
-                        SqlCommand Users = new SqlCommand(UsersInfo, dbConnection);
-                        SqlDataReader records = Users.ExecuteReader();
-                        if (records.Read())
+                        try
                         {
-                            do
+                            dbConnection.Open();
+
+                            string UsersInfo = "SELECT userLogin, userPassword FROM logins WHERE userLogin LIKE @userLogin";
+                            using (SqlCommand Users = new SqlCommand(UsersInfo, dbConnection))
                             {
-                                txtUserName.Text = records["UserName"].ToString();
-                                txtPassword.Text = records["Password"].ToString();
-                            } while (records.Read());
+
+                                Users.Parameters.AddWithValue("@userLogin", Request.Cookies["UserName"].Value);
+                                using (SqlDataReader records = Users.ExecuteReader())
+                                {
+                                    if (records.Read())
+                                    {
+                                        do
+                                        {
+                                            txtUserName.Text = records["userLogin"].ToString();
+                                            txtPassword.Text = records["userPassword"].ToString();
+                                        } while (records.Read());
+                                    }
+                                }
+                            }
                         }
-                        records.Close();
+                        catch (SqlException ex)
+                        {
+                            loginError = true;
+                        }
                     }
-                    catch (SqlException ex)
-                    {
-                           loginError = true;
-                    }
-                    dbConnection.Close();
                 }
             }
         }
@@ -62,42 +68,48 @@ namespace LinkedU
             }
 
             string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
-            SqlConnection dbConnection = new SqlConnection(connectionString);
-
-            try
+            using (SqlConnection dbConnection = new SqlConnection(connectionString))
             {
-                dbConnection.Open();
-
-                string usersInfo = "SELECT * FROM Users WHERE UserName='" + txtUserName.Text + "' AND Password='" + txtPassword.Text + "'";
-                SqlCommand users = new SqlCommand(usersInfo, dbConnection);
-                SqlDataReader records = users.ExecuteReader();
-                if (records.Read())
+                try
                 {
-                    do
+                    dbConnection.Open();
+
+                    string usersInfo = "SELECT userLogin, userPassword FROM logins WHERE userLogin = @userLogin AND userPassword = @userPassword";
+                    using (SqlCommand users = new SqlCommand(usersInfo, dbConnection))
                     {
-                        if (txtUserName.Text.ToLower().Equals(records["UserName"].ToString().ToLower()) && txtPassword.Text.ToLower().Equals(records["Password"].ToString().ToLower().ToString().ToLower()))
+
+                        users.Parameters.AddWithValue("@userLogin", txtUserName.Text);
+                        users.Parameters.AddWithValue("@userPassword", txtPassword.Text);
+                        using (SqlDataReader records = users.ExecuteReader())
                         {
-                            Session["UserName"] = records["UserName"].ToString();
-                            Response.Redirect("LoginHome.aspx");
+                            if (records.Read())
+                            {
+                                do
+                                {
+                                    if (txtUserName.Text.ToLower().Equals(records["userLogin"].ToString().ToLower()) && txtPassword.Text.ToLower().Equals(records["userPassword"].ToString().ToLower().ToString().ToLower()))
+                                    {
+                                        Session["UserName"] = records["userLogin"].ToString();
+                                        Response.Redirect("LoginHome.aspx");
+                                    }
+                                    else
+                                    {
+                                        loginError = true;
+                                    }
+                                } while (records.Read());
+                            }
+                            else
+                            {
+                                loginError = true;
+                            }
                         }
-                        else
-                        {
-                            loginError = true;
-                        }
-                    } while (records.Read());
+                    }
                 }
-                else
+                catch (SqlException ex)
                 {
-                    loginError = true;
-                }
-                records.Close();
-            }
-            catch (SqlException ex)
-            {
 
                     loginError = true;
+                }
             }
-            dbConnection.Close();
         }
     }
 }

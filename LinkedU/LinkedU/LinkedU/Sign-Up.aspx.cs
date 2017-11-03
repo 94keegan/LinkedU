@@ -28,7 +28,7 @@ namespace LinkedU
                     dbConnection.Open();
 
                     //Changed the query to "SELECT 1" from "SELECT *". Returns less data, and we only need to test existence
-                    string loginInfo = "SELECT 1 FROM login WHERE UserName = @username";
+                    string loginInfo = "SELECT 1 FROM logins WHERE userLogin LIKE @username";
                     using (SqlCommand login = new SqlCommand(loginInfo, dbConnection))
                     {
                         login.Parameters.AddWithValue("@username", txtUserName.Text);
@@ -53,19 +53,32 @@ namespace LinkedU
                 {
                     if (valid && successful)
                     {
-                        // Insert login values
-                        string loginInsert = "INSERT INTO login VALUES(@username, @password)";
-                        SqlCommand login = new SqlCommand(loginInsert, dbConnection);
-                        login.Parameters.AddWithValue("@username", txtUserName.Text);
-                        login.Parameters.AddWithValue("@password", txtPassword.Text);
-                        login.ExecuteNonQuery();
+                        // Insert logins values
+                        string loginInsert = "INSERT INTO logins (userLogin, userPassword) VALUES (@username, @password)";
+                        using (SqlCommand login = new SqlCommand(loginInsert, dbConnection))
+                        {
+                            login.Parameters.AddWithValue("@username", txtUserName.Text);
+                            login.Parameters.AddWithValue("@password", txtPassword.Text);
+                            login.ExecuteNonQuery();
+                        }
+
+                        //retrieve auto-generated userID
+                        int userid = 0;
+                        string loginSelect = "SELECT userID FROM logins WHERE userLogin = @username";
+                        using (SqlCommand select = new SqlCommand(loginSelect, dbConnection))
+                        {
+                            select.Parameters.AddWithValue("@username", txtUserName.Text);
+                            userid = int.Parse(select.ExecuteScalar().ToString());
+                        }
 
                         // Insert user values
-                        string userInsert = "INSERT INTO users VALUES(@username, @email)";
-                        SqlCommand user = new SqlCommand(userInsert, dbConnection);
-                        user.Parameters.AddWithValue("@username", txtUserName.Text);
-                        user.Parameters.AddWithValue("@email", txtEmail.Text);
-                        user.ExecuteNonQuery();
+                        string userInsert = "INSERT INTO users (userID, email) VALUES (@userID, @email)";
+                        using (SqlCommand user = new SqlCommand(userInsert, dbConnection))
+                        {
+                            user.Parameters.AddWithValue("@userID", userid);
+                            user.Parameters.AddWithValue("@email", txtEmail.Text);
+                            user.ExecuteNonQuery();
+                        }
                     }
 
                 }
