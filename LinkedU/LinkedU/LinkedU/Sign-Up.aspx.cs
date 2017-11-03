@@ -28,7 +28,7 @@ namespace LinkedU
                 dbConnection.Open();
                 dbConnection.ChangeDatabase("kssuth1_Assign4");
 
-                string loginInfo = "SELECT * FROM login WHERE UserName='" + txtUserName.Text + "'";
+                string loginInfo = "SELECT * FROM Users WHERE UserName='" + txtUserName.Text + "'";
                 SqlCommand login = new SqlCommand(loginInfo, dbConnection);
                 SqlDataReader records = login.ExecuteReader();
                 if (records.Read())
@@ -59,11 +59,6 @@ namespace LinkedU
             {
                 if (valid)
                 {
-                    // Insert login values
-                    string loginInsert = "INSERT INTO login VALUES('" + txtUserName.Text + "', '" + txtPassword.Text + "')";
-                    SqlCommand login = new SqlCommand(loginInsert, dbConnection);
-                    login.ExecuteNonQuery();
-
                     // Insert user values
                     string userInsert = "INSERT INTO users VALUES('" + txtUserName.Text + "', '" + txtEmail.Text + "')";
                     SqlCommand user = new SqlCommand(userInsert, dbConnection);
