@@ -72,7 +72,11 @@
                                         <asp:ListItem Text="Student" />
                                         <asp:ListItem Text="University" />
                                     </asp:DropDownList>
-                                    <asp:TextBox ID="txtUserName" runat="server" placeholder="Username" class="control-form" required="required" />
+                                    <asp:TextBox ID="txtUserName" runat="server" placeholder="User Name" class="control-form" required="required" />
+                                    <asp:TextBox ID="txtFirstName" runat="server" placeholder="First Name" class="control-form" required="required" />
+                                    <asp:TextBox ID="txtLastname" runat="server" placeholder="Last Name" class="control-form" required="required" />
+                                    <asp:TextBox ID="txtQuestion" runat="server" placeholder="Security Question" class="control-form" required="required" />
+                                    <asp:TextBox ID="txtAnswer" runat="server" placeholder="Security Answer" class="control-form" required="required" />
                                     <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" class="control-form" required="required" />
                                     <asp:TextBox ID="txtPassword" runat="server" placeholder="Password" class="control-form" required="required" />
                                     <asp:TextBox ID="txtConfPassword" runat="server" placeholder="Confirm Password" class="control-form" required="required" />

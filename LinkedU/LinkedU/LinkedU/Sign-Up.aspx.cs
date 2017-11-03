@@ -75,11 +75,15 @@ namespace LinkedU
                         }
 
                         // Insert user values
-                        string userInsert = "INSERT INTO users (userID, email) VALUES (@userID, @email)";
+                        string userInsert = "INSERT INTO users (userID, firstName, lastName, email, securityQuestion, securityAnswer) VALUES (@userID, @firstName, @lastName, @email, @securityQuestion, @securityAnswer)";
                         using (SqlCommand user = new SqlCommand(userInsert, dbConnection))
                         {
                             user.Parameters.AddWithValue("@userID", userid);
+                            user.Parameters.AddWithValue("@firstName", txtFirstName.Text);
+                            user.Parameters.AddWithValue("@lastName", txtLastname.Text);
                             user.Parameters.AddWithValue("@email", txtEmail.Text);
+                            user.Parameters.AddWithValue("@securityQuestion", txtQuestion.Text);
+                            user.Parameters.AddWithValue("@securityAnswer", txtAnswer.Text);
                             user.ExecuteNonQuery();
                         }
                     }
