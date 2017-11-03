@@ -19,39 +19,14 @@ namespace LinkedU
                 {
                     chkRememberMe.Checked = true;
                     string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
-                    SqlConnection dbConnection = new SqlConnection(connectionString);
-                    try
                     {
-                        dbConnection.Open();
-                        dbConnection.ChangeDatabase("kssuth1_Assign5");
-
-                        string UsersInfo = "SELECT * FROM Users WHERE UserName='" + Request.Cookies["UserName"].Value + "'";
-                        SqlCommand Users = new SqlCommand(UsersInfo, dbConnection);
-                        SqlDataReader records = Users.ExecuteReader();
-                        if (records.Read())
                         {
-                            do
                             {
-                                txtUserName.Text = records["UserName"].ToString();
-                                txtPassword.Text = records["Password"].ToString();
-                            } while (records.Read());
                         }
-                        records.Close();
-                    }
-                    catch (SqlException ex)
-                    {
-                        if (ex.Number == 911) // non-existent DB
-                        {
-                            SqlCommand sqlCommand = new SqlCommand("CREATE DATABASE kssuth1_Assign5", dbConnection);
-                            sqlCommand.ExecuteNonQuery();
-                            dbConnection.ChangeDatabase("kssuth1_Assign5");
-                        }
-                        else
                         {
                             loginError = true;
                         }
                     }
-                    dbConnection.Close();
                 }
             }
         }
@@ -72,51 +47,17 @@ namespace LinkedU
             }
 
             string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
-            SqlConnection dbConnection = new SqlConnection(connectionString);
-
-            try
             {
-                dbConnection.Open();
-                dbConnection.ChangeDatabase("kssuth1_Assign5");
-
-                string usersInfo = "SELECT * FROM Users WHERE UserName='" + txtUserName.Text + "' AND Password='" + txtPassword.Text + "'";
-                SqlCommand users = new SqlCommand(usersInfo, dbConnection);
-                SqlDataReader records = users.ExecuteReader();
-                if (records.Read())
                 {
-                    do
                     {
-                        if (txtUserName.Text.ToLower().Equals(records["UserName"].ToString().ToLower()) && txtPassword.Text.ToLower().Equals(records["Password"].ToString().ToLower().ToString().ToLower()))
-                        {
-                            Session["UserName"] = records["UserName"].ToString();
-                            Response.Redirect("LoginHome.aspx");
-                        }
-                        else
                         {
                             loginError = true;
                         }
-                    } while (records.Read());
                 }
-                else
-                {
-                    loginError = true;
-                }
-                records.Close();
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 911) // non-existent DB
-                {
-                    SqlCommand sqlCommand = new SqlCommand("CREATE DATABASE kssuth1_Assign5", dbConnection);
-                    sqlCommand.ExecuteNonQuery();
-                    dbConnection.ChangeDatabase("kssuth1_Assign5");
-                }
-                else
                 {
                     loginError = true;
                 }
             }
-            dbConnection.Close();
         }
     }
 }
