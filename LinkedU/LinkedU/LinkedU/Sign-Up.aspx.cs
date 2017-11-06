@@ -22,8 +22,6 @@ namespace LinkedU
             string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
             using (SqlConnection dbConnection = new SqlConnection(connectionString))
             {
-                dbConnection.Open();
-                dbConnection.ChangeDatabase("kssuth1_Assign4");
 
                 // Check if UserID has already been taken
                 try
