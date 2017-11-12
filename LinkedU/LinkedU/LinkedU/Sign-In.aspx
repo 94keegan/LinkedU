@@ -70,6 +70,7 @@
                                         </label>
                                     </div>
                                     <asp:Button ID="btnSignIn" runat="server" Text="Sign In" OnClick="btnSignIn_Click" />
+                                    <asp:HiddenField ID="SignInReferrer" runat="server" />
                                 </form>
                             </div>
                         </div>

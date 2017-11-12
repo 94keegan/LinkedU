@@ -43,12 +43,16 @@ namespace LinkedU
                                 }
                             }
                         }
-                        catch (SqlException ex)
+                        catch
                         {
                             loginError = true;
                         }
                     }
                 }
+
+                //Capture the referring web page, if in the same webiste (has the same host) and store in the web form, so it's accessible after sign-in
+                if ((Request.UrlReferrer != null) && (Request.UrlReferrer.Host == Request.Url.Host))
+                    SignInReferrer.Value = Request.UrlReferrer.AbsoluteUri;
             }
         }
 
@@ -89,7 +93,12 @@ namespace LinkedU
                                     if (txtUserName.Text.ToLower().Equals(records["userLogin"].ToString().ToLower()) && txtPassword.Text.ToLower().Equals(records["userPassword"].ToString().ToLower().ToString().ToLower()))
                                     {
                                         Session["UserName"] = records["userLogin"].ToString();
-                                        Response.Redirect("LoginHome.aspx");
+
+                                        //if referred from another page in this website, return to that page
+                                        if (SignInReferrer.Value != "")
+                                            Response.Redirect(SignInReferrer.Value);
+                                        else
+                                            Response.Redirect("LoginHome.aspx");
                                     }
                                     else
                                     {
@@ -104,7 +113,7 @@ namespace LinkedU
                         }
                     }
                 }
-                catch (SqlException ex)
+                catch
                 {
 
                     loginError = true;

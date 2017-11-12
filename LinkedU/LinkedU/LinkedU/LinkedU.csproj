@@ -48,6 +48,8 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -70,6 +72,25 @@
     <Content Include="artwork\BANNER-2.psd" />
     <Content Include="artwork\BANNER-3.psd" />
     <Content Include="artwork\BANNER-4.psd" />
+    <None Include="Connected Services\DistanceFinder\DistanceFinder.disco" />
+    <None Include="Connected Services\DistanceFinder\configuration91.svcinfo" />
+    <None Include="Connected Services\DistanceFinder\configuration.svcinfo" />
+    <Content Include="Connected Services\DistanceFinder\LinkedU.DistanceFinder.Geolocation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\DistanceFinder\LinkedU.DistanceFinder.GetDistanceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\DistanceFinder\LinkedU.DistanceFinder.GetLocationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\DistanceFinder\LinkedU.DistanceFinder.Path.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\DistanceFinder\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Contact.aspx" />
     <Content Include="css\LinkedU.css" />
     <Content Include="css\scss\about.scss" />
@@ -93,6 +114,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Connected Services\DistanceFinder\DistanceFinder.wsdl" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -257,9 +279,16 @@
     <Content Include="Reset.aspx" />
     <Content Include="Sign-In.aspx" />
     <Content Include="Sign-Up.aspx" />
+    <Content Include="UniversityLookup.aspx" />
+    <Content Include="UniversitySearch.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connected Services\DistanceFinder\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -296,6 +325,26 @@
     <Compile Include="Sign-Up.aspx.designer.cs">
       <DependentUpon>Sign-Up.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UniversityLookup.aspx.cs">
+      <DependentUpon>UniversityLookup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UniversityLookup.aspx.designer.cs">
+      <DependentUpon>UniversityLookup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UniversitySearch.aspx.cs">
+      <DependentUpon>UniversitySearch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UniversitySearch.aspx.designer.cs">
+      <DependentUpon>UniversitySearch.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\DistanceFinder\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
