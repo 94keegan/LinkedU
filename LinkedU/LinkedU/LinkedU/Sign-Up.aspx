@@ -70,7 +70,9 @@
                                     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                                     <asp:UpdatePanel ID="pnlAccountType" runat="server">
                                         <ContentTemplate>
-                                            <% if (!string.IsNullOrWhiteSpace(SignupError)) Response.Write(string.Concat("<p style='color:red'>", SignupError, "</p>")); %>
+                                            <asp:Panel Visible="false" runat="server" ID="PanelSignupError" ForeColor="Red">
+                                                <asp:Label runat="server" ID="LabelSignupError"></asp:Label>
+                                            </asp:Panel>
                                             <asp:DropDownList ID="ddlAccountType" runat="server" class="control-form" OnSelectedIndexChanged="ddlAccountType_SelectedIndexChanged" AutoPostBack="true">
                                                 <asp:ListItem Text="Student" />
                                                 <asp:ListItem Text="University" />

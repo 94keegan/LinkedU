@@ -6,8 +6,6 @@ namespace LinkedU
 {
     public partial class Sign_Up : System.Web.UI.Page
     {
-        private string signupError = "";
-        public string SignupError { get { return signupError; } }
         public bool valid = true;
         public bool successful = true;
 
@@ -64,11 +62,12 @@ namespace LinkedU
                 catch (SqlException ex)
                 {
                     successful = false;
-                    signupError = "Error Signing Up!";
+                    PanelSignupError.Visible = true;
+                    LabelSignupError.Text= "Error Signing Up!";
                 }
                 if (valid && successful)
                 {
-                    signupError = "";
+                    PanelSignupError.Visible = false;
                 }
             }
         }
@@ -124,12 +123,13 @@ namespace LinkedU
                         if (login.ExecuteScalar() != null)
                         {
                             valid = false;
-                            signupError = "User name already taken!";
+                            PanelSignupError.Visible = true;
+                            LabelSignupError.Text = "User name already taken!";
                         }
                         else
                         {
                             valid = true;
-                            signupError = "";
+                            PanelSignupError.Visible = false;
                         }
                     }
                 }
@@ -137,7 +137,8 @@ namespace LinkedU
                 {
                     Response.Write(ex.Message);
                     successful = false;
-                    signupError = "Error Signing Up!";
+                    PanelSignupError.Visible = true;
+                    LabelSignupError.Text = "Error Signing Up!";
                 }
             }
         }

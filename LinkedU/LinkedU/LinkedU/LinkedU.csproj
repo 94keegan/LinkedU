@@ -104,6 +104,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Contact.aspx" />
+    <Content Include="CreateStudentProfile.aspx" />
     <Content Include="css\LinkedU.css" />
     <Content Include="css\scss\about.scss" />
     <Content Include="css\scss\backgrounds.scss" />
@@ -321,6 +322,13 @@
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateStudentProfile.aspx.cs">
+      <DependentUpon>CreateStudentProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateStudentProfile.aspx.designer.cs">
+      <DependentUpon>CreateStudentProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
