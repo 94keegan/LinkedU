@@ -98,7 +98,7 @@ namespace LinkedU
                                         if (SignInReferrer.Value != "")
                                             Response.Redirect(SignInReferrer.Value);
                                         else
-                                            Response.Redirect("LoginHome.aspx");
+                                            Response.Redirect("Default.aspx");
                                     }
                                     else
                                     {
