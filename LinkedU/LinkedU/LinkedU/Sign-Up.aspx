@@ -22,7 +22,7 @@
 
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
+    <![endif]-->
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -66,15 +66,21 @@
                                 <div class="line"></div>
                             </div>
                             <div class="form">
-                                <% if (SignupError) Response.Write("<p style='color:red'>Error Signing Up!</p>"); %>
                                 <form runat="server" id="form">
-                                    <asp:DropDownList ID="ddlAccountType" runat="server" class="control-form">
-                                        <asp:ListItem Text="Student" />
-                                        <asp:ListItem Text="University" />
-                                    </asp:DropDownList>
-                                    <asp:TextBox ID="txtUserName" runat="server" placeholder="User Name" class="control-form" required="required" />
-                                    <asp:TextBox ID="txtFirstName" runat="server" placeholder="First Name" class="control-form" required="required" />
-                                    <asp:TextBox ID="txtLastname" runat="server" placeholder="Last Name" class="control-form" required="required" />
+                                    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                                    <asp:UpdatePanel ID="pnlAccountType" runat="server">
+                                        <ContentTemplate>
+                                            <% if (!string.IsNullOrWhiteSpace(SignupError)) Response.Write(string.Concat("<p style='color:red'>", SignupError, "</p>")); %>
+                                            <asp:DropDownList ID="ddlAccountType" runat="server" class="control-form" OnSelectedIndexChanged="ddlAccountType_SelectedIndexChanged" AutoPostBack="true">
+                                                <asp:ListItem Text="Student" />
+                                                <asp:ListItem Text="University" />
+                                            </asp:DropDownList>
+                                            <asp:TextBox ID="txtUniversityName" runat="server" placeholder="University Name" class="control-form" Visible="false" />
+                                            <asp:TextBox ID="txtFirstName" runat="server" placeholder="First Name" class="control-form" required="required" />
+                                            <asp:TextBox ID="txtLastname" runat="server" placeholder="Last Name" class="control-form" required="required" />
+                                            <asp:TextBox ID="txtUserName" runat="server" placeholder="User Name" class="control-form" required="required" OnTextChanged="txtUserName_OnTextChanged" AutoPostBack="true" />
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
                                     <asp:TextBox ID="txtQuestion" runat="server" placeholder="Security Question" class="control-form" required="required" />
                                     <asp:TextBox ID="txtAnswer" runat="server" placeholder="Security Answer" class="control-form" required="required" />
                                     <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" class="control-form" required="required" />
