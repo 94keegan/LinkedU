@@ -48,6 +48,7 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
@@ -75,6 +76,7 @@
     <None Include="Connected Services\DistanceFinder\DistanceFinder.disco" />
     <None Include="Connected Services\DistanceFinder\configuration91.svcinfo" />
     <None Include="Connected Services\DistanceFinder\configuration.svcinfo" />
+    <Content Include="autocomplete\UniversityName.aspx" />
     <Content Include="Connected Services\DistanceFinder\LinkedU.DistanceFinder.Geolocation.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -88,6 +90,16 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\DistanceFinder\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Connected Services\StudentLookup\LinkedU.StudentLookup.HelloWorldResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\StudentLookup\StudentLookup.disco" />
+    <None Include="Connected Services\StudentLookup\configuration91.svcinfo" />
+    <None Include="Connected Services\StudentLookup\configuration.svcinfo" />
+    <None Include="Connected Services\StudentLookup\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -111,10 +123,12 @@
     <Content Include="css\scss\sign-up.scss" />
     <Content Include="css\scss\theme.scss" />
     <Content Include="Default.aspx" />
+    <Content Include="examples\UniversityNameExample.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="Connected Services\DistanceFinder\DistanceFinder.wsdl" />
+    <None Include="Connected Services\StudentLookup\StudentLookup.wsdl" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -284,7 +298,19 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="autocomplete\UniversityName.aspx.cs">
+      <DependentUpon>UniversityName.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="autocomplete\UniversityName.aspx.designer.cs">
+      <DependentUpon>UniversityName.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\DistanceFinder\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\StudentLookup\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -302,6 +328,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="examples\UniversityNameExample.aspx.cs">
+      <DependentUpon>UniversityNameExample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="examples\UniversityNameExample.aspx.designer.cs">
+      <DependentUpon>UniversityNameExample.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reset.aspx.cs">
@@ -345,6 +378,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\DistanceFinder\" />
+    <WCFMetadataStorage Include="Connected Services\StudentLookup\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
