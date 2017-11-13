@@ -76,8 +76,8 @@
     </div>
 
     <form id="form1" runat="server">
-        <asp:TextBox ID="TextBoxUniversity" runat="server"></asp:TextBox>
-        <asp:HiddenField ID="UniversityID" runat="server" />
+        <asp:TextBox ID="TextBoxUniversity" runat="server" placeholder="Select from list..."></asp:TextBox>
+        <asp:TextBox ID="UniversityID" runat="server"></asp:TextBox>
     </form>
 
     <!-- starts footer -->
@@ -120,10 +120,15 @@
             $("#TextBoxUniversity").autocomplete({
                 source: "/autocomplete/UniversityName.aspx",
                 minlength: 3,
-                select: function(event, ui) {
+                select: function (event, ui) {
                     $("#UniversityID").val(ui.item.id);
                 }
-            })
+            });
+
+            $("#TextBoxUniversity").keypress(function() {
+                $("#UniversityID").val("");
+            });
+
         });
     </script>
 </body>

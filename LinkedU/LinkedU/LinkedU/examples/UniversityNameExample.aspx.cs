@@ -11,7 +11,6 @@ namespace LinkedU.examples
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            TextBoxUniversity.Attributes.Add("placeholder", "University Name");
         }
     }
 }
