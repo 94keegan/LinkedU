@@ -81,7 +81,7 @@
                                                 <asp:ListItem Text="University" />
                                             </asp:DropDownList>
                                             <asp:TextBox ID="txtUniversityName" runat="server" placeholder="University Name" class="control-form" Visible="false" />
-                                            <asp:TextBox ID="txtUniversityID" runat="server" class="control-form" Visible="false" />
+                                            <asp:HiddenField ID="txtUniversityID" runat="server" />
                                             <asp:TextBox ID="txtFirstName" runat="server" placeholder="First Name" class="control-form" required="required" />
                                             <asp:TextBox ID="txtLastname" runat="server" placeholder="Last Name" class="control-form" required="required" />
                                         </ContentTemplate>
@@ -137,20 +137,21 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
     <script type="text/javascript">
-        $(function () {
+       function pageLoad() {
             $("#txtUniversityName").autocomplete({
-                source: "/autocomplete/UniversityName.aspx",
+                source: "autocomplete/UniversityName.aspx",
                 minlength: 3,
                 select: function (event, ui) {
                     $("#txtUniversityID").val(ui.item.id);
+                    $("#txtQuestion").focus();
                 }
             });
 
-            $("#txtUniversityName").keypress(function() {
+            $("#txtUniversityName").on("keypress", function() {
                 $("#txtUniversityID").val("");
             });
 
-        });
+        };
     </script>
 </body>
 </html>

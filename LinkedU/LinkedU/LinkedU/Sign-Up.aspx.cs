@@ -49,42 +49,60 @@ namespace LinkedU
             string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
             using (SqlConnection dbConnection = new SqlConnection(connectionString))
             {
+
+                dbConnection.Open();
+
                 // Insert user into the user and login tables
                 try
                 {
                     if (valid && successful)
                     {
-                        // Insert logins values
-                        string loginInsert = "INSERT INTO logins (userLogin, userPassword) VALUES (@username, @password)";
-                        using (SqlCommand login = new SqlCommand(loginInsert, dbConnection))
-                        {
-                            login.Parameters.AddWithValue("@username", txtUserName.Text);
-                            login.Parameters.AddWithValue("@password", txtPassword.Text);
-                            login.ExecuteNonQuery();
-                        }
 
-                        //retrieve auto-generated userID
-                        int userid = 0;
-                        string loginSelect = "SELECT userID FROM logins WHERE userLogin = @username";
-                        using (SqlCommand select = new SqlCommand(loginSelect, dbConnection))
-                        {
-                            select.Parameters.AddWithValue("@username", txtUserName.Text);
-                            userid = int.Parse(select.ExecuteScalar().ToString());
-                        }
+                        SqlTransaction transaction = dbConnection.BeginTransaction();
 
-                        // Insert user values
-                        string userInsert = "INSERT INTO users (userID, firstName, lastName, email, securityQuestion, securityAnswer) VALUES (@userID, @accountType, @universityID, @firstName, @lastName, @email, @securityQuestion, @securityAnswer)";
-                        using (SqlCommand user = new SqlCommand(userInsert, dbConnection))
+                        try
                         {
-                            user.Parameters.AddWithValue("@userID", userid);
-                            user.Parameters.AddWithValue("@accountType", ddlAccountType.Text);
-                            user.Parameters.AddWithValue("@universityID", txtUniversityID.Text);
-                            user.Parameters.AddWithValue("@firstName", txtFirstName.Text);
-                            user.Parameters.AddWithValue("@lastName", txtLastname.Text);
-                            user.Parameters.AddWithValue("@email", txtEmail.Text);
-                            user.Parameters.AddWithValue("@securityQuestion", txtQuestion.Text);
-                            user.Parameters.AddWithValue("@securityAnswer", txtAnswer.Text);
-                            user.ExecuteNonQuery();
+                            // Insert logins values
+                            string loginInsert = "INSERT INTO logins (userLogin, userPassword) VALUES (@username, @password)";
+                            using (SqlCommand login = new SqlCommand(loginInsert, dbConnection))
+                            {
+                                login.Transaction = transaction;
+                                login.Parameters.AddWithValue("@username", txtUserName.Text);
+                                login.Parameters.AddWithValue("@password", txtPassword.Text);
+                                login.ExecuteNonQuery();
+                            }
+
+                            //retrieve auto-generated userID
+                            int userid = 0;
+                            string loginSelect = "SELECT userID FROM logins WHERE userLogin = @username";
+                            using (SqlCommand select = new SqlCommand(loginSelect, dbConnection))
+                            {
+                                select.Transaction = transaction;
+                                select.Parameters.AddWithValue("@username", txtUserName.Text);
+                                userid = int.Parse(select.ExecuteScalar().ToString());
+                            }
+
+                            // Insert user values
+                            string userInsert = "INSERT INTO users (userID, accountType, universityID, firstName, lastName, email, securityQuestion, securityAnswer) VALUES (@userID, @accountType, @universityID, @firstName, @lastName, @email, @securityQuestion, @securityAnswer)";
+                            using (SqlCommand user = new SqlCommand(userInsert, dbConnection))
+                            {
+                                user.Transaction = transaction;
+                                user.Parameters.AddWithValue("@userID", userid);
+                                user.Parameters.AddWithValue("@accountType", ddlAccountType.Text);
+                                user.Parameters.AddWithValue("@universityID", txtUniversityID.Value);
+                                user.Parameters.AddWithValue("@firstName", txtFirstName.Text);
+                                user.Parameters.AddWithValue("@lastName", txtLastname.Text);
+                                user.Parameters.AddWithValue("@email", txtEmail.Text);
+                                user.Parameters.AddWithValue("@securityQuestion", txtQuestion.Text);
+                                user.Parameters.AddWithValue("@securityAnswer", txtAnswer.Text);
+                                user.ExecuteNonQuery();
+                            }
+
+                            transaction.Commit();
+                        } catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                                throw ex;
                         }
                     }
                 }
