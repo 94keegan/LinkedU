@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 
@@ -13,6 +15,33 @@ namespace LinkedU
         {
             txtPassword.Attributes["type"] = "password";
             txtConfPassword.Attributes["type"] = "password";
+
+            if (Request.QueryString["term"] != null)
+            {
+                List<University> universities = new List<University>();
+
+                string connStr = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
+
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    conn.Open();
+
+                    using (SqlCommand comm = conn.CreateCommand())
+                    {
+                        comm.CommandText = "SELECT UNITID, INSTNM FROM universities WHERE INSTNM LIKE @name ORDER BY INSTNM";
+                        comm.Parameters.AddWithValue("@name", "%" + Request.QueryString["term"] + "%");
+
+                        using (SqlDataReader reader = comm.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                universities.Add(new University(reader.GetString(1), reader.GetInt32(0)));
+                            }
+                        }
+                    }
+                }
+                Response.Write(JsonConvert.SerializeObject(universities));
+            }
         }
 
         protected void btnSignUp_Click(object sender, EventArgs e)
@@ -44,12 +73,12 @@ namespace LinkedU
                         }
 
                         // Insert user values
-                        string userInsert = "INSERT INTO users (userID, firstName, lastName, email, securityQuestion, securityAnswer) VALUES (@userID, @accountType, @universityName, @firstName, @lastName, @email, @securityQuestion, @securityAnswer)";
+                        string userInsert = "INSERT INTO users (userID, firstName, lastName, email, securityQuestion, securityAnswer) VALUES (@userID, @accountType, @universityID, @firstName, @lastName, @email, @securityQuestion, @securityAnswer)";
                         using (SqlCommand user = new SqlCommand(userInsert, dbConnection))
                         {
                             user.Parameters.AddWithValue("@userID", userid);
                             user.Parameters.AddWithValue("@accountType", ddlAccountType.Text);
-                            user.Parameters.AddWithValue("@universityName", txtUniversityName.Text);
+                            user.Parameters.AddWithValue("@universityID", txtUniversityID.Text);
                             user.Parameters.AddWithValue("@firstName", txtFirstName.Text);
                             user.Parameters.AddWithValue("@lastName", txtLastname.Text);
                             user.Parameters.AddWithValue("@email", txtEmail.Text);
@@ -63,7 +92,7 @@ namespace LinkedU
                 {
                     successful = false;
                     PanelSignupError.Visible = true;
-                    LabelSignupError.Text= "Error Signing Up!";
+                    lblSignupError.Text= "Error Signing Up!";
                 }
                 if (valid && successful)
                 {
@@ -124,7 +153,7 @@ namespace LinkedU
                         {
                             valid = false;
                             PanelSignupError.Visible = true;
-                            LabelSignupError.Text = "User name already taken!";
+                            lblSignupError.Text = "User name already taken!";
                         }
                         else
                         {
@@ -138,9 +167,24 @@ namespace LinkedU
                     Response.Write(ex.Message);
                     successful = false;
                     PanelSignupError.Visible = true;
-                    LabelSignupError.Text = "Error Signing Up!";
+                    lblSignupError.Text = "Error Signing Up!";
                 }
             }
+        }
+
+        public class University
+        {
+            private string _name;
+            private int _id;
+
+            public University(string name, int id)
+            {
+                _name = name;
+                _id = id;
+            }
+
+            public string value { get { return _name; } set { _name = value; } }
+            public int id { get { return _id; } set { _id = value; } }
         }
     }
 }

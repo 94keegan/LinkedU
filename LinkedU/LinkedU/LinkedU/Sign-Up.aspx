@@ -71,16 +71,17 @@
                                     <asp:UpdatePanel ID="pnlAccountType" runat="server">
                                         <ContentTemplate>
                                             <asp:Panel Visible="false" runat="server" ID="PanelSignupError" ForeColor="Red">
-                                                <asp:Label runat="server" ID="LabelSignupError"></asp:Label>
+                                                <asp:Label runat="server" ID="lblSignupError" class="alert alert-danger"></asp:Label>
                                             </asp:Panel>
+                                            <asp:TextBox ID="txtUserName" runat="server" placeholder="User Name" class="control-form" required="required" OnTextChanged="txtUserName_OnTextChanged" AutoPostBack="true" />
                                             <asp:DropDownList ID="ddlAccountType" runat="server" class="control-form" OnSelectedIndexChanged="ddlAccountType_SelectedIndexChanged" AutoPostBack="true">
                                                 <asp:ListItem Text="Student" />
                                                 <asp:ListItem Text="University" />
                                             </asp:DropDownList>
                                             <asp:TextBox ID="txtUniversityName" runat="server" placeholder="University Name" class="control-form" Visible="false" />
+                                            <asp:TextBox ID="txtUniversityID" runat="server" class="control-form" Visible="false" />
                                             <asp:TextBox ID="txtFirstName" runat="server" placeholder="First Name" class="control-form" required="required" />
                                             <asp:TextBox ID="txtLastname" runat="server" placeholder="Last Name" class="control-form" required="required" />
-                                            <asp:TextBox ID="txtUserName" runat="server" placeholder="User Name" class="control-form" required="required" OnTextChanged="txtUserName_OnTextChanged" AutoPostBack="true" />
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                     <asp:TextBox ID="txtQuestion" runat="server" placeholder="Security Question" class="control-form" required="required" />
@@ -120,8 +121,8 @@
                 <div class='col-md-12'>
                     <div class='row copyright'>
                         <div class='col-md-12'>
-                            2017 CeMaST. All rights reserved.<br />
-                            Development &amp; Design: ISU Spring 2017 IT363 Class
+                            2017 LinkedU. All rights reserved.<br />
+                            Development &amp; Design: Team JKMZ
                         </div>
                     </div>
                 </div>
@@ -132,5 +133,21 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#txtUniversityName").autocomplete({
+                source: "/autocomplete/UniversityName.aspx",
+                minlength: 3,
+                select: function (event, ui) {
+                    $("#txtUniversityID").val(ui.item.id);
+                }
+            });
+
+            $("#txtUniversityName").keypress(function() {
+                $("#txtUniversityID").val("");
+            });
+
+        });
+    </script>
 </body>
 </html>

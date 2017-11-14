@@ -46,7 +46,7 @@
                     <li><a href="Contact.aspx">CONTACT US</a></li>
                     <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <% 
+                            <%
                                 if (Session["UserName"] != null)
                                 {
                                     Response.Write(Session["UserName"]);
@@ -57,7 +57,7 @@
                                 }
                                %>
                             <b class="caret"></b></a>
-                            <% 
+                            <%
                                 if (Session["UserName"] != null)
                                 {
                                     Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"#\">Logoff</a></li></ul>");
@@ -118,8 +118,8 @@
                 <div class='col-md-12'>
                     <div class='row copyright'>
                         <div class='col-md-12'>
-                            2017 CeMaST. All rights reserved.<br />
-                            Development &amp; Design: ISU Spring 2017 IT363 Class
+                            2017 LinkedU. All rights reserved.<br />
+                            Development &amp; Design: Team JKMZ
                         </div>
                     </div>
                 </div>

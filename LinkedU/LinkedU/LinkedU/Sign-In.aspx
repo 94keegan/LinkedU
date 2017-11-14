@@ -103,8 +103,8 @@
                 <div class='col-md-12'>
                     <div class='row copyright'>
                         <div class='col-md-12'>
-                            2017 CeMaST. All rights reserved.<br />
-                            Development &amp; Design: ISU Spring 2017 IT363 Class
+                            2017 LinkedU. All rights reserved.<br />
+                            Development &amp; Design: Team JKMZ
                         </div>
                     </div>
                 </div>
