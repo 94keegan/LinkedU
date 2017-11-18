@@ -30,8 +30,8 @@ namespace LinkedU
             {
                 try
                 {
-                    MailAddress messageFrom = new MailAddress("Linkedu368@gmail.com", "LinkedU");
-                    MailAddress messageTo = new MailAddress(txtEmail.Text);
+                    MailAddress messageFrom = new MailAddress(txtEmail.Text);
+                    MailAddress messageTo = new MailAddress("Linkedu368@gmail.com", "LinkedU");
                     MailMessage emailMessage = new MailMessage();
                     emailMessage.To.Add(messageTo.Address);
                     emailMessage.From = messageFrom;
