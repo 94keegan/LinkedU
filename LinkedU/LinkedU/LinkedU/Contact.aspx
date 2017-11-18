@@ -62,19 +62,20 @@
             <div class="row contact">
                 <p>What you think is important to us, and we've got you covered 110%. Our team will review your message and reply back as soon as possible.</p>
                 <!--TODO: Convert to ASP
-                    <?php if(isset($error)){ ?><div class="alert alert-danger"><?php  echo $error; ?></div> <?php }
-                else if(isset($success)){ ?><div class="alert alert-success">Email has been sent!</div><?php } ?>-->
+                    class="alert alert-danger"
+                    class="alert alert-success"-->
+                <asp:Label ID="lblAlert" runat="server" Visible="false"></asp:Label>
                 <form id="form1">
                     <div class="row form">
                         <div class="col-sm-6 row-col">
                             <div class="box">
-                                <input class="name form-control" name="name" type="text" placeholder="Name" required="required" />
-                                <input class="mail form-control" name="email" type="text" placeholder="Email" required="required" />
+                                <asp:TextBox ID="txtName" runat="server" class="name form-control" placeholder="Name" required="required"></asp:TextBox>
+                                <asp:TextBox ID="txtEmail" runat="server" class="mail form-control" placeholder="Email" required="required"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-sm-6 row-col">
                             <div class="box">
-                                <textarea name="message" style="resize:none;" placeholder="Type a message here..." class="form-control" required="required"></textarea>
+                                <asp:TextBox id="txtMessage" TextMode="multiline" style="resize:none;" Columns="50" Rows="5" runat="server" class="form-control" required="required" placeholder="Type a message here..." />
                             </div>
                         </div>
                     </div>
@@ -82,7 +83,7 @@
                     <div class="row submit">
                         <div class="col-md-3 right">
                             <br/>
-                            <input type="submit" value="Send your message" />
+                            <asp:Button ID="btnSubmit" runat="server" Text="Send your message" OnClick="btnSubmit_Click" />
                         </div>
                     </div>
                 </form>
@@ -100,10 +101,9 @@
                         <li>Normal, IL</li>
                     </ul>
                 </div>
-                <div class='col-sm-5 touch'>
+                <div class='col-sm-5'>
                     <ul>
                         <li><strong>Contact</strong></li>
-                        <br />
                         <li><a href='Contact.aspx'>Click Here to Send Us A Note</a></li>
                     </ul>
                 </div>

@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Web.UI;
 
 namespace LinkedU
 {
-    public partial class Sign_Up : System.Web.UI.Page
+    public partial class Sign_Up : Page
     {
         public bool valid = true;
         public bool successful = true;
@@ -89,7 +90,7 @@ namespace LinkedU
                                 user.Transaction = transaction;
                                 user.Parameters.AddWithValue("@userID", userid);
                                 user.Parameters.AddWithValue("@accountType", ddlAccountType.Text);
-                                user.Parameters.AddWithValue("@universityID", txtUniversityID.Value);
+                                user.Parameters.AddWithValue("@universityID", UniversityID.Value);
                                 user.Parameters.AddWithValue("@firstName", txtFirstName.Text);
                                 user.Parameters.AddWithValue("@lastName", txtLastname.Text);
                                 user.Parameters.AddWithValue("@email", txtEmail.Text);
@@ -201,8 +202,8 @@ namespace LinkedU
                 _id = id;
             }
 
-            public string value { get { return _name; } set { _name = value; } }
-            public int id { get { return _id; } set { _id = value; } }
+            public string Value { get { return _name; } set { _name = value; } }
+            public int ID { get { return _id; } set { _id = value; } }
         }
     }
 }
