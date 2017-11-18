@@ -61,16 +61,13 @@
             </div>
             <div class="row contact">
                 <p>What you think is important to us, and we've got you covered 110%. Our team will review your message and reply back as soon as possible.</p>
-                <!--TODO: Convert to ASP
-                    class="alert alert-danger"
-                    class="alert alert-success"-->
-                <asp:Label ID="lblAlert" runat="server" Visible="false"></asp:Label>
-                <form id="form1">
+                <asp:Label ID="lblAlert" runat="server" Visible="false" /><br />
+                <form id="form1" runat="server">
                     <div class="row form">
                         <div class="col-sm-6 row-col">
                             <div class="box">
-                                <asp:TextBox ID="txtName" runat="server" class="name form-control" placeholder="Name" required="required"></asp:TextBox>
-                                <asp:TextBox ID="txtEmail" runat="server" class="mail form-control" placeholder="Email" required="required"></asp:TextBox>
+                                <asp:TextBox ID="txtName" runat="server" class="name form-control" placeholder="Name" required="required" />
+                                <asp:TextBox ID="txtEmail" runat="server" class="mail form-control" placeholder="Email" required="required" />
                             </div>
                         </div>
                         <div class="col-sm-6 row-col">

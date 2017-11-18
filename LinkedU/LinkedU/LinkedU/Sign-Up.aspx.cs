@@ -50,6 +50,18 @@ namespace LinkedU
             string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
             using (SqlConnection dbConnection = new SqlConnection(connectionString))
             {
+                // Check if passwords match
+                if (!string.IsNullOrWhiteSpace(txtPassword.Text) && !string.IsNullOrWhiteSpace(txtConfPassword.Text) && txtPassword.Text.Equals(txtConfPassword.Text))
+                {
+                    successful = true;
+                    PanelSignupError.Visible = false;
+                }
+                else
+                {
+                    successful = false;
+                    PanelSignupError.Visible = true;
+                    lblSignupError.Text = "Passwords do not match!";
+                }
 
                 dbConnection.Open();
 
