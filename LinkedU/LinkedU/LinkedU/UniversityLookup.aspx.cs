@@ -116,19 +116,19 @@ namespace LinkedU
                                 {
                                     source = "1305+Welling+St,Bloomington+IL,61701";
                                 }
-                                
+
                                 if (source == "")
                                 {
                                     Control iframe = new LiteralControl(String.Format("<iframe width=\"100%\" height=\"300\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" src=\"https://www.google.com/maps/embed/v1/place?key={0}&q={1}\" ></iframe>", WebConfigurationManager.AppSettings.Get("GoogleMapsApiKey"), destination));
                                     UniversityMap.Controls.Add(iframe);
                                 } else
-                                { 
+                                {
                                     Control iframe = new LiteralControl(String.Format("<iframe width=\"100%\" height=\"300\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" src=\"https://www.google.com/maps/embed/v1/directions?key={0}&origin={1}&destination={2}\" ></iframe>", WebConfigurationManager.AppSettings.Get("GoogleMapsApiKey"), source, destination));
                                     UniversityMap.Controls.Add(iframe);
                                 }
 
                             }
-                            
+
                         }
                     }
                 }

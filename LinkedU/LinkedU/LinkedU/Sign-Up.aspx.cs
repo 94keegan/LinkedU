@@ -70,7 +70,6 @@ namespace LinkedU
                 {
                     if (valid && successful)
                     {
-
                         SqlTransaction transaction = dbConnection.BeginTransaction();
 
                         try

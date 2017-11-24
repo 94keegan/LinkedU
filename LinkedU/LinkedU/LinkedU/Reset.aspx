@@ -3,10 +3,10 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head  runat="server">
-	<title>LinkedU || Reset</title>
+<head runat="server">
+    <title>LinkedU || Reset</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Styles -->
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
@@ -59,14 +59,21 @@
                     <div class="col-md-12">
                         <div class="box">
                             <div class="head">
-								<h1>Reset your Password</h1>
+                                <h1>Reset your Password</h1>
                                 <h4>Enter your email address below to receive instructions on how to reset your password.</h4>
                                 <div class="line"></div>
                             </div>
                             <div class="form">
-                                <form>
-                                    <input type="text" placeholder="Email" class="control-form" />
-                                    <input type="submit" value="Reset password"/>
+                                <form runat="server" id="form">
+                                    <asp:Label runat="server" ID="lblAlert" class="alert alert-danger"></asp:Label>
+                                    <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" class="control-form" />
+                                    <asp:TextBox ID="txtPhone" runat="server" placeholder="Phone" class="control-form" Visible="false" />
+                                    <asp:Label ID="lblQuestion" runat="server" Visible="false" />
+                                    <asp:TextBox ID="txtAnswer" runat="server" placeholder="Answer" class="control-form" Visible="false" />
+                                    <asp:TextBox ID="txtNewPassword" runat="server" placeholder="New Password" class="control-form" Visible="false" />
+                                    <asp:TextBox ID="txtNewPasswordConfirm" runat="server" placeholder="New Password Confirm" class="control-form" Visible="false" />
+                                    <asp:CheckBox ID="chkPhone" runat="server" class="control-form" OnCheckedChanged="chkPhone_CheckedChanged" />
+                                    <asp:Button ID="btnSubmit" runat="server" Text="Reset Password" OnClick="btnSubmit_Click" />
                                 </form>
                             </div>
                         </div>
