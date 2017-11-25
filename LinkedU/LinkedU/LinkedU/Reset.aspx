@@ -65,15 +65,24 @@
                             </div>
                             <div class="form">
                                 <form runat="server" id="form">
-                                    <asp:Label runat="server" ID="lblAlert" class="alert alert-danger"></asp:Label>
-                                    <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" class="control-form" />
-                                    <asp:TextBox ID="txtPhone" runat="server" placeholder="Phone" class="control-form" Visible="false" />
-                                    <asp:Label ID="lblQuestion" runat="server" Visible="false" />
-                                    <asp:TextBox ID="txtAnswer" runat="server" placeholder="Answer" class="control-form" Visible="false" />
-                                    <asp:TextBox ID="txtNewPassword" runat="server" placeholder="New Password" class="control-form" Visible="false" />
-                                    <asp:TextBox ID="txtNewPasswordConfirm" runat="server" placeholder="New Password Confirm" class="control-form" Visible="false" />
-                                    <asp:CheckBox ID="chkPhone" runat="server" class="control-form" OnCheckedChanged="chkPhone_CheckedChanged" />
-                                    <asp:Button ID="btnSubmit" runat="server" Text="Reset Password" OnClick="btnSubmit_Click" />
+                                    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                                    <asp:UpdatePanel ID="pnlReset" runat="server">
+                                        <ContentTemplate>
+                                            <asp:Label runat="server" ID="lblAlert"></asp:Label>
+                                            <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" class="control-form" />
+                                            <asp:TextBox ID="txtPhone" runat="server" placeholder="Phone" class="control-form" Visible="false" />
+                                            <asp:Label ID="lblQuestion" runat="server" Visible="false" />
+                                            <asp:TextBox ID="txtAnswer" runat="server" placeholder="Answer" class="control-form" Visible="false" />
+                                            <asp:TextBox ID="txtNewPassword" runat="server" placeholder="New Password" class="control-form" Visible="false" />
+                                            <asp:TextBox ID="txtNewPasswordConfirm" runat="server" placeholder="New Password Confirm" class="control-form" Visible="false" />
+                                            <div class="col-md-6 remember" id="RememberMe">
+                                                <label class="checkbox">
+                                                    <asp:CheckBox ID="chkPhone" runat="server" class="control-form" OnCheckedChanged="chkPhone_CheckedChanged" AutoPostBack="true" Text="Send SMS" />
+                                                </label>
+                                            </div>
+                                            <asp:Button ID="btnSubmit" runat="server" Text="Reset Password" OnClick="btnSubmit_Click" />
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
                                 </form>
                             </div>
                         </div>

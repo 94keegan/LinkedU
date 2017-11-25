@@ -10,10 +10,10 @@ namespace LinkedU
 {
     public partial class Reset : Page
     {
-        public bool valid = true;
-
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblAlert.Attributes["class"] = "";
+            // Display email to reset password if nothing in GET
             if (string.IsNullOrWhiteSpace(Request.QueryString["email"]) && string.IsNullOrWhiteSpace(Request.QueryString["genString"]))
             {
                 txtEmail.Visible = true;
@@ -22,7 +22,7 @@ namespace LinkedU
                 txtNewPassword.Visible = false;
                 txtNewPasswordConfirm.Visible = false;
             }
-            else
+            else // Display question, answer, and new password box to reset password if GET contains valid email and genString
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
                 using (SqlConnection dbConnection = new SqlConnection(connectionString))
@@ -30,7 +30,7 @@ namespace LinkedU
                     try
                     {
                         SqlTransaction transaction = dbConnection.BeginTransaction();
-                        // Check gen_string/email combo in DB
+                        // Check if gen_string/email combo is in DB
                         int resetExists = 0;
                         using (SqlCommand comm = dbConnection.CreateCommand())
                         {
@@ -48,7 +48,7 @@ namespace LinkedU
                             txtNewPassword.Visible = true;
                             txtNewPasswordConfirm.Visible = true;
 
-                            // Get question
+                            // Set question
                             using (SqlCommand comm = dbConnection.CreateCommand())
                             {
                                 comm.CommandText = "SELECT question FROM logins WHERE email = @email";
@@ -63,7 +63,7 @@ namespace LinkedU
                         else
                         {
                             lblAlert.Visible = true;
-                            lblAlert.Text = "Error Resetting Password!";
+                            lblAlert.Text = "Error in URL!";
                             lblAlert.Attributes["class"] = "alert alert-danger";
                         }
                     }
@@ -79,7 +79,8 @@ namespace LinkedU
 
 
         /// <summary>
-        /// Insert
+        /// If email and genString are not in GET then store values in DB and send email.
+        /// If email and genString are in GET then reset password.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -89,90 +90,89 @@ namespace LinkedU
             using (SqlConnection dbConnection = new SqlConnection(connectionString))
             {
                 dbConnection.Open();
+                // Create password reset in DB and send email to user
                 if (string.IsNullOrWhiteSpace(Request.QueryString["email"]) && string.IsNullOrWhiteSpace(Request.QueryString["genString"]))
                 {
                     try
                     {
-                        if (valid)
+                        SqlTransaction transaction = dbConnection.BeginTransaction();
+                        try
                         {
-                            SqlTransaction transaction = dbConnection.BeginTransaction();
-                            try
+                            // Check if email is in DB
+                            int userExists = 0;
+                            using (SqlCommand comm = dbConnection.CreateCommand())
                             {
-                                // Check if email is in DB
-                                int userExists = 0;
-                                using (SqlCommand comm = dbConnection.CreateCommand())
-                                {
-                                    comm.CommandText = "SELECT userLogin FROM logins WHERE email = @email";
-                                    comm.Parameters.AddWithValue("@email", txtEmail.Text);
-                                    userExists = int.Parse(comm.ExecuteScalar().ToString());
-                                }
-
-                                if (userExists > 0)
-                                {
-                                    string genString = genRandomString();
-                                    // Insert logins values
-                                    string resetPasswordInsert = "INSERT INTO reset_password (email, gen_string) VALUES (@email, @gen_string)";
-                                    using (SqlCommand login = new SqlCommand(resetPasswordInsert, dbConnection))
-                                    {
-                                        login.Transaction = transaction;
-                                        login.Parameters.AddWithValue("@email", txtEmail.Text);
-                                        login.Parameters.AddWithValue("@gen_string", genString);
-                                        login.ExecuteNonQuery();
-                                    }
-
-                                    // Send SMS
-                                    if (chkPhone.Checked)
-                                    {
-
-                                    }
-                                    // Send email
-                                    MailAddress messageFrom = new MailAddress(txtEmail.Text);
-                                    MailAddress messageTo = new MailAddress("Linkedu368@gmail.com", "LinkedU");
-                                    MailMessage emailMessage = new MailMessage();
-                                    emailMessage.To.Add(messageTo.Address);
-                                    emailMessage.From = messageFrom;
-                                    emailMessage.Subject = "LinkedU || Contact Us";
-                                    string body = string.Concat("This message was automatically generated via the LinkedU website.<br />",
-                                        "<p>Click the link to reset your password. -> ",
-                                        "localhost:/LinkedU/Reset.aspx?", // TODO: Change address when uploaded to IIS
-                                        "email=" + txtEmail.Text,
-                                        "&genString=" + genString);
-                                    emailMessage.Body = body;
-                                    emailMessage.IsBodyHtml = true;
-                                    SmtpClient smtp = new SmtpClient();
-                                    smtp.Host = "smtp.gmail.com";
-                                    smtp.EnableSsl = true;
-                                    // Credentials are necessary if the server requires the client
-                                    // to authenticate before it will send e-mail on the client's behalf.
-                                    NetworkCredential NetworkCred = new NetworkCredential("Linkedu368@gmail.com", "isuit368");
-                                    smtp.UseDefaultCredentials = true;
-                                    smtp.Credentials = NetworkCred;
-                                    smtp.Port = 587;
-                                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                                    smtp.ServicePoint.MaxIdleTime = 0;
-                                    smtp.ServicePoint.SetTcpKeepAlive(true, 2000, 2000);
-                                    emailMessage.Priority = MailPriority.High;
-                                    smtp.Send(emailMessage);
-                                    // Clean up.
-                                    emailMessage.Dispose();
-                                    lblAlert.Visible = true;
-                                    lblAlert.Text = "Email has been sent!";
-                                    lblAlert.Attributes["class"] = "alert alert-success";
-                                }
-                                else
-                                {
-                                    lblAlert.Visible = true;
-                                    lblAlert.Text = "User does not exist with this email!";
-                                    lblAlert.Attributes["class"] = "alert alert-danger";
-                                }
-
-                                transaction.Commit();
+                                comm.Transaction = transaction;
+                                comm.CommandText = "SELECT userLogin FROM logins WHERE email = @email";
+                                comm.Parameters.AddWithValue("@email", txtEmail.Text);
+                                userExists = int.Parse(comm.ExecuteScalar().ToString());
                             }
-                            catch (Exception ex)
+
+                            if (userExists > 0)
                             {
-                                transaction.Rollback();
-                                throw ex;
+                                string genString = genRandomString();
+                                // Insert logins values
+                                string resetPasswordInsert = "INSERT INTO reset_password (email, gen_string) VALUES (@email, @gen_string)";
+                                using (SqlCommand login = new SqlCommand(resetPasswordInsert, dbConnection))
+                                {
+                                    login.Transaction = transaction;
+                                    login.Parameters.AddWithValue("@email", txtEmail.Text);
+                                    login.Parameters.AddWithValue("@gen_string", genString);
+                                    login.ExecuteNonQuery();
+                                }
+
+                                // Send SMS
+                                if (chkPhone.Checked)
+                                {
+                                    // TODO: Send SMS and check phone format
+                                }
+                                // Send email
+                                MailAddress messageFrom = new MailAddress(txtEmail.Text);
+                                MailAddress messageTo = new MailAddress("Linkedu368@gmail.com", "LinkedU");
+                                MailMessage emailMessage = new MailMessage();
+                                emailMessage.To.Add(messageTo.Address);
+                                emailMessage.From = messageFrom;
+                                emailMessage.Subject = "LinkedU || Contact Us";
+                                string body = string.Concat("This message was automatically generated via the LinkedU website.<br />",
+                                    "<p>Click the link to reset your password. -> ",
+                                    "localhost:/LinkedU/Reset.aspx?", // TODO: Change address when uploaded to IIS
+                                    "email=" + txtEmail.Text,
+                                    "&genString=" + genString);
+                                emailMessage.Body = body;
+                                emailMessage.IsBodyHtml = true;
+                                SmtpClient smtp = new SmtpClient();
+                                smtp.Host = "smtp.gmail.com";
+                                smtp.EnableSsl = true;
+                                // Credentials are necessary if the server requires the client
+                                // to authenticate before it will send e-mail on the client's behalf.
+                                NetworkCredential NetworkCred = new NetworkCredential("Linkedu368@gmail.com", "isuit368");
+                                smtp.UseDefaultCredentials = true;
+                                smtp.Credentials = NetworkCred;
+                                smtp.Port = 587;
+                                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                                smtp.ServicePoint.MaxIdleTime = 0;
+                                smtp.ServicePoint.SetTcpKeepAlive(true, 2000, 2000);
+                                emailMessage.Priority = MailPriority.High;
+                                smtp.Send(emailMessage);
+                                // Clean up.
+                                emailMessage.Dispose();
+                                lblAlert.Visible = true;
+                                lblAlert.Text = "Email has been sent!";
+                                lblAlert.Attributes["class"] = "alert alert-success";
                             }
+                            else
+                            {
+                                lblAlert.Visible = true;
+                                lblAlert.Text = "User does not exist with this email!";
+                                lblAlert.Attributes["class"] = "alert alert-danger";
+                            }
+
+                            transaction.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            throw ex;
                         }
                     }
                     catch (SqlException ex)
@@ -195,11 +195,11 @@ namespace LinkedU
                             comm.Parameters.AddWithValue("@answer", txtAnswer.Text);
                             answerCorrect = int.Parse(comm.ExecuteScalar().ToString());
                         }
+
                         if (answerCorrect > 0)
                         {
-                            // Get userLogin
                             string userLogin = "";
-                            // Set question
+                            // Get userLogin
                             using (SqlCommand comm = dbConnection.CreateCommand())
                             {
                                 comm.CommandText = "SELECT userLogin FROM logins WHERE email = @email";
