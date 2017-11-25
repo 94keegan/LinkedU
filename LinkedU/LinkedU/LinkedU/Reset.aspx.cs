@@ -103,7 +103,7 @@ namespace LinkedU
                             using (SqlCommand comm = dbConnection.CreateCommand())
                             {
                                 comm.Transaction = transaction;
-                                comm.CommandText = "SELECT userLogin FROM logins WHERE email = @email";
+                                comm.CommandText = "SELECT userLogin FROM users WHERE email = @email";
                                 comm.Parameters.AddWithValue("@email", txtEmail.Text);
                                 userExists = int.Parse(comm.ExecuteScalar().ToString());
                             }

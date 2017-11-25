@@ -95,11 +95,12 @@ namespace LinkedU
                             }
 
                             // Insert user values
-                            string userInsert = "INSERT INTO users (userID, accountType, universityID, firstName, lastName, email, securityQuestion, securityAnswer) VALUES (@userID, @accountType, @universityID, @firstName, @lastName, @email, @securityQuestion, @securityAnswer)";
+                            string userInsert = "INSERT INTO users (userID, userLogin, accountType, universityID, firstName, lastName, email, securityQuestion, securityAnswer) VALUES (@userID, @accountType, @universityID, @firstName, @lastName, @email, @securityQuestion, @securityAnswer)";
                             using (SqlCommand user = new SqlCommand(userInsert, dbConnection))
                             {
                                 user.Transaction = transaction;
                                 user.Parameters.AddWithValue("@userID", userid);
+                                user.Parameters.AddWithValue("@userLogin", txtUserName.Text);
                                 user.Parameters.AddWithValue("@accountType", ddlAccountType.Text);
                                 user.Parameters.AddWithValue("@universityID", UniversityID.Value);
                                 user.Parameters.AddWithValue("@firstName", txtFirstName.Text);
