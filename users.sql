@@ -1,6 +1,5 @@
 CREATE TABLE users (
 	userID INT PRIMARY KEY,
-	userLogin VARCHAR(25) NOT NULL,
 	accountType NVARCHAR(50),
 	universityName NVARCHAR(100),
 	firstName NVARCHAR(50),
