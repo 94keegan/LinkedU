@@ -109,7 +109,6 @@
                 <div class='col-sm-5 touch'>
                     <ul>
                         <li><strong>Contact</strong></li>
-                        <br />
                         <li><a href='Contact.aspx'>Click Here to Send Us A Note</a></li>
                     </ul>
                 </div>

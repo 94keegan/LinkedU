@@ -78,7 +78,7 @@ namespace LinkedU
                 {
                     dbConnection.Open();
 
-                    string usersInfo = "SELECT userLogin, userPassword FROM logins WHERE userLogin = @userLogin AND userPassword = @userPassword";
+                    string usersInfo = "SELECT userLogin, userPassword, userID FROM logins WHERE userLogin = @userLogin AND userPassword = @userPassword";
                     using (SqlCommand users = new SqlCommand(usersInfo, dbConnection))
                     {
 
@@ -93,6 +93,7 @@ namespace LinkedU
                                     if (txtUserName.Text.ToLower().Equals(records["userLogin"].ToString().ToLower()) && txtPassword.Text.ToLower().Equals(records["userPassword"].ToString().ToLower().ToString().ToLower()))
                                     {
                                         Session["UserName"] = records["userLogin"].ToString();
+                                        Session["UserID"] = records["userID"].ToString();
 
                                         //if referred from another page in this website, return to that page
                                         if (SignInReferrer.Value != "")

@@ -111,18 +111,28 @@ namespace LinkedU
                             }
 
                             transaction.Commit();
-                        } catch (Exception ex)
+
+                            Session["UserName"] = txtUserName.Text;
+                            Session["UserID"] = userid;
+
+                            if (ddlAccountType.Text == "Student")
+                                Response.Redirect("CreateStudentProfile.aspx");
+                            else
+                                Response.Redirect("Default.aspx");
+
+                        }
+                        catch (Exception ex)
                         {
                             transaction.Rollback();
-                                throw ex;
+                            throw ex;
                         }
                     }
                 }
-                catch (SqlException ex)
+                catch
                 {
                     successful = false;
                     PanelSignupError.Visible = true;
-                    lblSignupError.Text= "Error Signing Up!";
+                    lblSignupError.Text = "Error Signing Up!";
                 }
                 if (valid && successful)
                 {

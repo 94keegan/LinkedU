@@ -62,7 +62,7 @@ namespace LinkedU
                     lblAlert.Text = "Email has been sent!";
                     lblAlert.Attributes["class"] = "alert alert-success";
                 }
-                catch (Exception ex)
+                catch
                 {
                     lblAlert.Text = "Email failed to send!";
                     lblAlert.Visible = true;

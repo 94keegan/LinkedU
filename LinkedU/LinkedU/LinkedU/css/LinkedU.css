@@ -5,3 +5,14 @@
     margin-top: -30px;
     width: 100%;
 }
+
+#Wizard1 div span:first-child {
+    display:inline-block;
+    width: 8em;
+    font-weight:bold;
+}
+
+.floatleft {
+    float:left;
+    padding-right:1em;
+}

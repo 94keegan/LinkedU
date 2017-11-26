@@ -75,6 +75,7 @@
     <Content Include="artwork\BANNER-2.psd" />
     <Content Include="artwork\BANNER-3.psd" />
     <Content Include="artwork\BANNER-4.psd" />
+    <Content Include="WebUserControlExtraCurricular.ascx" />
     <None Include="Connected Services\DistanceFinder\DistanceFinder.disco" />
     <None Include="Connected Services\DistanceFinder\configuration91.svcinfo" />
     <None Include="Connected Services\DistanceFinder\configuration.svcinfo" />
@@ -383,6 +384,12 @@
     </Compile>
     <Compile Include="UniversitySearch.aspx.designer.cs">
       <DependentUpon>UniversitySearch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUserControlExtraCurricular.ascx.cs">
+      <DependentUpon>WebUserControlExtraCurricular.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUserControlExtraCurricular.ascx.designer.cs">
+      <DependentUpon>WebUserControlExtraCurricular.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
