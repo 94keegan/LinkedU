@@ -8,5 +8,5 @@ CREATE TABLE users (
 	securityQuestion NVARCHAR(255),
 	securityAnswer NVARCHAR(255),
 	constraint unique_email UNIQUE (email),
-	constraint fk_userid foreign key (userID) REFERENCES logins(userID)
+	constraint fk_userid foreign key (userID) REFERENCES logins(userID) ON DELETE CASCADE
 );
