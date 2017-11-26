@@ -95,7 +95,7 @@ namespace LinkedU
                             }
 
                             // Insert user values
-                            string userInsert = "INSERT INTO users (userID, accountType, universityID, firstName, lastName, email, securityQuestion, securityAnswer) VALUES (@userID, @accountType, @universityName, @firstName, @lastName, @email, @securityQuestion, @securityAnswer)";
+                            string userInsert = "INSERT INTO users (userID, accountType, universityID, firstName, lastName, email, securityQuestion, securityAnswer) VALUES (@userID, @accountType, @universityID, @firstName, @lastName, @email, @securityQuestion, @securityAnswer)";
                             using (SqlCommand user = new SqlCommand(userInsert, dbConnection))
                             {
                                 user.Transaction = transaction;
