@@ -1,6 +1,7 @@
 CREATE TABLE [dbo].[student_test_scores](
 	[userID] [int] NOT NULL,
 	[test_score] [float] NOT NULL,
+	[test_date] [datetime],
 	[test_type] [int] NOT NULL,
 	primary key (userID, [test_type])
 )
