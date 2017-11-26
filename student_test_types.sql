@@ -6,7 +6,9 @@ GO
 
 INSERT INTO student_test_types (name) values ('SAT')
 INSERT INTO student_test_types (name) values ('ACT')
-INSERT INTO student_test_types (name) values ('GRE')
+INSERT INTO student_test_types (name) values ('GRE-V')
+INSERT INTO student_test_types (name) values ('GRE-Q')
+INSERT INTO student_test_types (name) values ('GRE-W')
 INSERT INTO student_test_types (name) values ('PSAT')
 INSERT INTO student_test_types (name) values ('PSAT/NMSQT')
 INSERT INTO student_test_types (name) values ('LSAT')
