@@ -12,66 +12,74 @@ namespace LinkedU
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblAlert.Attributes["class"] = "";
-            // Display email to reset password if nothing in GET
-            if (string.IsNullOrWhiteSpace(Request.QueryString["email"]) && string.IsNullOrWhiteSpace(Request.QueryString["genString"]))
+            if (!IsPostBack)
             {
-                txtEmail.Visible = true;
-                lblQuestion.Visible = false;
-                txtAnswer.Visible = false;
-                txtNewPassword.Visible = false;
-                txtNewPasswordConfirm.Visible = false;
-            }
-            else // Display question, answer, and new password box to reset password if GET contains valid email and genString
-            {
-                string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
-                using (SqlConnection dbConnection = new SqlConnection(connectionString))
+                lblAlert.Attributes["class"] = "";
+                // Display email to reset password if nothing in GET
+                if (string.IsNullOrWhiteSpace(Request.QueryString["email"]) && string.IsNullOrWhiteSpace(Request.QueryString["genString"]))
                 {
-                    try
+                    txtEmail.Visible = true;
+                    lblQuestion.Visible = false;
+                    txtAnswer.Visible = false;
+                    txtNewPassword.Visible = false;
+                    txtNewPasswordConfirm.Visible = false;
+                    chkPhone.Visible = true;
+                }
+                else // Display question, answer, and new password box to reset password if GET contains valid email and genString
+                {
+                    string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
+                    using (SqlConnection dbConnection = new SqlConnection(connectionString))
                     {
-                        SqlTransaction transaction = dbConnection.BeginTransaction();
-                        // Check if gen_string/email combo is in DB
-                        int resetExists = 0;
-                        using (SqlCommand comm = dbConnection.CreateCommand())
+                        dbConnection.Open();
+                        try
                         {
-                            comm.CommandText = "SELECT * FROM reset_password WHERE email = @email && genString = @genString";
-                            comm.Parameters.AddWithValue("@email", Request.QueryString["email"]);
-                            comm.Parameters.AddWithValue("@genString", Request.QueryString["genString"]);
-                            resetExists = int.Parse(comm.ExecuteScalar().ToString());
-                        }
-
-                        if (resetExists > 0)
-                        {
-                            txtEmail.Visible = false;
-                            lblQuestion.Visible = true;
-                            txtAnswer.Visible = true;
-                            txtNewPassword.Visible = true;
-                            txtNewPasswordConfirm.Visible = true;
-
-                            // Set question
+                            SqlTransaction transaction = dbConnection.BeginTransaction();
+                            // Check if gen_string/email combo is in DB
+                            int resetExists = 0;
                             using (SqlCommand comm = dbConnection.CreateCommand())
                             {
-                                comm.CommandText = "SELECT question FROM logins WHERE email = @email";
+                                comm.Transaction = transaction;
+                                comm.CommandText = "SELECT * FROM reset_password WHERE email = @email AND gen_String = @genString";
                                 comm.Parameters.AddWithValue("@email", Request.QueryString["email"]);
-                                SqlDataReader reader = comm.ExecuteReader();
-                                while (reader.Read())
+                                comm.Parameters.AddWithValue("@genString", Request.QueryString["genString"]);
+                                resetExists = int.Parse(comm.ExecuteScalar().ToString()); // FIX
+                            }
+
+                            if (resetExists > 0)
+                            {
+                                txtEmail.Visible = false;
+                                lblQuestion.Visible = true;
+                                txtAnswer.Visible = true;
+                                txtNewPassword.Visible = true;
+                                txtNewPasswordConfirm.Visible = true;
+                                chkPhone.Visible = false;
+
+                                // Set question
+                                using (SqlCommand comm = dbConnection.CreateCommand())
                                 {
-                                    lblQuestion.Text = reader["question"].ToString();
+                                    comm.Transaction = transaction;
+                                    comm.CommandText = "SELECT securityQuestion FROM users WHERE email = @email";
+                                    comm.Parameters.AddWithValue("@email", Request.QueryString["email"]);
+                                    SqlDataReader reader = comm.ExecuteReader();
+                                    while (reader.Read())
+                                    {
+                                        lblQuestion.Text = string.Concat("Question: ", reader["securityQuestion"].ToString());
+                                    }
                                 }
                             }
+                            else
+                            {
+                                lblAlert.Visible = true;
+                                lblAlert.Text = "Error in URL!";
+                                lblAlert.Attributes["class"] = "alert alert-danger";
+                            }
                         }
-                        else
+                        catch (SqlException ex)
                         {
                             lblAlert.Visible = true;
-                            lblAlert.Text = "Error in URL!";
+                            lblAlert.Text = "Error Resetting Password!";
                             lblAlert.Attributes["class"] = "alert alert-danger";
                         }
-                    }
-                    catch (SqlException ex)
-                    {
-                        lblAlert.Visible = true;
-                        lblAlert.Text = "Error Resetting Password!";
-                        lblAlert.Attributes["class"] = "alert alert-danger";
                     }
                 }
             }
@@ -103,9 +111,9 @@ namespace LinkedU
                             using (SqlCommand comm = dbConnection.CreateCommand())
                             {
                                 comm.Transaction = transaction;
-                                comm.CommandText = "SELECT userLogin FROM users WHERE email = @email";
+                                comm.CommandText = "SELECT userID FROM users WHERE email = @email";
                                 comm.Parameters.AddWithValue("@email", txtEmail.Text);
-                                userExists = int.Parse(comm.ExecuteScalar().ToString());
+                                userExists = int.Parse(comm.ExecuteScalar().ToString()); // FIX
                             }
 
                             if (userExists > 0)
@@ -127,15 +135,15 @@ namespace LinkedU
                                     // TODO: Send SMS and check phone format
                                 }
                                 // Send email
-                                MailAddress messageFrom = new MailAddress(txtEmail.Text);
-                                MailAddress messageTo = new MailAddress("Linkedu368@gmail.com", "LinkedU");
+                                MailAddress messageFrom = new MailAddress("Linkedu368@gmail.com", "LinkedU");
+                                MailAddress messageTo = new MailAddress(txtEmail.Text);
                                 MailMessage emailMessage = new MailMessage();
                                 emailMessage.To.Add(messageTo.Address);
                                 emailMessage.From = messageFrom;
-                                emailMessage.Subject = "LinkedU || Contact Us";
+                                emailMessage.Subject = "LinkedU || Reset";
                                 string body = string.Concat("This message was automatically generated via the LinkedU website.<br />",
                                     "<p>Click the link to reset your password. -> ",
-                                    "localhost:/LinkedU/Reset.aspx?", // TODO: Change address when uploaded to IIS
+                                    "localhost:64190/Reset.aspx?", // TODO: Change address when uploaded to IIS
                                     "email=" + txtEmail.Text,
                                     "&genString=" + genString);
                                 emailMessage.Body = body;
@@ -186,48 +194,84 @@ namespace LinkedU
                 {
                     try
                     {
-                        SqlTransaction transaction = dbConnection.BeginTransaction();
-                        // Check answer
-                        int answerCorrect = 0;
-                        using (SqlCommand comm = dbConnection.CreateCommand())
+                        if (!string.IsNullOrWhiteSpace(txtNewPassword.Text) && !string.IsNullOrWhiteSpace(txtNewPasswordConfirm.Text) && txtNewPassword.Text.Equals(txtNewPasswordConfirm.Text))
                         {
-                            comm.CommandText = "SELECT userLogin FROM logins WHERE answer = @answer";
-                            comm.Parameters.AddWithValue("@answer", txtAnswer.Text);
-                            answerCorrect = int.Parse(comm.ExecuteScalar().ToString());
-                        }
-
-                        if (answerCorrect > 0)
-                        {
-                            string userLogin = "";
-                            // Get userLogin
+                            SqlTransaction transaction = dbConnection.BeginTransaction();
+                            // Check answer
+                            int answerCorrect = 0;
                             using (SqlCommand comm = dbConnection.CreateCommand())
                             {
-                                comm.CommandText = "SELECT userLogin FROM logins WHERE email = @email";
-                                comm.Parameters.AddWithValue("@email", Request.QueryString["email"]);
-                                SqlDataReader reader = comm.ExecuteReader();
-                                while (reader.Read())
-                                {
-                                    userLogin = reader["userLogin"].ToString();
-                                }
+                                comm.Transaction = transaction;
+                                comm.CommandText = "SELECT userID FROM users WHERE securityAnswer = @answer";
+                                comm.Parameters.AddWithValue("@answer", txtAnswer.Text);
+                                answerCorrect = int.Parse(comm.ExecuteScalar().ToString()); // FIX
                             }
 
-                            // Reset password in DB
-                            string resetPasswordInsert = "UPDATE password FROM login SET password = @password WHERE VALUES userLogin = @userLogin)";
-                            using (SqlCommand updatePassword = new SqlCommand(resetPasswordInsert, dbConnection))
+                            if (answerCorrect > 0)
                             {
-                                updatePassword.Transaction = transaction;
-                                updatePassword.Parameters.AddWithValue("@password", txtNewPassword);
-                                updatePassword.Parameters.AddWithValue("@userLogin", userLogin);
-                                updatePassword.ExecuteNonQuery();
+                                string userID = "";
+                                string userLogin = "";
+                                // Get userLogin
+                                using (SqlCommand comm = dbConnection.CreateCommand())
+                                {
+                                    comm.Transaction = transaction;
+                                    comm.CommandText = "SELECT userID FROM users WHERE email = @email";
+                                    comm.Parameters.AddWithValue("@email", Request.QueryString["email"]);
+                                    SqlDataReader reader = comm.ExecuteReader();
+                                    while (reader.Read())
+                                    {
+                                        userID = reader["userID"].ToString();
+                                    }
+                                    reader.Close();
+                                }
+
+                                using (SqlCommand comm = dbConnection.CreateCommand())
+                                {
+                                    comm.Transaction = transaction;
+                                    comm.CommandText = "SELECT userLogin FROM logins WHERE userID = @userID";
+                                    comm.Parameters.AddWithValue("@userID", userID);
+                                    SqlDataReader reader = comm.ExecuteReader();
+                                    while (reader.Read())
+                                    {
+                                        userLogin = reader["userLogin"].ToString();
+                                    }
+                                    reader.Close();
+                                }
+
+                                // Reset password
+                                string resetPasswordInsert = "UPDATE logins SET userPassword = @userPassword WHERE userLogin = @userLogin";
+                                using (SqlCommand updatePassword = new SqlCommand(resetPasswordInsert, dbConnection))
+                                {
+                                    updatePassword.Transaction = transaction;
+                                    updatePassword.Parameters.AddWithValue("@userPassword", txtNewPassword.Text);
+                                    updatePassword.Parameters.AddWithValue("@userLogin", userLogin);
+                                    updatePassword.ExecuteNonQuery();
+                                }
+                                lblAlert.Visible = true;
+                                lblAlert.Text = "Password has been reset!";
+                                lblAlert.Attributes["class"] = "alert alert-success";
+
+                                // Delete reset password entry
+                                string resetPasswordDelete = "DELETE FROM reset_password WHERE email = @email";
+                                using (SqlCommand deleteReset = new SqlCommand(resetPasswordDelete, dbConnection))
+                                {
+                                    deleteReset.Transaction = transaction;
+                                    deleteReset.Parameters.AddWithValue("@email", Request.QueryString["email"]);
+                                    deleteReset.ExecuteNonQuery();
+                                }
+                                transaction.Commit();
                             }
-                            lblAlert.Visible = true;
-                            lblAlert.Text = "Password has been reset!";
-                            lblAlert.Attributes["class"] = "alert alert-success";
+                            else
+                            {
+                                lblAlert.Visible = true;
+                                lblAlert.Text = "Answer is incorrect!";
+                                lblAlert.Attributes["class"] = "alert alert-danger";
+                            }
                         }
                         else
                         {
                             lblAlert.Visible = true;
-                            lblAlert.Text = "Answer is incorrect!";
+                            lblAlert.Text = "Passwords do not match!";
                             lblAlert.Attributes["class"] = "alert alert-danger";
                         }
                     }

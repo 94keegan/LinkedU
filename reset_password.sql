@@ -1,5 +1,5 @@
 CREATE TABLE reset_password (
 	resetID INT IDENTITY(1,1) PRIMARY KEY,
-	userLogin VARCHAR(25) NOT NULL,
+	email VARCHAR(25) NOT NULL,
 	gen_String VARCHAR(10) NOT NULL
 );
