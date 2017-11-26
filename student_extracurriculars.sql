@@ -8,6 +8,7 @@ GO
 
 ALTER TABLE [dbo].[student_extracurriculars]  WITH CHECK ADD  CONSTRAINT [fk_student_extracurriculars_userid] FOREIGN KEY([userID])
 REFERENCES [dbo].[logins] ([userID])
+ON DELETE CASCADE
 GO
 
 ALTER TABLE [dbo].[student_extracurriculars] CHECK CONSTRAINT [fk_student_extracurriculars_userid]
@@ -15,6 +16,7 @@ GO
 
 ALTER TABLE [dbo].[student_extracurriculars]  WITH CHECK ADD  CONSTRAINT [fk_ectype] FOREIGN KEY([ec_type])
 REFERENCES [dbo].[extracurricular_types] ([id])
+ON DELETE CASCADE
 GO
 
 ALTER TABLE [dbo].[student_extracurriculars] CHECK CONSTRAINT [fk_ectype]
