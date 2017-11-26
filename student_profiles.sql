@@ -1,6 +1,3 @@
-drop table student_profiles
-go
-
 CREATE TABLE [dbo].[student_profiles](
 	[userID] [int] NOT NULL PRIMARY KEY,
 	[age] [int] NOT NULL,
@@ -21,6 +18,7 @@ GO
 
 ALTER TABLE [dbo].[student_profiles]  WITH CHECK ADD  CONSTRAINT [fk_profile_userid] FOREIGN KEY([userID])
 REFERENCES [dbo].[logins] ([userID])
+ON DELETE CASCADE
 GO
 
 ALTER TABLE [dbo].[student_profiles] CHECK CONSTRAINT [fk_profile_userid]
