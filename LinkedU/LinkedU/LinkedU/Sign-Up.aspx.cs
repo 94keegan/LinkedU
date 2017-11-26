@@ -95,13 +95,13 @@ namespace LinkedU
                             }
 
                             // Insert user values
-                            string userInsert = "INSERT INTO users (userID, accountType, universityID, firstName, lastName, email, securityQuestion, securityAnswer) VALUES (@userID, @accountType, @universityID, @firstName, @lastName, @email, @securityQuestion, @securityAnswer)";
+                            string userInsert = "INSERT INTO users (userID, accountType, universityName, firstName, lastName, email, securityQuestion, securityAnswer) VALUES (@userID, @accountType, @universityName, @firstName, @lastName, @email, @securityQuestion, @securityAnswer)";
                             using (SqlCommand user = new SqlCommand(userInsert, dbConnection))
                             {
                                 user.Transaction = transaction;
                                 user.Parameters.AddWithValue("@userID", userid);
                                 user.Parameters.AddWithValue("@accountType", ddlAccountType.Text);
-                                user.Parameters.AddWithValue("@universityID", UniversityID.Value);
+                                user.Parameters.AddWithValue("@universityName", UniversityID.Value);
                                 user.Parameters.AddWithValue("@firstName", txtFirstName.Text);
                                 user.Parameters.AddWithValue("@lastName", txtLastname.Text);
                                 user.Parameters.AddWithValue("@email", txtEmail.Text);
@@ -123,6 +123,7 @@ namespace LinkedU
                         }
                         catch (Exception ex)
                         {
+                            successful = false;
                             transaction.Rollback();
                             throw ex;
                         }
@@ -137,6 +138,9 @@ namespace LinkedU
                 if (valid && successful)
                 {
                     PanelSignupError.Visible = false;
+                    Response.Cookies["UserName"].Value = txtUserName.Text;
+                    Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(14);
+                    Response.Redirect("Default.aspx");
                 }
             }
         }

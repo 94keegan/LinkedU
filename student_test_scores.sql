@@ -9,6 +9,7 @@ GO
 
 ALTER TABLE [dbo].[student_test_scores]  WITH CHECK ADD  CONSTRAINT [fk_student_test_scores_userid] FOREIGN KEY([userID])
 REFERENCES [dbo].[logins] ([userID])
+ON DELETE CASCADE
 GO
 
 ALTER TABLE [dbo].[student_test_scores] CHECK CONSTRAINT [fk_student_test_scores_userid]
@@ -16,6 +17,7 @@ GO
 
 ALTER TABLE [dbo].[student_test_scores]  WITH CHECK ADD  CONSTRAINT [fk_student_test_scores_test_type] FOREIGN KEY([test_type])
 REFERENCES [dbo].[student_test_types] ([id])
+ON DELETE CASCADE
 GO
 
 ALTER TABLE [dbo].[student_test_scores] CHECK CONSTRAINT [fk_student_test_scores_test_type]

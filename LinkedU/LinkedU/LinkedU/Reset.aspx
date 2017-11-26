@@ -68,10 +68,10 @@
                                     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                                     <asp:UpdatePanel ID="pnlReset" runat="server">
                                         <ContentTemplate>
-                                            <asp:Label runat="server" ID="lblAlert"></asp:Label>
+                                            <asp:Label runat="server" ID="lblAlert"></asp:Label><br /><br />
                                             <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" class="control-form" />
                                             <asp:TextBox ID="txtPhone" runat="server" placeholder="Phone" class="control-form" Visible="false" />
-                                            <asp:Label ID="lblQuestion" runat="server" Visible="false" />
+                                            <asp:Label ID="lblQuestion" runat="server" Visible="false" style="text-align: left"/><br />
                                             <asp:TextBox ID="txtAnswer" runat="server" placeholder="Answer" class="control-form" Visible="false" />
                                             <asp:TextBox ID="txtNewPassword" runat="server" placeholder="New Password" class="control-form" Visible="false" />
                                             <asp:TextBox ID="txtNewPasswordConfirm" runat="server" placeholder="New Password Confirm" class="control-form" Visible="false" />
