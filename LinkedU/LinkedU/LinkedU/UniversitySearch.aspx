@@ -87,7 +87,7 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
-                <div class="container-fluid">
+                <div class="container">
                     <p>
                         <asp:Label CssClass="search-label" Text="Name:" runat="server" />
                         <asp:TextBox ID="SearchName" runat="server" Width="400"></asp:TextBox>
@@ -108,7 +108,7 @@
                         </asp:DropDownList>
                     </p>
                     <p>
-                        <asp:Label CssClass="search-label" Text="Region:" runat="server" />
+<%--                        <asp:Label CssClass="search-label" Text="Region:" runat="server" />
                         <asp:DropDownList ID="SearchRegion" runat="server" Width="150">
                             <asp:ListItem Value="-1">All</asp:ListItem>
                             <asp:ListItem Value="1">New England</asp:ListItem>
@@ -127,7 +127,15 @@
                             <asp:ListItem>All</asp:ListItem>
                         </asp:DropDownList>
                         <asp:Label CssClass="search-label" Text="City:" runat="server" />
-                        <asp:TextBox ID="SearchCity" runat="server" Width="200"></asp:TextBox>
+                        <asp:TextBox ID="SearchCity" runat="server" Width="200"></asp:TextBox>--%>
+                        <asp:Label CssClass="search-label" Text="Within " runat="server"></asp:Label>
+                        <asp:TextBox ID="TextBoxSearchRadius" TextMode="Number" runat="server" Text="50" Width="5em"></asp:TextBox>
+                        <asp:Label CssClass="search-label" Text=" miles of " runat="server"></asp:Label>
+                        <asp:DropDownList ID="DropDownRadiusCenter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownRadiusCenter_SelectedIndexChanged">
+                            <asp:ListItem Text="My Home" Value="me" Enabled="false"></asp:ListItem>
+                            <asp:ListItem Text="Address" Value="addr"></asp:ListItem>
+                        </asp:DropDownList>
+                        <asp:TextBox ID="TextBoxSearchCenter" runat="server" Width="20em"></asp:TextBox>
                     </p>
                     <asp:Button Text="Search" OnClick="SearchValue_TextChanged" runat="server" CssClass="btn-sm" />
                     <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="UpdatePanel1">
@@ -144,6 +152,7 @@
                             <asp:TableHeaderCell>City</asp:TableHeaderCell>
                             <asp:TableHeaderCell>State</asp:TableHeaderCell>
                             <asp:TableHeaderCell>Zip Code</asp:TableHeaderCell>
+                            <asp:TableHeaderCell>Distance</asp:TableHeaderCell>
                         </asp:TableHeaderRow>
                     </asp:Table>
                 </div>

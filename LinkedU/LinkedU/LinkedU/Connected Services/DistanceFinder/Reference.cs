@@ -258,6 +258,13 @@ namespace LinkedU.DistanceFinder {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://iis2.it.ilstu.edu/GetLocation", ReplyAction="*")]
         System.Threading.Tasks.Task<LinkedU.DistanceFinder.GetLocationResponse> GetLocationAsync(LinkedU.DistanceFinder.GetLocationRequest request);
+        
+        // CODEGEN: Generating message contract since element name fullAddress from namespace http://iis2.it.ilstu.edu/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://iis2.it.ilstu.edu/GetLocationFromAddress", ReplyAction="*")]
+        LinkedU.DistanceFinder.GetLocationFromAddressResponse GetLocationFromAddress(LinkedU.DistanceFinder.GetLocationFromAddressRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://iis2.it.ilstu.edu/GetLocationFromAddress", ReplyAction="*")]
+        System.Threading.Tasks.Task<LinkedU.DistanceFinder.GetLocationFromAddressResponse> GetLocationFromAddressAsync(LinkedU.DistanceFinder.GetLocationFromAddressRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -420,6 +427,74 @@ namespace LinkedU.DistanceFinder {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetLocationFromAddressRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetLocationFromAddress", Namespace="http://iis2.it.ilstu.edu/", Order=0)]
+        public LinkedU.DistanceFinder.GetLocationFromAddressRequestBody Body;
+        
+        public GetLocationFromAddressRequest() {
+        }
+        
+        public GetLocationFromAddressRequest(LinkedU.DistanceFinder.GetLocationFromAddressRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://iis2.it.ilstu.edu/")]
+    public partial class GetLocationFromAddressRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string fullAddress;
+        
+        public GetLocationFromAddressRequestBody() {
+        }
+        
+        public GetLocationFromAddressRequestBody(string fullAddress) {
+            this.fullAddress = fullAddress;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetLocationFromAddressResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetLocationFromAddressResponse", Namespace="http://iis2.it.ilstu.edu/", Order=0)]
+        public LinkedU.DistanceFinder.GetLocationFromAddressResponseBody Body;
+        
+        public GetLocationFromAddressResponse() {
+        }
+        
+        public GetLocationFromAddressResponse(LinkedU.DistanceFinder.GetLocationFromAddressResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://iis2.it.ilstu.edu/")]
+    public partial class GetLocationFromAddressResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public LinkedU.DistanceFinder.Geolocation GetLocationFromAddressResult;
+        
+        public GetLocationFromAddressResponseBody() {
+        }
+        
+        public GetLocationFromAddressResponseBody(LinkedU.DistanceFinder.Geolocation GetLocationFromAddressResult) {
+            this.GetLocationFromAddressResult = GetLocationFromAddressResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface DistanceFinderSoapChannel : LinkedU.DistanceFinder.DistanceFinderSoap, System.ServiceModel.IClientChannel {
     }
@@ -507,6 +582,31 @@ namespace LinkedU.DistanceFinder {
             inValue.Body.state = state;
             inValue.Body.zip = zip;
             return ((LinkedU.DistanceFinder.DistanceFinderSoap)(this)).GetLocationAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        LinkedU.DistanceFinder.GetLocationFromAddressResponse LinkedU.DistanceFinder.DistanceFinderSoap.GetLocationFromAddress(LinkedU.DistanceFinder.GetLocationFromAddressRequest request) {
+            return base.Channel.GetLocationFromAddress(request);
+        }
+        
+        public LinkedU.DistanceFinder.Geolocation GetLocationFromAddress(string fullAddress) {
+            LinkedU.DistanceFinder.GetLocationFromAddressRequest inValue = new LinkedU.DistanceFinder.GetLocationFromAddressRequest();
+            inValue.Body = new LinkedU.DistanceFinder.GetLocationFromAddressRequestBody();
+            inValue.Body.fullAddress = fullAddress;
+            LinkedU.DistanceFinder.GetLocationFromAddressResponse retVal = ((LinkedU.DistanceFinder.DistanceFinderSoap)(this)).GetLocationFromAddress(inValue);
+            return retVal.Body.GetLocationFromAddressResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<LinkedU.DistanceFinder.GetLocationFromAddressResponse> LinkedU.DistanceFinder.DistanceFinderSoap.GetLocationFromAddressAsync(LinkedU.DistanceFinder.GetLocationFromAddressRequest request) {
+            return base.Channel.GetLocationFromAddressAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<LinkedU.DistanceFinder.GetLocationFromAddressResponse> GetLocationFromAddressAsync(string fullAddress) {
+            LinkedU.DistanceFinder.GetLocationFromAddressRequest inValue = new LinkedU.DistanceFinder.GetLocationFromAddressRequest();
+            inValue.Body = new LinkedU.DistanceFinder.GetLocationFromAddressRequestBody();
+            inValue.Body.fullAddress = fullAddress;
+            return ((LinkedU.DistanceFinder.DistanceFinderSoap)(this)).GetLocationFromAddressAsync(inValue);
         }
     }
 }
