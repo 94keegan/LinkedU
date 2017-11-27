@@ -39,10 +39,10 @@ namespace LinkedU
                             using (SqlCommand comm = dbConnection.CreateCommand())
                             {
                                 comm.Transaction = transaction;
-                                comm.CommandText = "SELECT * FROM reset_password WHERE email = @email AND gen_String = @genString";
+                                comm.CommandText = "SELECT userID FROM reset_password WHERE email = @email AND gen_String = @genString";
                                 comm.Parameters.AddWithValue("@email", Request.QueryString["email"]);
                                 comm.Parameters.AddWithValue("@genString", Request.QueryString["genString"]);
-                                resetExists = int.Parse(comm.ExecuteScalar().ToString()); // FIX
+                                resetExists = comm.ExecuteScalar() == null ? 0 : int.Parse(comm.ExecuteScalar().ToString());
                             }
 
                             if (resetExists > 0)
@@ -113,7 +113,7 @@ namespace LinkedU
                                 comm.Transaction = transaction;
                                 comm.CommandText = "SELECT userID FROM users WHERE email = @email";
                                 comm.Parameters.AddWithValue("@email", txtEmail.Text);
-                                userExists = int.Parse(comm.ExecuteScalar().ToString()); // FIX
+                                userExists = comm.ExecuteScalar() == null ? 0 : int.Parse(comm.ExecuteScalar().ToString());
                             }
 
                             if (userExists > 0)
@@ -204,7 +204,7 @@ namespace LinkedU
                                 comm.Transaction = transaction;
                                 comm.CommandText = "SELECT userID FROM users WHERE securityAnswer = @answer";
                                 comm.Parameters.AddWithValue("@answer", txtAnswer.Text);
-                                answerCorrect = int.Parse(comm.ExecuteScalar().ToString()); // FIX
+                                answerCorrect = comm.ExecuteScalar() == null ? 0 : int.Parse(comm.ExecuteScalar().ToString());
                             }
 
                             if (answerCorrect > 0)
