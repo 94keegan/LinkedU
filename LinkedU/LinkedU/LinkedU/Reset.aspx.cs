@@ -143,7 +143,7 @@ namespace LinkedU
                                 emailMessage.Subject = "LinkedU || Reset";
                                 string body = string.Concat("This message was automatically generated via the LinkedU website.<br />",
                                     "<p>Click the link to reset your password. -> ",
-                                    "localhost:64190/Reset.aspx?", // TODO: Change address when uploaded to IIS
+                                    Request.Url.Authority,"/Reset.aspx?",
                                     "email=" + txtEmail.Text,
                                     "&genString=" + genString);
                                 emailMessage.Body = body;
