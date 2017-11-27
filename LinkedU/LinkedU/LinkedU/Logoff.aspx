@@ -3,17 +3,8 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-<<<<<<< HEAD
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-        </div>
-    </form>
-=======
-    <title>LinkedU || Sign In</title>
+<head>
+    <title>LinkedU || Log Off</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -121,6 +112,5 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
->>>>>>> dd80ba928738314105fd8e21c52f3d1a07b72159
 </body>
 </html>

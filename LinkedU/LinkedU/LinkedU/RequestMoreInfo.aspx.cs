@@ -18,11 +18,11 @@ namespace LinkedU
 
             string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
             MailMessage msg = new MailMessage();
-            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+            SmtpClient client = new System.Net.Mail.SmtpClient();
             using (SqlConnection dbConnection = new SqlConnection(connectionString))
             {
 
-                
+
 
             }
             try
