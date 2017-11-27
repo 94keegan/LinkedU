@@ -38,13 +38,21 @@
                 <a href="Default.aspx" class="navbar-brand"><strong>LinkedU</strong></a>
             </div>
 
-            <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
+            
+                        <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="Default.aspx">HOME</a></li>
+                    <li class=""><a href="Default.aspx">HOME</a></li>
                     <!--Add more menus here above the Contact Us-->
 
-                    <li><a href="Contact.aspx">CONTACT US</a></li>
                     <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">SEARCH<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="UniversitySearch.aspx">Universities</a></li>
+                            <li><a href="StudentSearch.aspx">Students</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="Contact.aspx">CONTACT US</a></li>
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <%
                                 if (Session["UserName"] != null)
@@ -60,13 +68,13 @@
                             <%
                                 if (Session["UserName"] != null)
                                 {
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"#\">Logoff</a></li></ul>");
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Profile.aspx\">Profile</a></li><li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
                                 }
                                 else
                                 {
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li></ul>");
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
                                 }
-                               %>
+                            %>
                     </li>
                 </ul>
             </div>
@@ -157,7 +165,6 @@
                 <div class='col-sm-5 touch'>
                     <ul>
                         <li><strong>Contact</strong></li>
-                        <br />
                         <li><a href='Contact.aspx'>Click Here to Send Us A Note</a></li>
                     </ul>
                 </div>

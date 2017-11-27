@@ -10,6 +10,6 @@
 namespace LinkedU {
     
     
-    public partial class Default {
+    public partial class Default2 {
     }
 }

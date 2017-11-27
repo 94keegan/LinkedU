@@ -75,6 +75,9 @@
     <Content Include="artwork\BANNER-2.psd" />
     <Content Include="artwork\BANNER-3.psd" />
     <Content Include="artwork\BANNER-4.psd" />
+    <Content Include="Default2.aspx" />
+    <Content Include="PayPalCheckOut.aspx" />
+    <Content Include="RequestMoreInfo.aspx" />
     <Content Include="WebUserControlExtraCurricular.ascx" />
     <None Include="Connected Services\DistanceFinder\DistanceFinder.disco" />
     <None Include="Connected Services\DistanceFinder\configuration91.svcinfo" />
@@ -342,6 +345,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Default2.aspx.cs">
+      <DependentUpon>Default2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default2.aspx.designer.cs">
+      <DependentUpon>Default2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="examples\UniversityNameExample.aspx.cs">
       <DependentUpon>UniversityNameExample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -349,7 +359,21 @@
     <Compile Include="examples\UniversityNameExample.aspx.designer.cs">
       <DependentUpon>UniversityNameExample.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PayPalCheckOut.aspx.cs">
+      <DependentUpon>PayPalCheckOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PayPalCheckOut.aspx.designer.cs">
+      <DependentUpon>PayPalCheckOut.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestMoreInfo.aspx.cs">
+      <DependentUpon>RequestMoreInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RequestMoreInfo.aspx.designer.cs">
+      <DependentUpon>RequestMoreInfo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reset.aspx.cs">
       <DependentUpon>Reset.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -14,6 +14,10 @@ namespace LinkedU
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Session["UserID"] == null)
+                Response.Redirect("Sign-In.aspx");
+
             SummaryAddress.Text = HiddenFieldAddressFormatted.Value;
             SummaryAge.Text = TextBoxAge.Text;
 
@@ -164,7 +168,11 @@ namespace LinkedU
                             comm.Parameters.AddWithValue("@latitude", float.Parse(HiddenFieldAddressLatitude.Value));
                             comm.Parameters.AddWithValue("@longitude", float.Parse(HiddenFieldAddressLongitude.Value));
                             comm.Parameters.AddWithValue("@highschool", TextBoxHighSchool.Text);
-                            comm.Parameters.AddWithValue("@gpa", float.Parse(TextBoxGpa.Text));
+                            comm.Parameters.Add("@gpa", System.Data.SqlDbType.Float);
+
+                            if (TextBoxGpa.Text.Length > 0)
+                                comm.Parameters["@gpa"].Value = float.Parse(TextBoxGpa.Text);
+
                             comm.ExecuteNonQuery();
 
 
@@ -249,8 +257,9 @@ namespace LinkedU
 
                             Response.Redirect("Default.aspx");
                         }
-                        catch
+                        catch (Exception ex)
                         {
+                            Console.WriteLine(ex.Message);
                             transaction.Rollback();
                         }
                     }

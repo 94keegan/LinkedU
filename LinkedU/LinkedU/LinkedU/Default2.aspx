@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default2.aspx.cs" Inherits="LinkedU.Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default2.aspx.cs" Inherits="LinkedU.Default2" %>
 
 <!DOCTYPE html>
 
@@ -44,13 +44,28 @@
                     <li><a href="Contact.aspx">CONTACT US</a></li>
                     <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <% if (Request.Cookies["UserName"].Value != null)
-	                            {
-                                    Response.Write(Request.Cookies["UserName"].Value);
-	                            } %> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Logoff</a></li>
-                        <%--</ul>--%>
+                            <%
+                                if (Session["UserName"] != null)
+                                {
+                                    Response.Write(Session["UserName"]);
+                                }
+                                else
+                                {
+                                    Response.Write("Guest");
+                                }
+                               %>
+                            <b class="caret"></b></a>
+                            <%
+                                if (Session["UserName"] != null)
+                                {
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Profile.aspx\">Profile</a></li></ul>");
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
+                                }
+                                else
+                                {
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li></ul>");
+                                }
+                            %>
                     </li>
                 </ul>
             </div>
@@ -113,7 +128,7 @@
         </article>
     </section>
 
-    <div id="showcase">
+<%--    <div id="showcase">
         <div class="container">
             <div class="section_header">
                 <h3>Our Services</h3>
@@ -124,15 +139,15 @@
                     <!-- Feature -->
                     <div class="col-sm-4 feature first">
                         <div class="img_box">
-                            <a href="services.html">
-                                &nbsp;<span class="circle"><span class="plus">&#43;</span>
-                                </span>
+                            <a href="services.html">&nbsp;<span class="circle"><span class="plus">&#43;</span>
+                            </span>
                             </a>
                         </div>
-                        <div class="text">
-                            
+                        <div class="text">--%>
 
-    <!-- starts footer -->
+
+
+                            <!-- starts footer -->
     <footer id='footer'>
         <div class='container'>
             <div class='row info'>

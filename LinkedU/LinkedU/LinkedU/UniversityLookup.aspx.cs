@@ -26,6 +26,26 @@ namespace LinkedU
                 {
                     conn.Open();
 
+                    string source = "";
+
+                    if (Session["UserID"] != null)
+                    {
+
+                        using (SqlCommand comm = conn.CreateCommand())
+                        {
+                            comm.CommandText = "SELECT formatted_address FROM student_profiles WHERE userID = @userID";
+                            comm.Parameters.AddWithValue("@userID", Session["UserID"]);
+
+                            object formatted_address = comm.ExecuteScalar();
+                            if (formatted_address != null)
+                            {
+                                source = formatted_address.ToString();
+                            }
+                        }
+                    }
+
+
+
                     using (SqlCommand comm = conn.CreateCommand())
                     {
                         comm.CommandText = "SELECT INSTNM as [Name], ADDR as [Address], CITY as [City]," +
@@ -110,18 +130,13 @@ namespace LinkedU
                                 }
 
                                 string destination = String.Format("{0},{1},{2},{3}", properties["Name"].Replace(" ", "+"), properties["Address"].Replace(" ", "+"), properties["City"].Replace(" ", "+"), properties["State"].Replace(" ", "+"));
-                                string source = "";
-
-                                if (Session["UserName"] != null)
-                                {
-                                    source = "1305+Welling+St,Bloomington+IL,61701";
-                                }
 
                                 if (source == "")
                                 {
                                     Control iframe = new LiteralControl(String.Format("<iframe width=\"100%\" height=\"300\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" src=\"https://www.google.com/maps/embed/v1/place?key={0}&q={1}\" ></iframe>", WebConfigurationManager.AppSettings.Get("GoogleMapsApiKey"), destination));
                                     UniversityMap.Controls.Add(iframe);
-                                } else
+                                }
+                                else
                                 {
                                     Control iframe = new LiteralControl(String.Format("<iframe width=\"100%\" height=\"300\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" src=\"https://www.google.com/maps/embed/v1/directions?key={0}&origin={1}&destination={2}\" ></iframe>", WebConfigurationManager.AppSettings.Get("GoogleMapsApiKey"), source, destination));
                                     UniversityMap.Controls.Add(iframe);

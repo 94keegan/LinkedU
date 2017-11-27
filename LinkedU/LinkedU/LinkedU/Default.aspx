@@ -36,24 +36,47 @@
                 <a href="Default.aspx" class="navbar-brand"><strong>LinkedU</strong></a>
             </div>
 
+            <!--Begin Navigation template for other pages-->
             <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="index.html">HOME</a></li>
+                    <li class="active"><a href="Default.aspx">HOME</a></li>
                     <!--Add more menus here above the Contact Us-->
 
-                    <li><a href="Contact.aspx">CONTACT US</a></li>
-                    <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <% if (Request.Cookies["UserName"].Value != null)
-	                            {
-                                    Response.Write(Request.Cookies["UserName"].Value);
-	                            } %> <b class="caret"></b></a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">SEARCH<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Logoff</a></li>
+                            <li><a href="UniversitySearch.aspx">Universities</a></li>
+                            <li><a href="StudentSearch.aspx">Students</a></li>
                         </ul>
+                    </li>
+                    <li><a href="Contact.aspx">CONTACT US</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <%
+                                if (Session["UserName"] != null)
+                                {
+                                    Response.Write(Session["UserName"]);
+                                }
+                                else
+                                {
+                                    Response.Write("Guest");
+                                }
+                               %>
+                            <b class="caret"></b></a>
+                            <%
+                                if (Session["UserName"] != null)
+                                {
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Profile.aspx\">Profile</a></li><li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
+                                }
+                                else
+                                {
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
+                                }
+                            %>
                     </li>
                 </ul>
             </div>
+            <!--End Navigation template for other pages-->
         </div>
     </div>
 
