@@ -12,6 +12,7 @@ CREATE TABLE [dbo].[student_profiles](
 	[latitude] [float],
 	[longitude] [float],
 	[highschool] [nvarchar] (100) NULL,
+	[graduationyear] [int] NULL,
 	[gpa] [float] NULL
 )
 GO

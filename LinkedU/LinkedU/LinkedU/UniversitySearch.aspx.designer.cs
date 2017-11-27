@@ -58,31 +58,31 @@ namespace LinkedU {
         protected global::System.Web.UI.WebControls.DropDownList SearchHighestLevel;
         
         /// <summary>
-        /// SearchRegion control.
+        /// TextBoxSearchRadius control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList SearchRegion;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxSearchRadius;
         
         /// <summary>
-        /// SearchState control.
+        /// DropDownRadiusCenter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList SearchState;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownRadiusCenter;
         
         /// <summary>
-        /// SearchCity control.
+        /// TextBoxSearchCenter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox SearchCity;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxSearchCenter;
         
         /// <summary>
         /// UpdateProgress1 control.

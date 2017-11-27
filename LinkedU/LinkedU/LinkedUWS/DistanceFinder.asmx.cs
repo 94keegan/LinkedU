@@ -111,5 +111,48 @@ namespace LinkedUWS
             return geo;
         }
 
+        [WebMethod]
+        public Geolocation GetLocationFromAddress(string fullAddress)
+        {
+            Geolocation geo = new Geolocation();
+
+            try
+            {
+                using (WebClient wc = new WebClient())
+                {
+
+                    try
+                    {
+                        Uri uri = new Uri(String.Format("https://maps.googleapis.com/maps/api/geocode/json?address={0}", fullAddress, apiKey));
+                        string json = wc.DownloadString(uri);
+
+                        if (json != null)
+                        {
+
+                            AddressResult address = JsonConvert.DeserializeObject<AddressResult>(json);
+
+                            if (address.Status == "OK")
+                            {
+                                geo.Latitude = address.Results.First().Geometry.Location.Latitude;
+                                geo.Longitude = address.Results.First().Geometry.Location.Longitude;
+                                geo.FormattedAddress = address.Results.First().FormattedAddress;
+                            }
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return geo;
+        }
+
     }
 }

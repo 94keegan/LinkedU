@@ -39,7 +39,7 @@
             </div>
 
             
-                       <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
+            <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
                 <ul class="nav navbar-nav navbar-right">
                     <li class=""><a href="Default.aspx">HOME</a></li>
                     <!--Add more menus here above the Contact Us-->
@@ -95,6 +95,14 @@
                     </div>
                     <div class='col-md-5'>
                         <asp:Panel ID="UniversityMap" runat="server">
+                        </asp:Panel>
+                        <asp:Panel runat="server" HorizontalAlign="Right">
+                            <asp:LinkButton runat="server" CssClass="btn btn-sm btn-default" PostBackUrl="~/RequestMoreInfo.aspx" Text="More Information">
+                                <span aria-hidden="true" class="glyphicon glyphicon-envelope">&nbsp;Request More Information</span>
+                            </asp:LinkButton>
+                            <asp:LinkButton runat="server" CssClass="btn btn-sm btn-default" PostBackUrl="~/ApplyToUniversity.aspx" Text="Apply for Admission">
+                                <span aria-hidden="true" class="glyphicon glyphicon-shopping-cart">&nbsp;Apply for Admission</span>
+                            </asp:LinkButton>
                         </asp:Panel>
                     </div>
                     <div class="col-md-2">

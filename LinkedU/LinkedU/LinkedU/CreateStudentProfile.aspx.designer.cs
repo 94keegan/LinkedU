@@ -292,6 +292,15 @@ namespace LinkedU {
         protected global::System.Web.UI.WebControls.TextBox TextBoxHighSchool;
         
         /// <summary>
+        /// TextBoxGraduationYear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxGraduationYear;
+        
+        /// <summary>
         /// WizardStepTestScores control.
         /// </summary>
         /// <remarks>
@@ -569,6 +578,24 @@ namespace LinkedU {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label SummaryHighSchool;
+        
+        /// <summary>
+        /// PanelSummaryGraduationYear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelSummaryGraduationYear;
+        
+        /// <summary>
+        /// SummaryGraduationYear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SummaryGraduationYear;
         
         /// <summary>
         /// PanelSummaryAct control.
