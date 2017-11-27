@@ -11,14 +11,8 @@ namespace LinkedU
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-            Session["UserName"] = null;
-            Response.Redirect("Sign-Up.aspx");
-=======
             Session.Clear();
-
             Response.Redirect("Sign-In.aspx");
->>>>>>> dd80ba928738314105fd8e21c52f3d1a07b72159
         }
     }
 }
