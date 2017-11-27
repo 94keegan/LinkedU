@@ -17,6 +17,7 @@
 
     <link rel="stylesheet" href="css/compiled/index.css" type="text/css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/lib/animate.css" media="screen, projection" />
+    <link rel="stylesheet" href="css/LinkedU.css" type="text/css" media="screen" />
 
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -61,18 +62,18 @@
                                 {
                                     Response.Write("Guest");
                                 }
-                               %>
-                            <b class="caret"></b></a>
-                            <%
-                                if (Session["UserName"] != null)
-                                {
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Profile.aspx\">Profile</a></li><li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
-                                }
-                                else
-                                {
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
-                                }
                             %>
+                            <b class="caret"></b></a>
+                        <%
+                            if (Session["UserName"] != null)
+                            {
+                                Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Profile.aspx\">Profile</a></li><li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
+                            }
+                            else
+                            {
+                                Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
+                            }
+                        %>
                     </li>
                 </ul>
             </div>
@@ -80,7 +81,7 @@
         </div>
     </div>
 
-   
+    <div>
         <!--
             Each slide is composed by <img> and .info
             - .info's position is customized with css in index.css
@@ -96,7 +97,7 @@
             For the backgrounds, you can combine from the bgs folder :D
         -->
         <section id="feature_slider" class="lol">
-        <!--
+            <!--
             Each slide is composed by <img> and .info
             - .info's position is customized with css in index.css
             - each <img> parallax effect is declared by the following params inside its class:
@@ -110,45 +111,47 @@
 
             For the backgrounds, you can combine from the bgs folder :D
         -->
-        <article class="slide" id="showcasing" style="background: url('img/backgrounds/landscape.png') repeat-x top center;">
-            <img class="asset left-30 sp600 t120 z1" src="img/slides/scene2/linkedu.png" />
-            <div class="info">
-                <h2>LinkedU, A place for Students and Universities to Connect.</h2>
-            </div>
-        </article>
-        <article class="slide" id="ideas" style="background: url('img/backgrounds/aqua.jpg') repeat-x top center;">
-            <div class="info">
-                <h2>Featured University of the Day</h2><a href="http://localhost:64190/UniversityLookup.aspx?uid=145813"> <img class="asset left-210 sp600 t113 z2" src="img/slides/scene2/illinoisstatebanner.png" /><b></b></a>
-            </div>
-           
-            
-            
-         
-        </article>
-        <article class="slide" id="tour" style="background: url('img/backgrounds/color-splash.jpg') repeat-x top center;">
-          
-            <img class="asset left-350 sp450 t135 z2" src="img/slides/scene2/linkedu.png" />
-            
-            <div class="info">
-                <h2>Want your University featured? </h2>
-                <a href="PayPalCheckout.aspx" style ="color:black">  Click Here</a>
-            </div>
-        </article>
-        <article class="slide" id="responsive" style="background: url('img/backgrounds/indigo.jpg') repeat-x top center;">
-            <img class="asset left-472 sp600 t120 z3" src="img/slides/scene4/html5.png" />
-            <img class="asset left-190 sp500 t120 z2" src="img/slides/scene4/css3.png" />
-            <div class="info">
-                <h2> <strong>Linked U</strong>
-                    
-                </h2>
-            </div>
-        </article>
-    </section>
+            <article class="slide" id="showcasing" style="background: url('img/backgrounds/landscape.png') repeat-x top center;">
+                <img class="asset left-30 sp600 t120 z1" src="img/slides/scene2/linkedu.png" />
+                <div class="info">
+                    <h2>LinkedU, A place for Students and Universities to Connect.</h2>
+                </div>
+            </article>
+            <article class="slide" id="ideas" style="background: url('img/backgrounds/aqua.jpg') repeat-x top center;">
+                <div class="info">
+                    <h2>Featured University of the Day</h2>
+                    <a href="http://localhost:64190/UniversityLookup.aspx?uid=145813">
+                        <img class="asset left-210 sp600 t113 z2" src="img/slides/scene2/illinoisstatebanner.png" /><b></b></a>
+                </div>
 
-    
-           
 
-   
+
+
+            </article>
+            <article class="slide" id="tour" style="background: url('img/backgrounds/color-splash.jpg') repeat-x top center;">
+
+                <img class="asset left-350 sp450 t135 z2" src="img/slides/scene2/linkedu.png" />
+
+                <div class="info">
+                    <h2>Want your University featured? </h2>
+                    <a href="PayPalCheckout.aspx" style="color: black">Click Here</a>
+                </div>
+            </article>
+            <article class="slide" id="responsive" style="background: url('img/backgrounds/indigo.jpg') repeat-x top center;">
+                <img class="asset left-472 sp600 t120 z3" src="img/slides/scene4/html5.png" />
+                <img class="asset left-190 sp500 t120 z2" src="img/slides/scene4/css3.png" />
+                <div class="info">
+                    <h2><strong>Linked U</strong>
+
+                    </h2>
+                </div>
+            </article>
+        </section>
+
+    </div>
+
+
+
 
     <!-- starts footer -->
     <footer id='footer'>

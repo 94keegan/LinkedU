@@ -51,7 +51,7 @@ namespace LinkedU
                 }
 
                 //Capture the referring web page, if in the same webiste (has the same host) and store in the web form, so it's accessible after sign-in
-                if ((Request.UrlReferrer != null) && (Request.UrlReferrer.Host == Request.Url.Host))
+                if ((Request.UrlReferrer != null) && (Request.UrlReferrer.Host == Request.Url.Host) && (!Request.UrlReferrer.AbsolutePath.Contains("Reset.aspx")))
                     SignInReferrer.Value = Request.UrlReferrer.AbsoluteUri;
             }
         }

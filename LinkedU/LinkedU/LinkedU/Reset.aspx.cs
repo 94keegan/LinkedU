@@ -33,13 +33,12 @@ namespace LinkedU
                         dbConnection.Open();
                         try
                         {
-                            SqlTransaction transaction = dbConnection.BeginTransaction();
+
                             // Check if gen_string/email combo is in DB
                             int resetExists = 0;
                             using (SqlCommand comm = dbConnection.CreateCommand())
                             {
-                                comm.Transaction = transaction;
-                                comm.CommandText = "SELECT userID FROM reset_password WHERE email = @email AND gen_String = @genString";
+                                comm.CommandText = "SELECT resetID FROM reset_password WHERE email = @email AND gen_String = @genString";
                                 comm.Parameters.AddWithValue("@email", Request.QueryString["email"]);
                                 comm.Parameters.AddWithValue("@genString", Request.QueryString["genString"]);
                                 resetExists = comm.ExecuteScalar() == null ? 0 : int.Parse(comm.ExecuteScalar().ToString());
@@ -57,7 +56,6 @@ namespace LinkedU
                                 // Set question
                                 using (SqlCommand comm = dbConnection.CreateCommand())
                                 {
-                                    comm.Transaction = transaction;
                                     comm.CommandText = "SELECT securityQuestion FROM users WHERE email = @email";
                                     comm.Parameters.AddWithValue("@email", Request.QueryString["email"]);
                                     SqlDataReader reader = comm.ExecuteReader();

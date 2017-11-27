@@ -16,3 +16,7 @@
     float:left;
     padding-right:1em;
 }
+
+div.navbar + div, div.navbar + form {
+    min-height: 65vh;
+}

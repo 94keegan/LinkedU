@@ -112,7 +112,7 @@
                     
                     
                 <asp:Button ID="btnRequest" runat="server" OnClick="btnRequest_Click" Text="Request More Information" CssClass="btn-primary" />
-                <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
+                <asp:Label ID="lblTest" runat="server"></asp:Label>
             </div>
         </div>
     </div>

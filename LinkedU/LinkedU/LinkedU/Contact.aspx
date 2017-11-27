@@ -79,7 +79,7 @@
         </div>
     </div>
 
-    <div id="contact">
+    <div id="contact" style="margin-top:0;padding-top:70px;">
         <div class="container">
             <div class="section_header">
                 <h3>Get in touch</h3>
