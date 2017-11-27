@@ -76,6 +76,7 @@
     <Content Include="artwork\BANNER-3.psd" />
     <Content Include="artwork\BANNER-4.psd" />
     <Content Include="Default2.aspx" />
+    <Content Include="Logoff.aspx" />
     <Content Include="PayPalCheckOut.aspx" />
     <Content Include="RequestMoreInfo.aspx" />
     <Content Include="WebUserControlExtraCurricular.ascx" />
@@ -362,6 +363,13 @@
     </Compile>
     <Compile Include="examples\UniversityNameExample.aspx.designer.cs">
       <DependentUpon>UniversityNameExample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logoff.aspx.cs">
+      <DependentUpon>Logoff.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logoff.aspx.designer.cs">
+      <DependentUpon>Logoff.aspx</DependentUpon>
     </Compile>
     <Compile Include="PayPalCheckOut.aspx.cs">
       <DependentUpon>PayPalCheckOut.aspx</DependentUpon>
