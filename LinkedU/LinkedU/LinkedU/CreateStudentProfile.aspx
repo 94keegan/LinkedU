@@ -169,6 +169,10 @@
                         <h5>High School</h5>
                         <asp:TextBox ID="TextBoxHighSchool" runat="server" Width="15em"></asp:TextBox>
                     </asp:Panel>
+                    <asp:Panel runat="server">
+                        <h5>Graduation Year</h5>
+                        <asp:TextBox ID="TextBoxGraduationYear" runat="server" Width="5em" TextMode="Number"></asp:TextBox>
+                    </asp:Panel>
                     </asp:WizardStep>
                 <asp:WizardStep ID="WizardStepTestScores" runat="server" Title="Test Scores">
                     <h5>Undergraduate</h5>
@@ -254,6 +258,10 @@
                     <asp:Panel runat="server" Visible="false" ID="PanelSummaryHighSchool">
                         <asp:Label runat="server" Text="High School" />
                         <asp:Label runat="server" ID="SummaryHighSchool" />
+                    </asp:Panel>
+                    <asp:Panel runat="server" Visible="false" ID="PanelSummaryGraduationYear">
+                        <asp:Label runat="server" Text="Graduation Year" />
+                        <asp:Label runat="server" ID="SummaryGraduationYear" />
                     </asp:Panel>
                     <h4>Test Scores</h4>
                     <asp:Panel runat="server" Visible="false" ID="PanelSummaryAct">

@@ -37,6 +37,11 @@ namespace LinkedU
                 PanelSummaryHighSchool.Visible = true;
                 SummaryHighSchool.Text = TextBoxHighSchool.Text;
             }
+            if (TextBoxGraduationYear.Text.Length > 0)
+            {
+                PanelSummaryGraduationYear.Visible = true;
+                SummaryGraduationYear.Text = TextBoxGraduationYear.Text;
+            }
 
             if (TextBoxActScore.Text.Length > 0)
             {
@@ -154,7 +159,7 @@ namespace LinkedU
                         try
                         {
 
-                            comm.CommandText = "INSERT INTO student_profiles (userID, age, gender, race, address1, address2, city, state, zipcode, formatted_address, latitude, longitude, highschool, gpa) VALUES (@userID, @age, @gender, @race, @address1, @address2, @city, @state, @zipcode, @formatted_address, @latitude, @longitude, @highschool, @gpa)";
+                            comm.CommandText = "INSERT INTO student_profiles (userID, age, gender, race, address1, address2, city, state, zipcode, formatted_address, latitude, longitude, highschool, gpa, graduationyear) VALUES (@userID, @age, @gender, @race, @address1, @address2, @city, @state, @zipcode, @formatted_address, @latitude, @longitude, @highschool, @gpa, @graduationyear)";
                             comm.Parameters.AddWithValue("@userID", Session["UserID"]);
                             comm.Parameters.AddWithValue("@age", int.Parse(TextBoxAge.Text));
                             comm.Parameters.AddWithValue("@gender", RadioButtonGender.SelectedValue);
@@ -168,6 +173,7 @@ namespace LinkedU
                             comm.Parameters.AddWithValue("@latitude", float.Parse(HiddenFieldAddressLatitude.Value));
                             comm.Parameters.AddWithValue("@longitude", float.Parse(HiddenFieldAddressLongitude.Value));
                             comm.Parameters.AddWithValue("@highschool", TextBoxHighSchool.Text);
+                            comm.Parameters.AddWithValue("@graduationyear", TextBoxGraduationYear.Text);
                             comm.Parameters.Add("@gpa", System.Data.SqlDbType.Float);
 
                             if (TextBoxGpa.Text.Length > 0)
