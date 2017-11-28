@@ -95,6 +95,7 @@
                                         <ContentTemplate>
                                             <asp:Label runat="server" ID="lblAlert"></asp:Label><br /><br />
                                             <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" class="control-form" />
+                                            <asp:DropDownList ID="ddlCarrier" runat="server" class="control-form" Visible="false" />
                                             <asp:TextBox ID="txtPhone" runat="server" placeholder="Phone" class="control-form" Visible="false" />
                                             <asp:Label ID="lblQuestion" runat="server" Visible="false" style="text-align: left"/><br />
                                             <asp:TextBox ID="txtAnswer" runat="server" placeholder="Answer" class="control-form" Visible="false" />
@@ -148,8 +149,14 @@
         </div>
     </footer>
 
+    <!--www.scrolltotop.com-->
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script type='text/javascript' src='http://arrow.scrolltotop.com/arrow66.js'></script>
+
+    <!-- Scripts -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
+    <script type="text/javascript" src="js/index-slider.js"></script>
 </body>
 </html>

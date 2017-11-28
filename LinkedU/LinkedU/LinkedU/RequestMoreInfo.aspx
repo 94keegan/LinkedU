@@ -88,18 +88,14 @@
             </div>
             <div class="row contact">
                 <p>Please enter the email address that you would like to be contacted at. Your information will be sent to the University or Student that you&#39;re interested in. You may also enter a message to be sent to the interested party.</p>
-                <!--TODO: Convert to ASP
-                    <?php if(isset($error)){ ?><div class="alert alert-danger"><?php  echo $error; ?></div> <?php }
-                else if(isset($success)){ ?><div class="alert alert-success">Email has been sent!</div><?php } ?>-->
                     <div class ="button submit">
-                        
+
                     </div>
                     <div class="row form">
                         <div class="col-sm-6 row-col">
                             <div class="box">
                                 <input class="name form-control" name="name" type="text" placeholder="Name" required="required" />
                                 <input class="mail form-control" name="email" type="text" placeholder="Email" required="required" />
-                                 
                             </div>
                         </div>
                         <div class="col-sm-6 row-col">
@@ -109,8 +105,6 @@
                         </div>
                     </div>
 
-                    
-                    
                 <asp:Button ID="btnRequest" runat="server" OnClick="btnRequest_Click" Text="Request More Information" CssClass="btn-primary" />
                 <asp:Label ID="lblTest" runat="server"></asp:Label>
             </div>
@@ -148,9 +142,14 @@
         </div>
     </footer>
 
+    <!--www.scrolltotop.com-->
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script type='text/javascript' src='http://arrow.scrolltotop.com/arrow66.js'></script>
+
+    <!-- Scripts -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
-    </form>
+    <script type="text/javascript" src="js/index-slider.js"></script>
 </body>
 </html>

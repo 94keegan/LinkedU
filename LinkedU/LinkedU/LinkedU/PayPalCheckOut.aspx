@@ -4,22 +4,22 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-	<title>LinkedU || Contact</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinkedU || Contact</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<!-- Styles -->
-	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="css/compiled/bootstrap-overrides.css" type="text/css" />
-	<link rel="stylesheet" type="text/css" href="css/compiled/theme.css" />
+    <!-- Styles -->
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/compiled/bootstrap-overrides.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="css/compiled/theme.css" />
 
-	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
 
-	<link rel="stylesheet" href="css/compiled/contact.css" type="text/css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/lib/animate.css" media="screen, projection" />
+    <link rel="stylesheet" href="css/compiled/contact.css" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/lib/animate.css" media="screen, projection" />
     <link rel="stylesheet" href="css/LinkedU.css" type="text/css" media="screen" />
 
-	<!--[if lt IE 9]>
+    <!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
     <style type="text/css">
@@ -29,11 +29,10 @@
             border-color: #357ebd;
             width: 265px;
         }
-    </style>
+    </style> <!-- Add this in the LinkedU.css file -Keegan -->
 </head>
 <body>
-
-	<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="navbar navbar-inverse navbar-static-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -86,11 +85,10 @@
             </div>
         </div>
     </div>
-    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 
-   
-    &nbsp;&nbsp;&nbsp;
-        </form>
+    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+        &nbsp;&nbsp;&nbsp;
+    </form>
     <div id="contact">
         <div class="container">
             <div class="section_header">
@@ -105,22 +103,20 @@
 
                     <div class="row submit">
                         <div class="col-md-3 right">
-                            <br/>
+                            <br />
                         </div>
-    
-    </form>
+                    </div>
+                </form>
 
 
-     <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-     <input type="hidden" name="cmd" value="_xclick" />
-    <input type="hidden" name="business" value="linkedu368@gmail.com" />
+                <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                    <input type="hidden" name="cmd" value="_xclick" />
+                    <input type="hidden" name="business" value="linkedu368@gmail.com" />
 
-    <input type="hidden" name="item_name" value="My painting" />
-    <input type="hidden" name="amount" value="10.00" /> 
-        <input type="submit" value="Purchase a spot!" class="auto-style2" /></div>
-            </form>
-
-                
+                    <input type="hidden" name="item_name" value="My painting" />
+                    <input type="hidden" name="amount" value="10.00" />
+                    <input type="submit" value="Purchase a spot!" class="auto-style2" />
+                </form>
             </div>
         </div>
     </div>
@@ -155,11 +151,14 @@
         </div>
     </footer>
 
+    <!--www.scrolltotop.com-->
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script type='text/javascript' src='http://arrow.scrolltotop.com/arrow66.js'></script>
+
+    <!-- Scripts -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
-
-
-    
+    <script type="text/javascript" src="js/index-slider.js"></script>
 </body>
 </html>

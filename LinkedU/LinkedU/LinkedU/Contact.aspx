@@ -143,8 +143,14 @@
         </div>
     </footer>
 
+    <!--www.scrolltotop.com-->
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script type='text/javascript' src='http://arrow.scrolltotop.com/arrow66.js'></script>
+
+    <!-- Scripts -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
+    <script type="text/javascript" src="js/index-slider.js"></script>
 </body>
 </html>

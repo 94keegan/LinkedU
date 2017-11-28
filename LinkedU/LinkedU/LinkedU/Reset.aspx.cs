@@ -23,7 +23,15 @@ namespace LinkedU
                     txtAnswer.Visible = false;
                     txtNewPassword.Visible = false;
                     txtNewPasswordConfirm.Visible = false;
+                    ddlCarrier.Visible = true;
                     chkPhone.Visible = true;
+
+                    // Load carriers into dropdownlist
+                    SMS.TextSenderClient client = new SMS.TextSenderClient();
+                    foreach (var carrier in client.getCarriers())
+                    {
+                        ddlCarrier.Items.Add(carrier);
+                    }
                 }
                 else // Display question, answer, and new password box to reset password if GET contains valid email and genString
                 {
@@ -51,6 +59,7 @@ namespace LinkedU
                                 txtAnswer.Visible = true;
                                 txtNewPassword.Visible = true;
                                 txtNewPasswordConfirm.Visible = true;
+                                ddlCarrier.Visible = false;
                                 chkPhone.Visible = false;
 
                                 // Set question
@@ -128,10 +137,18 @@ namespace LinkedU
                                 }
 
                                 // Send SMS
-                                if (chkPhone.Checked)
+                                if (chkPhone.Checked && !string.IsNullOrWhiteSpace(txtPhone.Text) && !string.IsNullOrWhiteSpace(ddlCarrier.SelectedValue))
                                 {
                                     // TODO: Send SMS and check phone format
+                                    SMS.TextSenderClient client = new SMS.TextSenderClient();
+                                    client.sendSMS(ddlCarrier.SelectedValue, txtPhone.Text,
+                                        string.Concat("This message was automatically generated via the LinkedU website.<br />",
+                                        "<p>Click the link to reset your password. -> ",
+                                        Request.Url.Authority, "/Reset.aspx?",
+                                        "email=" + txtEmail.Text,
+                                        "&genString=" + genString));
                                 }
+
                                 // Send email
                                 MailAddress messageFrom = new MailAddress("Linkedu368@gmail.com", "LinkedU");
                                 MailAddress messageTo = new MailAddress(txtEmail.Text);

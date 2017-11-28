@@ -75,7 +75,18 @@
     <Content Include="artwork\BANNER-2.psd" />
     <Content Include="artwork\BANNER-3.psd" />
     <Content Include="artwork\BANNER-4.psd" />
-    <Content Include="Default2.aspx" />
+    <None Include="Connected Services\SMS\configuration91.svcinfo" />
+    <None Include="Connected Services\SMS\configuration.svcinfo" />
+    <Content Include="Connected Services\SMS\LinkedU.SMS.getCarriersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\SMS\LinkedU.SMS.sendSMSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\SMS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Logoff.aspx" />
     <Content Include="PayPalCheckOut.aspx" />
     <Content Include="RequestMoreInfo.aspx" />
@@ -106,6 +117,10 @@
     <Content Include="Connected Services\StudentLookup\LinkedU.StudentLookup.HelloWorldResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\SMS\TextSenderService.wsdl" />
+    <None Include="Connected Services\SMS\TextSenderService.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\StudentLookup\StudentLookup.disco" />
     <None Include="Connected Services\StudentLookup\configuration91.svcinfo" />
     <None Include="Connected Services\StudentLookup\configuration.svcinfo" />
@@ -325,6 +340,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\SMS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\StudentLookup\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -350,13 +370,6 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Default2.aspx.cs">
-      <DependentUpon>Default2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default2.aspx.designer.cs">
-      <DependentUpon>Default2.aspx</DependentUpon>
     </Compile>
     <Compile Include="examples\UniversityNameExample.aspx.cs">
       <DependentUpon>UniversityNameExample.aspx</DependentUpon>
@@ -434,6 +447,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\DistanceFinder\" />
+    <WCFMetadataStorage Include="Connected Services\SMS\" />
     <WCFMetadataStorage Include="Connected Services\StudentLookup\" />
   </ItemGroup>
   <PropertyGroup>

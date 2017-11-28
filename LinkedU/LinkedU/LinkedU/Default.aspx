@@ -16,7 +16,9 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
 
     <link rel="stylesheet" href="css/compiled/index.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/compiled/services.css" type="text/css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/lib/animate.css" media="screen, projection" />
+    <link rel="stylesheet" href="css/lib/flexslider.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="css/LinkedU.css" type="text/css" media="screen" />
 
     <!--[if lt IE 9]>
@@ -81,7 +83,7 @@
         </div>
     </div>
 
-    <div>
+    <section id="feature_slider" class="lol">
         <!--
             Each slide is composed by <img> and .info
             - .info's position is customized with css in index.css
@@ -96,62 +98,74 @@
 
             For the backgrounds, you can combine from the bgs folder :D
         -->
-        <section id="feature_slider" class="lol">
-            <!--
-            Each slide is composed by <img> and .info
-            - .info's position is customized with css in index.css
-            - each <img> parallax effect is declared by the following params inside its class:
+        <article class="slide" id="showcasing" style="background: url('img/backgrounds/landscape.png') repeat-x top center;">
+            <img class="asset left-30 sp600 t120 z1" src="img/slides/scene2/linkedu.png" />
+            <div class="info">
+                <h2>LinkedU, A place for Students and Universities to Connect.</h2>
+            </div>
+        </article>
+        <article class="slide" id="ideas" style="background: url('img/backgrounds/aqua.jpg') repeat-x top center;">
+            <div class="info">
+                <h2>Featured University of the Day</h2>
+                <a href="http://localhost:64190/UniversityLookup.aspx?uid=145813">
+                    <img class="asset left-210 sp600 t113 z2" src="img/slides/scene2/illinoisstatebanner.png" /><b></b></a>
+            </div>
+        </article>
+        <article class="slide" id="tour" style="background: url('img/backgrounds/color-splash.jpg') repeat-x top center;">
+            <img class="asset left-350 sp450 t135 z2" src="img/slides/scene2/linkedu.png" />
+            <div class="info">
+                <h2>Want your University featured? </h2>
+                <a href="PayPalCheckout.aspx" style="color: black">Click Here</a>
+            </div>
+        </article>
+        <article class="slide" id="responsive" style="background: url('img/backgrounds/indigo.jpg') repeat-x top center;">
+            <img class="asset left-472 sp600 t120 z3" src="img/slides/scene4/html5.png" />
+            <img class="asset left-190 sp500 t120 z2" src="img/slides/scene4/css3.png" />
+            <div class="info">
+                <h2><strong>Linked U</strong>
+                </h2>
+            </div>
+        </article>
+    </section>
 
-            example: class="asset left-472 sp600 t120 z3"
-            left-472 means left: -472px from the center
-            sp600 is speed transition
-            t120 is top to 120px
-            z3 is z-index to 3  
-            Note: Maintain this order of params
-
-            For the backgrounds, you can combine from the bgs folder :D
-        -->
-            <article class="slide" id="showcasing" style="background: url('img/backgrounds/landscape.png') repeat-x top center;">
-                <img class="asset left-30 sp600 t120 z1" src="img/slides/scene2/linkedu.png" />
-                <div class="info">
-                    <h2>LinkedU, A place for Students and Universities to Connect.</h2>
+    <div id="process">
+        <div class="container">
+            <div class="section_header">
+                <h3>Services</h3>
+            </div>
+            <div class="row services_circles">
+                <div class="col-sm-4 description">
+                    <div class="text active">
+                        <h4>Search for students and universities.</h4>
+                        <p>Students can search for universities closest to their home and get directions on how to get there. Universities can search to recruit new students and show just how great they are.</p>
+                    </div>
+                    <div class="text">
+                        <h4>Apply for schools.</h4>
+                        <p>After students have completed their profile, they can apply for their favorite universities with ease. Applying is only a click away!</p>
+                    </div>
+                    <div class="text">
+                        <h4>Explore your options.</h4>
+                        <p>Explore LinkedU and finding the right university for you. Get all the information you need to make your decision.</p>
+                    </div>
                 </div>
-            </article>
-            <article class="slide" id="ideas" style="background: url('img/backgrounds/aqua.jpg') repeat-x top center;">
-                <div class="info">
-                    <h2>Featured University of the Day</h2>
-                    <a href="http://localhost:64190/UniversityLookup.aspx?uid=145813">
-                        <img class="asset left-210 sp600 t113 z2" src="img/slides/scene2/illinoisstatebanner.png" /><b></b></a>
+
+                <div class="col-sm-7 col-xs-12 areas">
+                    <div class="circle active">
+                        <img src="img/plan.png" />
+                        <span>Search</span>
+                    </div>
+                    <div class="circle">
+                        <img src="img/develop.png" />
+                        <span>Apply</span>
+                    </div>
+                    <div class="circle last_circle">
+                        <img src="img/design.png" />
+                        <span>Explore</span>
+                    </div>
                 </div>
-
-
-
-
-            </article>
-            <article class="slide" id="tour" style="background: url('img/backgrounds/color-splash.jpg') repeat-x top center;">
-
-                <img class="asset left-350 sp450 t135 z2" src="img/slides/scene2/linkedu.png" />
-
-                <div class="info">
-                    <h2>Want your University featured? </h2>
-                    <a href="PayPalCheckout.aspx" style="color: black">Click Here</a>
-                </div>
-            </article>
-            <article class="slide" id="responsive" style="background: url('img/backgrounds/indigo.jpg') repeat-x top center;">
-                <img class="asset left-472 sp600 t120 z3" src="img/slides/scene4/html5.png" />
-                <img class="asset left-190 sp500 t120 z2" src="img/slides/scene4/css3.png" />
-                <div class="info">
-                    <h2><strong>Linked U</strong>
-
-                    </h2>
-                </div>
-            </article>
-        </section>
-
+            </div>
+        </div>
     </div>
-
-
-
 
     <!-- starts footer -->
     <footer id='footer'>

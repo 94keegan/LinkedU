@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://it.ilstu.edu/" targetNamespace="http://it.ilstu.edu/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="getCarriers" type="tns:getCarriers" />
+  <xs:element name="getCarriersResponse" type="tns:getCarriersResponse" />
+  <xs:element name="sendSMS" type="tns:sendSMS" />
+  <xs:element name="sendSMSResponse" type="tns:sendSMSResponse" />
+  <xs:complexType name="sendSMS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="carrier" type="xs:string" />
+      <xs:element minOccurs="0" name="telephoneNum" type="xs:string" />
+      <xs:element minOccurs="0" name="text" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendSMSResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCarriers">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="getCarriersResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
