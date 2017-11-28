@@ -10,7 +10,7 @@
 namespace LinkedU {
     
     
-    public partial class CreateStudentProfile {
+    public partial class StudentProfile {
         
         /// <summary>
         /// form1 control.
@@ -274,6 +274,15 @@ namespace LinkedU {
         protected global::System.Web.UI.WebControls.WizardStep WizardStepEducation;
         
         /// <summary>
+        /// ValidationSummaryEducation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummaryEducation;
+        
+        /// <summary>
         /// TextBoxGpa control.
         /// </summary>
         /// <remarks>
@@ -281,6 +290,15 @@ namespace LinkedU {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxGpa;
+        
+        /// <summary>
+        /// RangeValidatorGpa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RangeValidatorGpa;
         
         /// <summary>
         /// TextBoxHighSchool control.
@@ -301,6 +319,15 @@ namespace LinkedU {
         protected global::System.Web.UI.WebControls.TextBox TextBoxGraduationYear;
         
         /// <summary>
+        /// RangeValidatorGraduationYear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RangeValidatorGraduationYear;
+        
+        /// <summary>
         /// WizardStepTestScores control.
         /// </summary>
         /// <remarks>
@@ -308,6 +335,15 @@ namespace LinkedU {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.WizardStep WizardStepTestScores;
+        
+        /// <summary>
+        /// ValidationSummaryTestSCores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummaryTestSCores;
         
         /// <summary>
         /// LabelActScore control.
@@ -328,6 +364,15 @@ namespace LinkedU {
         protected global::System.Web.UI.WebControls.TextBox TextBoxActScore;
         
         /// <summary>
+        /// RangeValidatorAct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RangeValidatorAct;
+        
+        /// <summary>
         /// LabelSatScore control.
         /// </summary>
         /// <remarks>
@@ -344,6 +389,15 @@ namespace LinkedU {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxSatScore;
+        
+        /// <summary>
+        /// RangeValidatorSat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RangeValidatorSat;
         
         /// <summary>
         /// LabelPsat control.
@@ -364,6 +418,15 @@ namespace LinkedU {
         protected global::System.Web.UI.WebControls.TextBox TextBoxPsat;
         
         /// <summary>
+        /// RangeValidatorPsat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RangeValidatorPsat;
+        
+        /// <summary>
         /// LabelPsatNmsqt control.
         /// </summary>
         /// <remarks>
@@ -380,6 +443,15 @@ namespace LinkedU {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxPsatNmsqt;
+        
+        /// <summary>
+        /// RangeValidatorPsatNmsqt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RangeValidatorPsatNmsqt;
         
         /// <summary>
         /// LabelGreVerbal control.
@@ -400,6 +472,15 @@ namespace LinkedU {
         protected global::System.Web.UI.WebControls.TextBox TextBoxGreVerbal;
         
         /// <summary>
+        /// RangeValidatorGreVerbal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RangeValidatorGreVerbal;
+        
+        /// <summary>
         /// LabelGreQuantitative control.
         /// </summary>
         /// <remarks>
@@ -416,6 +497,15 @@ namespace LinkedU {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxGreQuantitative;
+        
+        /// <summary>
+        /// RangeValidatorGreQuantitative control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RangeValidatorGreQuantitative;
         
         /// <summary>
         /// LabelGreWritten control.
@@ -436,6 +526,15 @@ namespace LinkedU {
         protected global::System.Web.UI.WebControls.TextBox TextBoxGreWritten;
         
         /// <summary>
+        /// RangeValidatorGreWritten control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RangeValidatorGreWritten;
+        
+        /// <summary>
         /// LabelLsat control.
         /// </summary>
         /// <remarks>
@@ -454,6 +553,15 @@ namespace LinkedU {
         protected global::System.Web.UI.WebControls.TextBox TextBoxLsat;
         
         /// <summary>
+        /// RangeValidatorLsat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RangeValidatorLsat;
+        
+        /// <summary>
         /// LabelMcat control.
         /// </summary>
         /// <remarks>
@@ -470,6 +578,15 @@ namespace LinkedU {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxMcat;
+        
+        /// <summary>
+        /// RangeValidatorMcat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RangeValidatorMcat;
         
         /// <summary>
         /// WizardStepExtraCurriculars control.
@@ -497,6 +614,24 @@ namespace LinkedU {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater ExtraCurriculars;
+        
+        /// <summary>
+        /// WizardStepNewsletter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.WizardStep WizardStepNewsletter;
+        
+        /// <summary>
+        /// CheckBoxNewsletter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox CheckBoxNewsletter;
         
         /// <summary>
         /// WizardStepSummary control.
@@ -776,5 +911,23 @@ namespace LinkedU {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table SummaryExtraCurriculars;
+        
+        /// <summary>
+        /// PanelSummaryNewsletter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelSummaryNewsletter;
+        
+        /// <summary>
+        /// SummaryNewsletter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SummaryNewsletter;
     }
 }

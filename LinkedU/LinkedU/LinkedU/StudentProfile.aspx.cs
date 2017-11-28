@@ -10,13 +10,16 @@ using System.Data.SqlClient;
 
 namespace LinkedU
 {
-    public partial class CreateStudentProfile : System.Web.UI.Page
+    public partial class StudentProfile : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
             if (Session["UserID"] == null)
                 Response.Redirect("Sign-In.aspx");
+
+            if (Session["AccountType"].ToString() == "University")
+                Response.Redirect("UniversityProfile.aspx");
 
             SummaryAddress.Text = HiddenFieldAddressFormatted.Value;
             SummaryAge.Text = TextBoxAge.Text;
@@ -89,6 +92,11 @@ namespace LinkedU
                 SummaryMcat.Text = TextBoxMcat.Text;
             }
 
+            if (CheckBoxNewsletter.Checked)
+                SummaryNewsletter.Text = "Yes";
+            else
+                SummaryNewsletter.Text = "No";
+
             List<ExtraCurricularData> ecs = GetExtraCurriculars();
             if (ecs.Count > 0)
             {
@@ -158,9 +166,11 @@ namespace LinkedU
                         comm.Transaction = transaction;
                         try
                         {
-
-                            comm.CommandText = "INSERT INTO student_profiles (userID, age, gender, race, address1, address2, city, state, zipcode, formatted_address, latitude, longitude, highschool, gpa, graduationyear) VALUES (@userID, @age, @gender, @race, @address1, @address2, @city, @state, @zipcode, @formatted_address, @latitude, @longitude, @highschool, @gpa, @graduationyear)";
                             comm.Parameters.AddWithValue("@userID", Session["UserID"]);
+                            comm.CommandText = "DELETE FROM student_profiles WHERE userID = @userID";
+                            comm.ExecuteNonQuery();
+
+                            comm.CommandText = "INSERT INTO student_profiles (userID, age, gender, race, address1, address2, city, state, zipcode, formatted_address, latitude, longitude, highschool, gpa, graduationyear, newsletter) VALUES (@userID, @age, @gender, @race, @address1, @address2, @city, @state, @zipcode, @formatted_address, @latitude, @longitude, @highschool, @gpa, @graduationyear, @newsletter)";
                             comm.Parameters.AddWithValue("@age", int.Parse(TextBoxAge.Text));
                             comm.Parameters.AddWithValue("@gender", RadioButtonGender.SelectedValue);
                             comm.Parameters.AddWithValue("@race", RadioButtonRace.SelectedValue);
@@ -174,6 +184,7 @@ namespace LinkedU
                             comm.Parameters.AddWithValue("@longitude", float.Parse(HiddenFieldAddressLongitude.Value));
                             comm.Parameters.AddWithValue("@highschool", TextBoxHighSchool.Text);
                             comm.Parameters.AddWithValue("@graduationyear", TextBoxGraduationYear.Text);
+                            comm.Parameters.AddWithValue("@newsletter", CheckBoxNewsletter.Checked);
                             comm.Parameters.Add("@gpa", System.Data.SqlDbType.Float);
 
                             if (TextBoxGpa.Text.Length > 0)
@@ -184,6 +195,9 @@ namespace LinkedU
 
                             comm.Parameters.Clear();
                             comm.Parameters.AddWithValue("@userID", Session["UserID"]);
+                            comm.CommandText = "DELETE FROM student_test_scores WHERE userID = @userID";
+                            comm.ExecuteNonQuery();
+
                             comm.Parameters.Add("@score", System.Data.SqlDbType.Float);
                             comm.Parameters.Add("@type", System.Data.SqlDbType.Int);
                             comm.CommandText = "INSERT INTO student_test_scores (userID, test_score, test_type) VALUES (@userID, @score, @type)";
@@ -245,6 +259,9 @@ namespace LinkedU
 
                             comm.Parameters.Clear();
                             comm.Parameters.AddWithValue("@userID", Session["UserID"]);
+                            comm.CommandText = "DELETE FROM student_extracurriculars WHERE userID = @userID";
+                            comm.ExecuteNonQuery();
+
                             comm.Parameters.Add("@ecname", System.Data.SqlDbType.NVarChar, 100);
                             comm.Parameters.Add("@ectype", System.Data.SqlDbType.Int);
                             comm.CommandText = "INSERT INTO student_extracurriculars (userID, ec_name, ec_type) VALUES (@userID, @ecname, @ectype)";

@@ -1,10 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="LinkedU.Contact" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StudentSearch.aspx.cs" Inherits="LinkedU.StudentSearch" %>
 
+<%@ Import Namespace="LinkedU" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-	<title>LinkedU || Contact</title>
+	<title>LinkedU || Student Search</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -37,12 +38,13 @@
                 <a href="Default.aspx" class="navbar-brand"><strong>LinkedU</strong></a>
             </div>
 
-            <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
+
+                        <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="Default.aspx">HOME</a></li>
+                    <li class=""><a href="Default.aspx">HOME</a></li>
                     <!--Add more menus here above the Contact Us-->
 
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">SEARCH<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="UniversitySearch.aspx">Universities</a></li>
@@ -52,7 +54,7 @@
                             %>
                         </ul>
                     </li>
-                    <li class="active"><a href="Contact.aspx">CONTACT US</a></li>
+                    <li><a href="Contact.aspx">CONTACT US</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <%
@@ -87,41 +89,72 @@
         </div>
     </div>
 
-    <div id="contact" style="margin-top:0;padding-top:70px;">
-        <div class="container">
-            <div class="section_header">
-                <h3>Get in touch</h3>
-            </div>
-            <div class="row contact">
-                <p>What you think is important to us, and we've got you covered 110%. Our team will review your message and reply back as soon as possible.</p>
-                <asp:Label ID="lblAlert" runat="server" Visible="false" /><br />
-                <form id="form1" runat="server">
-                    <div class="row form">
-                        <div class="col-sm-6 row-col">
-                            <div class="box">
-                                <asp:TextBox ID="txtName" runat="server" class="name form-control" placeholder="Name" required="required" />
-                                <asp:TextBox ID="txtEmail" runat="server" class="mail form-control" placeholder="Email" required="required" />
-                            </div>
-                        </div>
-                        <div class="col-sm-6 row-col">
-                            <div class="box">
-                                <asp:TextBox id="txtMessage" TextMode="multiline" style="resize:none;" Columns="50" Rows="5" runat="server" class="form-control" required="required" placeholder="Type a message here..." />
-                            </div>
-                        </div>
-                    </div>
+    <form id="form1" runat="server">
 
-                    <div class="row submit">
-                        <div class="col-md-3 right">
-                            <br/>
-                            <asp:Button ID="btnSubmit" runat="server" Text="Send your message" OnClick="btnSubmit_Click" />
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+        <h3>Student Search</h3>
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
+                <div class="container">
 
-	<!-- starts footer -->
+                    <p>
+                        <asp:Label CssClass="search-label" Text="Minimum GPA:" runat="server" />
+                        <asp:TextBox ID="SearchMinimumGPA" runat="server" Width="4em" TextMode="Number" step="0.1" ></asp:TextBox>
+                        <asp:Label CssClass="search-label" Text="Minimum Test Percentile:" runat="server" />
+                        <asp:TextBox ID="SearchMinimumPercentile" runat="server" Width="4em" TextMode="Number" step="0.1" ></asp:TextBox>
+                    </p>
+                    <p>
+                        <asp:Label CssClass="search-label" Text="Extra Curricular:" runat="server" />
+                        <asp:DropDownList runat="server" ID="SearchExtraCurricular">
+                            <asp:ListItem Text="Any" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="Student Government" Value="1"></asp:ListItem>
+                            <asp:ListItem Text="Academic Team/Club" Value="2"></asp:ListItem>
+                            <asp:ListItem Text="Internship" Value="3"></asp:ListItem>
+                            <asp:ListItem Text="Culture Club" Value="4"></asp:ListItem>
+                            <asp:ListItem Text="Volunteer/Community Service" Value="5"></asp:ListItem>
+                            <asp:ListItem Text="Student Newspaper" Value="6"></asp:ListItem>
+                            <asp:ListItem Text="Athletics" Value="7"></asp:ListItem>
+                            <asp:ListItem Text="Arts" Value="8"></asp:ListItem>
+                        </asp:DropDownList>
+                        <asp:Label CssClass="search-label" Text="Minimum Total:" runat="server" />
+                        <asp:TextBox ID="SearchMinimumExtraCurriculars" runat="server" Width="4em" TextMode="Number"></asp:TextBox>
+                    </p>
+                    <p>
+                        <asp:Label CssClass="search-label" Text="Minority Status:" runat="server" />
+                        <asp:DropDownList ID="SearchMinorityStatus" runat="server">
+                            <asp:ListItem Text="Any" Value="N"></asp:ListItem>
+                            <asp:ListItem Text="Minority" Value="Y"></asp:ListItem>
+                        </asp:DropDownList>
+                    </p>
+                    <p>
+                        <asp:Label CssClass="search-label" Text="Within " runat="server"></asp:Label>
+                        <asp:TextBox ID="TextBoxSearchRadius" TextMode="Number" runat="server" Text="50" Width="5em"></asp:TextBox>
+                        <asp:Label CssClass="search-label" Text=" miles" runat="server"></asp:Label>
+                    </p>
+                    <asp:Button Text="Search" OnClick="Search_Click" runat="server" CssClass="btn-sm" />
+                    <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="UpdatePanel1">
+                        <ProgressTemplate>
+                            <asp:Image ID="UpdateInProgress" AlternateText="loading..." ImageUrl="~/img/ajax-loader.gif" runat="server" />
+                        </ProgressTemplate>
+                    </asp:UpdateProgress>
+                </div>
+                <div class="container-fluid">
+                    <asp:Table ID="ResultTable" Caption="Results" runat="server" CssClass="table" Visible="false">
+                        <asp:TableHeaderRow>
+                            <asp:TableHeaderCell>Student Name</asp:TableHeaderCell>
+                            <asp:TableHeaderCell>GPA</asp:TableHeaderCell>
+                            <asp:TableHeaderCell>Graduation Year</asp:TableHeaderCell>
+                            <asp:TableHeaderCell>Best Score</asp:TableHeaderCell>
+                            <asp:TableHeaderCell>Extra Curriculars</asp:TableHeaderCell>
+                        </asp:TableHeaderRow>
+                    </asp:Table>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+
+    </form>
+
+    <!-- starts footer -->
     <footer id='footer'>
         <div class='container'>
             <div class='row info'>
@@ -131,7 +164,7 @@
                         <li>Normal, IL</li>
                     </ul>
                 </div>
-                <div class='col-sm-5'>
+                <div class='col-sm-5 touch'>
                     <ul>
                         <li><strong>Contact</strong></li>
                         <li><a href='Contact.aspx'>Click Here to Send Us A Note</a></li>
@@ -162,3 +195,4 @@
     <script type="text/javascript" src="js/index-slider.js"></script>
 </body>
 </html>
+

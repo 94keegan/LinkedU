@@ -49,7 +49,10 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">SEARCH<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="UniversitySearch.aspx">Universities</a></li>
-                            <li><a href="StudentSearch.aspx">Students</a></li>
+                            <%
+                                if (Session["AccountType"] != null && Session["AccountType"].ToString() == "University")
+                                    Response.Write("<li><a href=\"StudentSearch.aspx\">Students</a></li>");
+                            %>
                         </ul>
                     </li>
                     <li><a href="Contact.aspx">CONTACT US</a></li>
@@ -68,9 +71,14 @@
                             <b class="caret"></b></a>
                         <%
                             if (Session["UserName"] != null)
-                            {
-                                Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Profile.aspx\">Profile</a></li><li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
-                            }
+                                {
+                                    if (Session["AccountType"].ToString() == "Student")
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Profile</a></li>");
+                                    else
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
+
+                                    Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
+                                }
                             else
                             {
                                 Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");

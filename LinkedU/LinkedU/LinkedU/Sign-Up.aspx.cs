@@ -114,11 +114,12 @@ namespace LinkedU
 
                             Session["UserName"] = txtUserName.Text;
                             Session["UserID"] = userid;
+                            Session["AccountType"] = ddlAccountType.Text;
 
                             if (ddlAccountType.Text == "Student")
-                                Response.Redirect("CreateStudentProfile.aspx");
+                                Response.Redirect("StudentProfile.aspx");
                             else
-                                Response.Redirect("Default.aspx");
+                                Response.Redirect("UniversityProfile.aspx");
 
                         }
                         catch (Exception ex)

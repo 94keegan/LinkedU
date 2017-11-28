@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateStudentProfile.aspx.cs" Inherits="LinkedU.CreateStudentProfile" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StudentProfile.aspx.cs" Inherits="LinkedU.StudentProfile" %>
 
 <%@ Import Namespace="LinkedU" %>
 
@@ -8,7 +8,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>LinkedU || University Search</title>
+    <title>LinkedU || Student Profile</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -49,7 +49,10 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">SEARCH<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="UniversitySearch.aspx">Universities</a></li>
-                            <li><a href="StudentSearch.aspx">Students</a></li>
+                            <%
+                                if (Session["AccountType"] != null && Session["AccountType"].ToString() == "University")
+                                    Response.Write("<li><a href=\"StudentSearch.aspx\">Students</a></li>");
+                            %>
                         </ul>
                     </li>
                     <li><a href="Contact.aspx">CONTACT US</a></li>
@@ -69,7 +72,12 @@
                             <%
                                 if (Session["UserName"] != null)
                                 {
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Profile.aspx\">Profile</a></li><li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
+                                    if (Session["AccountType"].ToString() == "Student")
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Profile</a></li>");
+                                    else
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
+
+                                    Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
                                 }
                                 else
                                 {
@@ -83,18 +91,17 @@
     </div>
 
     <form id="form1" runat="server">
-        <h2>Create Profile</h2>
+        <h2>Edit Profile</h2>
         <asp:Wizard ID="Wizard1" runat="server" StepStyle-Wrap="False" StepStyle-VerticalAlign="Top" SideBarStyle-VerticalAlign="Top" CancelDestinationPageUrl="~/Default.aspx" CellPadding="5" CellSpacing="5" DisplayCancelButton="True" ActiveStepIndex="0" ValidateRequestMode="Enabled" OnNextButtonClick="Wizard1_NextButtonClick" OnFinishButtonClick="Wizard1_FinishButtonClick">
             <CancelButtonStyle CssClass="btn btn-sm" />
             <FinishCompleteButtonStyle CssClass="btn btn-sm" />
             <FinishPreviousButtonStyle CssClass="btn btn-sm" />
-            <HeaderStyle Font-Size="Large" />
             <StartNextButtonStyle CssClass="btn btn-sm" />
             <StepNextButtonStyle CssClass="btn btn-sm" />
             <StepPreviousButtonStyle CssClass="btn btn-sm" />
             <SideBarStyle VerticalAlign="Top" Wrap="True"></SideBarStyle>
 
-<StepStyle Wrap="True"></StepStyle>
+<StepStyle Wrap="True" Font-Bold="False"></StepStyle>
             <WizardSteps>
                 <asp:WizardStep ID="WizardStepBasicInformation" runat="server" Title="Demographics">
                     <asp:ValidationSummary ID="ValidationSummaryDemographics" runat="server" ValidationGroup="Demographics" HeaderText="Correct the following before continuing:" />
@@ -161,9 +168,11 @@
                     </asp:Panel>
                 </asp:WizardStep>
                 <asp:WizardStep ID="WizardStepEducation" runat="server" Title="Education">
+                    <asp:ValidationSummary ID="ValidationSummaryEducation" runat="server" ValidationGroup="Education" HeaderText="Correct the following before continuing:" />
                     <asp:Panel runat="server">
                         <h5>GPA</h5>
                         <asp:TextBox ID="TextBoxGpa" runat="server" Width="4em"></asp:TextBox>
+                        <asp:RangeValidator ID="RangeValidatorGpa" runat="server" ErrorMessage="GPA is outside of the valid range" MinimumValue="0" MaximumValue="5.0" Type="Double" ValidationGroup="Education" Display="None" ControlToValidate="TextBoxGpa"></asp:RangeValidator>
                     </asp:Panel>
                     <asp:Panel runat="server">
                         <h5>High School</h5>
@@ -172,53 +181,62 @@
                     <asp:Panel runat="server">
                         <h5>Graduation Year</h5>
                         <asp:TextBox ID="TextBoxGraduationYear" runat="server" Width="5em" TextMode="Number"></asp:TextBox>
+                        <asp:RangeValidator ID="RangeValidatorGraduationYear" runat="server" ErrorMessage="Graduation Year specified is not valid" MinimumValue="1900" MaximumValue="2020" Type="Integer" ValidationGroup="Education" Display="None" ControlToValidate="TextBoxGraduationYear"></asp:RangeValidator>
                     </asp:Panel>
                     </asp:WizardStep>
                 <asp:WizardStep ID="WizardStepTestScores" runat="server" Title="Test Scores">
+                    <asp:ValidationSummary ID="ValidationSummaryTestSCores" runat="server" ValidationGroup="TestScores" HeaderText="Correct the following before continuing:" />
                     <h5>Undergraduate</h5>
                     <asp:Panel runat="server">
                         <asp:Label ID="LabelActScore" runat="server" Text="ACT" />
                         <asp:TextBox ID="TextBoxActScore" runat="server" TextMode="Number"></asp:TextBox>
+                        <asp:RangeValidator ID="RangeValidatorAct" runat="server" ErrorMessage="ACT score is outside of the valid range (1 - 36)" MinimumValue="1" MaximumValue="36" Type="Integer" ValidationGroup="TestScores" Display="None" ControlToValidate="TextBoxActScore"></asp:RangeValidator>
                     </asp:Panel>
                     <asp:Panel runat="server">
                         <asp:Label ID="LabelSatScore" runat="server" Text="SAT" />
                         <asp:TextBox ID="TextBoxSatScore" runat="server" TextMode="Number"></asp:TextBox>
+                        <asp:RangeValidator ID="RangeValidatorSat" runat="server" ErrorMessage="SAT score is outside of the valid range (400 - 1600)" MinimumValue="400" MaximumValue="1600" Type="Integer" ValidationGroup="TestScores" Display="None" ControlToValidate="TextBoxSatScore"></asp:RangeValidator>
                     </asp:Panel>
                     <asp:Panel runat="server">
                         <asp:Label ID="LabelPsat" runat="server" Text="PSAT" />
                         <asp:TextBox ID="TextBoxPsat" runat="server" TextMode="Number"></asp:TextBox>
+                        <asp:RangeValidator ID="RangeValidatorPsat" runat="server" ErrorMessage="PSAT score is outside of the valid range (320 - 1520)" MinimumValue="320" MaximumValue="1520" Type="Integer" ValidationGroup="TestScores" Display="None" ControlToValidate="TextBoxPsat"></asp:RangeValidator>
                     </asp:Panel>
                     <asp:Panel runat="server">
                         <asp:Label ID="LabelPsatNmsqt" runat="server" Text="PSAT/NSMQT" />
                         <asp:TextBox ID="TextBoxPsatNmsqt" runat="server" TextMode="Number"></asp:TextBox>
+                        <asp:RangeValidator ID="RangeValidatorPsatNmsqt" runat="server" ErrorMessage="PSAT/NSMQT score is outside of the valid range (320 - 1520)" MinimumValue="320" MaximumValue="1520" Type="Integer" ValidationGroup="TestScores" Display="None" ControlToValidate="TextBoxPsatNmsqt"></asp:RangeValidator>
                     </asp:Panel>
                     <h5>GRE</h5>
                     <asp:Panel runat="server">
                         <asp:Label ID="LabelGreVerbal" runat="server" Text="Verbal" />
                         <asp:TextBox ID="TextBoxGreVerbal" runat="server" TextMode="Number"></asp:TextBox>
+                        <asp:RangeValidator ID="RangeValidatorGreVerbal" runat="server" ErrorMessage="GRE Verbal score is outside of the valid range (130 - 170)" MinimumValue="130" MaximumValue="170" Type="Integer" ValidationGroup="TestScores" Display="None" ControlToValidate="TextBoxGreVerbal"></asp:RangeValidator>
                     </asp:Panel>
                     <asp:Panel runat="server">
                         <asp:Label ID="LabelGreQuantitative" runat="server" Text="Quantitative" />
                         <asp:TextBox ID="TextBoxGreQuantitative" runat="server" TextMode="Number"></asp:TextBox>
+                        <asp:RangeValidator ID="RangeValidatorGreQuantitative" runat="server" ErrorMessage="GRE Quantitative score is outside of the valid range (130 - 170)" MinimumValue="130" MaximumValue="170" Type="Integer" ValidationGroup="TestScores" Display="None" ControlToValidate="TextBoxGreQuantitative"></asp:RangeValidator>
                     </asp:Panel>
                     <asp:Panel runat="server">
                         <asp:Label ID="LabelGreWritten" runat="server" Text="Written" />
-                        <asp:TextBox ID="TextBoxGreWritten" runat="server" TextMode="Number"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxGreWritten" runat="server" TextMode="Number" step="0.5"></asp:TextBox>
+                        <asp:RangeValidator ID="RangeValidatorGreWritten" runat="server" ErrorMessage="GRE Written score is outside of the valid range (0 - 6)" MinimumValue="0" MaximumValue="6" Type="Double" ValidationGroup="TestScores" Display="None" ControlToValidate="TextBoxGreWritten"></asp:RangeValidator>
                     </asp:Panel>
                     <h5>Other Graduate</h5>
                     <asp:Panel runat="server">
                         <asp:Label ID="LabelLsat" runat="server" Text="LSAT" />
                         <asp:TextBox ID="TextBoxLsat" runat="server" TextMode="Number"></asp:TextBox>
+                        <asp:RangeValidator ID="RangeValidatorLsat" runat="server" ErrorMessage="LSAT score is outside of the valid range (120 - 180)" MinimumValue="120" MaximumValue="180" Type="Integer" ValidationGroup="TestScores" Display="None" ControlToValidate="TextBoxLsat"></asp:RangeValidator>
                     </asp:Panel>
                     <asp:Panel runat="server">
                         <asp:Label ID="LabelMcat" runat="server" Text="MCAT" />
                         <asp:TextBox ID="TextBoxMcat" runat="server" TextMode="Number"></asp:TextBox>
+                        <asp:RangeValidator ID="RangeValidatorMcat" runat="server" ErrorMessage="MCAT score is outside of the valid range (472 - 528)" MinimumValue="472" MaximumValue="528" Type="Integer" ValidationGroup="TestScores" Display="None" ControlToValidate="TextBoxMcat"></asp:RangeValidator>
                     </asp:Panel>
                 </asp:WizardStep>
                 <asp:WizardStep ID="WizardStepExtraCurriculars" runat="server" Title="Extra Curriculars">
                     <asp:Button ID="ButtonAddExtraCurricular" runat="server" CssClass="btn" OnClick="ButtonAddExtraCurricular_Click" Text="Add Extra Curricular" />
-
-
                     <table id="TableExtraCurriculars" class="table">
                         <tr>
                             <th>Type</th>
@@ -230,6 +248,10 @@
                         </ItemTemplate>
                     </asp:Repeater>
                     </table>
+                </asp:WizardStep>
+                <asp:WizardStep ID="WizardStepNewsletter" runat="server" Title="Stay Up-to-Date">
+                    <h4>Newletter</h4>
+                    <asp:CheckBox ID="CheckBoxNewsletter" Checked="true" Text="Keep me up-to-date on everything going on at LinkedU with weekly newsletters" runat="server"/>
                 </asp:WizardStep>
                 <asp:WizardStep ID="WizardStepSummary" runat="server" Title="Summary">
                     <h4>Demographics</h4>
@@ -308,6 +330,11 @@
                                 <asp:TableHeaderCell>Name</asp:TableHeaderCell>
                             </asp:TableHeaderRow>
                         </asp:Table>
+                    </asp:Panel>
+                    <h4>Newsletter</h4>
+                    <asp:Panel runat="server" ID="PanelSummaryNewsletter">
+                        <asp:Label runat="server" Text="Opt-in" />
+                        <asp:Label runat="server" ID="SummaryNewsletter" />
                     </asp:Panel>
                 </asp:WizardStep>
             </WizardSteps>

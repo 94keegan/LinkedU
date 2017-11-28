@@ -7,16 +7,32 @@
 }
 
 #Wizard1 div span:first-child {
-    display:inline-block;
+    display: inline-block;
     width: 8em;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .floatleft {
-    float:left;
-    padding-right:1em;
+    float: left;
+    padding-right: 1em;
 }
 
 div.navbar + div, div.navbar + form {
     min-height: 65vh;
+}
+
+span.search-label + input, span.search-label + text, span.search-label + select {
+    margin-left: .25em;
+    margin-right: .75em;
+}
+
+#Wizard1 td:first-child table td[style*="font-weight"] a {
+    text-decoration: underline;
+    font-size: 1.1em;
+    padding-left: .3em
+}
+
+#Wizard1 td:first-child table td a:hover {
+    text-decoration: underline;
+    margin-left: .1em
 }

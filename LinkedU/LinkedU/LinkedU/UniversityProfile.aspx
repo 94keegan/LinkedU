@@ -1,31 +1,31 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="LinkedU.Contact" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UniversityProfile.aspx.cs" Inherits="LinkedU.UniversityProfile" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-	<title>LinkedU || Contact</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinkedU || University Profile</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<!-- Styles -->
-	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="css/compiled/bootstrap-overrides.css" type="text/css" />
-	<link rel="stylesheet" type="text/css" href="css/compiled/theme.css" />
+    <!-- Styles -->
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/compiled/bootstrap-overrides.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="css/compiled/theme.css" />
 
-	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
 
-	<link rel="stylesheet" href="css/compiled/contact.css" type="text/css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/lib/animate.css" media="screen, projection" />
+    <link rel="stylesheet" href="css/compiled/contact.css" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/lib/animate.css" media="screen, projection" />
     <link rel="stylesheet" href="css/LinkedU.css" type="text/css" media="screen" />
 
-	<!--[if lt IE 9]>
+    <!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 </head>
 <body>
 
-	<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="navbar navbar-inverse navbar-static-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -36,10 +36,9 @@
                 </button>
                 <a href="Default.aspx" class="navbar-brand"><strong>LinkedU</strong></a>
             </div>
-
-            <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
+                        <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="Default.aspx">HOME</a></li>
+                    <li class=""><a href="Default.aspx">HOME</a></li>
                     <!--Add more menus here above the Contact Us-->
 
                     <li class="dropdown">
@@ -52,8 +51,8 @@
                             %>
                         </ul>
                     </li>
-                    <li class="active"><a href="Contact.aspx">CONTACT US</a></li>
-                    <li class="dropdown">
+                    <li><a href="Contact.aspx">CONTACT US</a></li>
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <%
                                 if (Session["UserName"] != null)
@@ -86,42 +85,11 @@
             </div>
         </div>
     </div>
+    <form id="form1" runat="server">
+        <h2>Edit Profile</h2>
+    </form>
 
-    <div id="contact" style="margin-top:0;padding-top:70px;">
-        <div class="container">
-            <div class="section_header">
-                <h3>Get in touch</h3>
-            </div>
-            <div class="row contact">
-                <p>What you think is important to us, and we've got you covered 110%. Our team will review your message and reply back as soon as possible.</p>
-                <asp:Label ID="lblAlert" runat="server" Visible="false" /><br />
-                <form id="form1" runat="server">
-                    <div class="row form">
-                        <div class="col-sm-6 row-col">
-                            <div class="box">
-                                <asp:TextBox ID="txtName" runat="server" class="name form-control" placeholder="Name" required="required" />
-                                <asp:TextBox ID="txtEmail" runat="server" class="mail form-control" placeholder="Email" required="required" />
-                            </div>
-                        </div>
-                        <div class="col-sm-6 row-col">
-                            <div class="box">
-                                <asp:TextBox id="txtMessage" TextMode="multiline" style="resize:none;" Columns="50" Rows="5" runat="server" class="form-control" required="required" placeholder="Type a message here..." />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row submit">
-                        <div class="col-md-3 right">
-                            <br/>
-                            <asp:Button ID="btnSubmit" runat="server" Text="Send your message" OnClick="btnSubmit_Click" />
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-	<!-- starts footer -->
+    <!-- starts footer -->
     <footer id='footer'>
         <div class='container'>
             <div class='row info'>
@@ -131,7 +99,7 @@
                         <li>Normal, IL</li>
                     </ul>
                 </div>
-                <div class='col-sm-5'>
+                <div class='col-sm-5 touch'>
                     <ul>
                         <li><strong>Contact</strong></li>
                         <li><a href='Contact.aspx'>Click Here to Send Us A Note</a></li>

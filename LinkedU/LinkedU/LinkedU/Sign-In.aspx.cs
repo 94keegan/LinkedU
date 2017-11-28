@@ -78,7 +78,9 @@ namespace LinkedU
                 {
                     dbConnection.Open();
 
-                    string usersInfo = "SELECT userLogin, userPassword, userID FROM logins WHERE userLogin = @userLogin AND userPassword = @userPassword";
+                    string usersInfo = "SELECT logins.userLogin, logins.userPassword, logins.userID, users.accountType FROM logins " +
+                        "INNER JOIN users ON users.userID = logins.userID " +
+                        "WHERE logins.userLogin = @userLogin AND logins.userPassword = @userPassword";
                     using (SqlCommand users = new SqlCommand(usersInfo, dbConnection))
                     {
 
@@ -94,6 +96,7 @@ namespace LinkedU
                                     {
                                         Session["UserName"] = records["userLogin"].ToString();
                                         Session["UserID"] = records["userID"].ToString();
+                                        Session["AccountType"] = records["accountType"].ToString();
 
                                         //if referred from another page in this website, return to that page
                                         if (SignInReferrer.Value != "")

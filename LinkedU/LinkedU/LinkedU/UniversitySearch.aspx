@@ -48,7 +48,10 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">SEARCH<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="UniversitySearch.aspx">Universities</a></li>
-                            <li><a href="StudentSearch.aspx">Students</a></li>
+                            <%
+                                if (Session["AccountType"] != null && Session["AccountType"].ToString() == "University")
+                                    Response.Write("<li><a href=\"StudentSearch.aspx\">Students</a></li>");
+                            %>
                         </ul>
                     </li>
                     <li><a href="Contact.aspx">CONTACT US</a></li>
@@ -68,7 +71,12 @@
                             <%
                                 if (Session["UserName"] != null)
                                 {
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Profile.aspx\">Profile</a></li><li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
+                                    if (Session["AccountType"].ToString() == "Student")
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Profile</a></li>");
+                                    else
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
+
+                                    Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
                                 }
                                 else
                                 {
@@ -108,26 +116,6 @@
                         </asp:DropDownList>
                     </p>
                     <p>
-<%--                        <asp:Label CssClass="search-label" Text="Region:" runat="server" />
-                        <asp:DropDownList ID="SearchRegion" runat="server" Width="150">
-                            <asp:ListItem Value="-1">All</asp:ListItem>
-                            <asp:ListItem Value="1">New England</asp:ListItem>
-                            <asp:ListItem Value="2">Mid East</asp:ListItem>
-                            <asp:ListItem Value="3">Great Lakes</asp:ListItem>
-                            <asp:ListItem Value="4">Plains</asp:ListItem>
-                            <asp:ListItem Value="5">Southeast</asp:ListItem>
-                            <asp:ListItem Value="6">Southwest</asp:ListItem>
-                            <asp:ListItem Value="7">Rocky Mountains</asp:ListItem>
-                            <asp:ListItem Value="8">Far West</asp:ListItem>
-                            <asp:ListItem Value="9">Outlying</asp:ListItem>
-                            <asp:ListItem Value="0">US Service Schools</asp:ListItem>
-                        </asp:DropDownList>
-                        <asp:Label CssClass="search-label" Text="State:" runat="server" />
-                        <asp:DropDownList ID="SearchState" runat="server" Width="60">
-                            <asp:ListItem>All</asp:ListItem>
-                        </asp:DropDownList>
-                        <asp:Label CssClass="search-label" Text="City:" runat="server" />
-                        <asp:TextBox ID="SearchCity" runat="server" Width="200"></asp:TextBox>--%>
                         <asp:Label CssClass="search-label" Text="Within " runat="server"></asp:Label>
                         <asp:TextBox ID="TextBoxSearchRadius" TextMode="Number" runat="server" Text="50" Width="5em"></asp:TextBox>
                         <asp:Label CssClass="search-label" Text=" miles of " runat="server"></asp:Label>

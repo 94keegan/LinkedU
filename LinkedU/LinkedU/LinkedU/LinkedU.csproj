@@ -90,6 +90,8 @@
     <Content Include="Logoff.aspx" />
     <Content Include="PayPalCheckOut.aspx" />
     <Content Include="RequestMoreInfo.aspx" />
+    <Content Include="StudentSearch.aspx" />
+    <Content Include="UniversityProfile.aspx" />
     <Content Include="WebUserControlExtraCurricular.ascx" />
     <None Include="Connected Services\DistanceFinder\DistanceFinder.disco" />
     <None Include="Connected Services\DistanceFinder\configuration91.svcinfo" />
@@ -129,7 +131,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Contact.aspx" />
-    <Content Include="CreateStudentProfile.aspx" />
+    <Content Include="StudentProfile.aspx" />
     <Content Include="css\LinkedU.css" />
     <Content Include="css\scss\about.scss" />
     <Content Include="css\scss\backgrounds.scss" />
@@ -357,12 +359,12 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CreateStudentProfile.aspx.cs">
-      <DependentUpon>CreateStudentProfile.aspx</DependentUpon>
+    <Compile Include="StudentProfile.aspx.cs">
+      <DependentUpon>StudentProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CreateStudentProfile.aspx.designer.cs">
-      <DependentUpon>CreateStudentProfile.aspx</DependentUpon>
+    <Compile Include="StudentProfile.aspx.designer.cs">
+      <DependentUpon>StudentProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -421,12 +423,26 @@
     <Compile Include="Sign-Up.aspx.designer.cs">
       <DependentUpon>Sign-Up.aspx</DependentUpon>
     </Compile>
+    <Compile Include="StudentSearch.aspx.cs">
+      <DependentUpon>StudentSearch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StudentSearch.aspx.designer.cs">
+      <DependentUpon>StudentSearch.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UniversityLookup.aspx.cs">
       <DependentUpon>UniversityLookup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UniversityLookup.aspx.designer.cs">
       <DependentUpon>UniversityLookup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UniversityProfile.aspx.cs">
+      <DependentUpon>UniversityProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UniversityProfile.aspx.designer.cs">
+      <DependentUpon>UniversityProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="UniversitySearch.aspx.cs">
       <DependentUpon>UniversitySearch.aspx</DependentUpon>
