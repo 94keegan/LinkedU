@@ -92,14 +92,17 @@
 
     <form id="form1" runat="server">
         <h2>Edit Profile</h2>
-        <asp:Wizard ID="Wizard1" runat="server" StepStyle-Wrap="False" StepStyle-VerticalAlign="Top" SideBarStyle-VerticalAlign="Top" CancelDestinationPageUrl="~/Default.aspx" CellPadding="5" CellSpacing="5" DisplayCancelButton="True" ActiveStepIndex="0" ValidateRequestMode="Enabled" OnNextButtonClick="Wizard1_NextButtonClick" OnFinishButtonClick="Wizard1_FinishButtonClick">
+        <asp:Wizard ID="Wizard1" runat="server" StepStyle-Wrap="False" StepStyle-VerticalAlign="Top" SideBarStyle-VerticalAlign="Top" CancelDestinationPageUrl="~/Default.aspx" CellPadding="5" CellSpacing="5" DisplayCancelButton="True" ActiveStepIndex="0" ValidateRequestMode="Enabled" OnNextButtonClick="Wizard1_NextButtonClick" OnFinishButtonClick="Wizard1_FinishButtonClick" NavigationStyle-HorizontalAlign="Left">
             <CancelButtonStyle CssClass="btn btn-sm" />
             <FinishCompleteButtonStyle CssClass="btn btn-sm" />
             <FinishPreviousButtonStyle CssClass="btn btn-sm" />
+
+<NavigationStyle HorizontalAlign="Left"></NavigationStyle>
+
             <StartNextButtonStyle CssClass="btn btn-sm" />
             <StepNextButtonStyle CssClass="btn btn-sm" />
             <StepPreviousButtonStyle CssClass="btn btn-sm" />
-            <SideBarStyle VerticalAlign="Top" Wrap="True"></SideBarStyle>
+            <SideBarStyle VerticalAlign="Top" Wrap="True" HorizontalAlign="Left"></SideBarStyle>
 
 <StepStyle Wrap="True" Font-Bold="False"></StepStyle>
             <WizardSteps>
@@ -249,9 +252,9 @@
                     </asp:Repeater>
                     </table>
                 </asp:WizardStep>
-                <asp:WizardStep ID="WizardStepNewsletter" runat="server" Title="Stay Up-to-Date">
+                <asp:WizardStep ID="WizardStepNewsletter" runat="server" Title="Stay Current">
                     <h4>Newletter</h4>
-                    <asp:CheckBox ID="CheckBoxNewsletter" Checked="true" Text="Keep me up-to-date on everything going on at LinkedU with weekly newsletters" runat="server"/>
+                    <asp:CheckBox ID="CheckBoxNewsletter" Checked="true" Text="&nbsp;&nbsp;Keep me up-to-date on everything going on at LinkedU with weekly newsletters" runat="server"/>
                 </asp:WizardStep>
                 <asp:WizardStep ID="WizardStepSummary" runat="server" Title="Summary">
                     <h4>Demographics</h4>

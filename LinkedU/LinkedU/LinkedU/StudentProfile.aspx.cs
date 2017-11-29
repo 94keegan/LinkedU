@@ -12,6 +12,9 @@ namespace LinkedU
 {
     public partial class StudentProfile : System.Web.UI.Page
     {
+
+        string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -20,6 +23,9 @@ namespace LinkedU
 
             if (Session["AccountType"].ToString() == "University")
                 Response.Redirect("UniversityProfile.aspx");
+
+            if (!IsPostBack)
+                GetStudentProfile();
 
             SummaryAddress.Text = HiddenFieldAddressFormatted.Value;
             SummaryAge.Text = TextBoxAge.Text;
@@ -153,7 +159,6 @@ namespace LinkedU
 
         protected void Wizard1_FinishButtonClick(object sender, WizardNavigationEventArgs e)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
@@ -205,7 +210,7 @@ namespace LinkedU
                             {
                                 comm.Parameters["@score"].Value = TextBoxActScore.Text;
                                 comm.Parameters["@type"].Value = 9;
-                                comm.ExecuteNonQuery();   
+                                comm.ExecuteNonQuery();
                             }
                             if (TextBoxSatScore.Text.Length > 0)
                             {
@@ -289,8 +294,138 @@ namespace LinkedU
                 }
                 catch
                 {
-                    
+
                 }
+            }
+        }
+
+        private void GetStudentProfile()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    using (SqlCommand comm = conn.CreateCommand())
+                    {
+
+                        comm.Parameters.AddWithValue("@userID", Session["UserID"]);
+                        comm.CommandText = "SELECT age, gender, race, address1, address2, city, state, zipcode, formatted_address, latitude, longitude, highschool, gpa, graduationyear, newsletter FROM student_profiles WHERE userID = @userID";
+
+                        using (SqlDataReader reader = comm.ExecuteReader())
+                        {
+                            if (reader != null && reader.HasRows && reader.Read())
+                            {
+                                if (!reader.IsDBNull(0))
+                                    TextBoxAge.Text = reader.GetInt32(0).ToString();
+
+                                if (!reader.IsDBNull(1))
+                                    RadioButtonGender.SelectedValue = reader.GetString(1);
+
+                                if (!reader.IsDBNull(2))
+                                    RadioButtonRace.SelectedValue = reader.GetString(2);
+
+                                if (!reader.IsDBNull(3))
+                                    TextBoxAddress1.Text = reader.GetString(3);
+                                if (!reader.IsDBNull(4))
+                                    TextBoxAddress2.Text = reader.GetString(4);
+                                if (!reader.IsDBNull(5))
+                                    TextBoxCity.Text = reader.GetString(5);
+                                if (!reader.IsDBNull(6))
+                                    TextBoxState.Text = reader.GetString(6);
+                                if (!reader.IsDBNull(7))
+                                    TextBoxZipCode.Text = reader.GetString(7);
+                                if (!reader.IsDBNull(8))
+                                    HiddenFieldAddressFormatted.Value = reader.GetString(8);
+
+                                if (!reader.IsDBNull(9))
+                                    HiddenFieldAddressLatitude.Value = reader.GetDouble(9).ToString();
+                                if (!reader.IsDBNull(10))
+                                    HiddenFieldAddressLongitude.Value = reader.GetDouble(10).ToString();
+
+                                if (!reader.IsDBNull(11))
+                                    TextBoxHighSchool.Text = reader.GetString(11);
+
+                                if (!reader.IsDBNull(12))
+                                    TextBoxGpa.Text = Math.Round(reader.GetDouble(12), 2).ToString();
+
+                                if (!reader.IsDBNull(13))
+                                    TextBoxGraduationYear.Text = reader.GetInt32(13).ToString();
+
+                                if (!reader.IsDBNull(14))
+                                    CheckBoxNewsletter.Checked = reader.GetBoolean(14);
+                            }
+                        }
+
+                        comm.CommandText = "SELECT test_score, name FROM student_test_scores INNER JOIN student_test_types ON student_test_scores.test_type = student_test_types.id WHERE userID = @userID";
+                        using (SqlDataReader reader = comm.ExecuteReader())
+                        {
+                            if (reader != null && reader.HasRows)
+                            {
+                                while (reader.Read())
+                                {
+                                    switch (reader.GetString(1))
+                                    {
+                                        case "ACT":
+                                            TextBoxActScore.Text = reader.GetDouble(0).ToString();
+                                            break;
+                                        case "SAT":
+                                            TextBoxSatScore.Text = reader.GetDouble(0).ToString();
+                                            break;
+                                        case "GRE-V":
+                                            TextBoxGreVerbal.Text = reader.GetDouble(0).ToString();
+                                            break;
+                                        case "GRE-Q":
+                                            TextBoxGreQuantitative.Text = reader.GetDouble(0).ToString();
+                                            break;
+                                        case "GRE-W":
+                                            TextBoxGreWritten.Text = reader.GetDouble(0).ToString();
+                                            break;
+                                        case "PSAT":
+                                            TextBoxPsat.Text = reader.GetDouble(0).ToString();
+                                            break;
+                                        case "PSAT/NMSQT":
+                                            TextBoxPsatNmsqt.Text = reader.GetDouble(0).ToString();
+                                            break;
+                                        case "LSAT":
+                                            TextBoxLsat.Text = reader.GetDouble(0).ToString();
+                                            break;
+                                        case "MCAT":
+                                            TextBoxMcat.Text = reader.GetDouble(0).ToString();
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+
+                        comm.CommandText = "select ec_name, ec_type from student_extracurriculars WHERE userID = @userID";
+                        using (SqlDataReader reader = comm.ExecuteReader())
+                        {
+                            if (reader != null && reader.HasRows)
+                            {
+                                List<ExtraCurricularData> list = new List<ExtraCurricularData>();
+
+                                while (reader.Read())
+                                {
+                                    ExtraCurricularData ec = new ExtraCurricularData()
+                                    {
+                                        Name = reader.GetString(0),
+                                        Type = reader.GetInt32(1)
+                                    };
+                                    list.Add(ec);
+                                }
+
+                                ExtraCurriculars.DataSource = list;
+                                ExtraCurriculars.DataBind();
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+
             }
         }
 
@@ -310,7 +445,7 @@ namespace LinkedU
             List<ExtraCurricularData> list = new List<ExtraCurricularData>();
             foreach (RepeaterItem item in ExtraCurriculars.Items)
             {
-                
+
                 ExtraCurricular uc = (ExtraCurricular)item.FindControl("extraCurricular");
                 if (uc != null && uc.Data.Type != 0)
                     list.Add(uc.Data);
