@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ReqeustMoreInfo.aspx.cs" Inherits="LinkedU.RequestMoreInfo" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RequestMoreInfo.aspx.cs" Inherits="LinkedU.RequestMoreInfo" %>
 
 <!DOCTYPE html>
 

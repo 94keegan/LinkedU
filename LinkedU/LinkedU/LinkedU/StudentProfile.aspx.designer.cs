@@ -616,6 +616,51 @@ namespace LinkedU {
         protected global::System.Web.UI.WebControls.Repeater ExtraCurriculars;
         
         /// <summary>
+        /// WizardStepUploadFiles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.WizardStep WizardStepUploadFiles;
+        
+        /// <summary>
+        /// DropDownListMediaType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListMediaType;
+        
+        /// <summary>
+        /// FileUploadMedia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadMedia;
+        
+        /// <summary>
+        /// LinkButtonUploadMedia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButtonUploadMedia;
+        
+        /// <summary>
+        /// RepeaterUploadedMedia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater RepeaterUploadedMedia;
+        
+        /// <summary>
         /// WizardStepNewsletter control.
         /// </summary>
         /// <remarks>

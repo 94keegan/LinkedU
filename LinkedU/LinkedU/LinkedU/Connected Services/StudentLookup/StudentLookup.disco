@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
-  <contractRef ref="http://iis2.it.ilstu.edu/17f368/it368f711/app10/StudentLookup.asmx?wsdl" docRef="http://iis2.it.ilstu.edu/17f368/it368f711/app10/StudentLookup.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
-  <soap address="http://iis2.it.ilstu.edu/17f368/it368f711/app10/StudentLookup.asmx" xmlns:q1="http://iis2.it.ilstu.edu/" binding="q1:StudentLookupSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-  <soap address="http://iis2.it.ilstu.edu/17f368/it368f711/app10/StudentLookup.asmx" xmlns:q2="http://iis2.it.ilstu.edu/" binding="q2:StudentLookupSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-</discovery>

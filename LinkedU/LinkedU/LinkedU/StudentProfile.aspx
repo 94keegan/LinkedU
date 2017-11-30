@@ -3,6 +3,8 @@
 <%@ Import Namespace="LinkedU" %>
 
 <%@ Register src="WebUserControlExtraCurricular.ascx" tagname="ExtraCurricular" tagprefix="ec" %>
+<%@ Register src="WebUserControlUploadedMedia.ascx" tagname="UploadMedia" tagprefix="um" %>
+
 
 <!DOCTYPE html>
 
@@ -246,15 +248,45 @@
                             <th>Name</th>
                         </tr>
                         <asp:Repeater runat="server" ID="ExtraCurriculars">
-                        <ItemTemplate>
-                            <ec:ExtraCurricular ID="extraCurricular" runat="server" Data="<%# Container.DataItem %>"></ec:ExtraCurricular>
-                        </ItemTemplate>
-                    </asp:Repeater>
+                            <ItemTemplate>
+                                <ec:ExtraCurricular ID="extraCurricular" runat="server" Data="<%# Container.DataItem %>"></ec:ExtraCurricular>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </table>
+                </asp:WizardStep>
+                <asp:WizardStep ID="WizardStepUploadFiles" runat="server" Title="Upload Media">
+                    <asp:DropDownList ID="DropDownListMediaType" runat="server">
+                        <asp:ListItem Text="Profile Picture"></asp:ListItem>
+                        <asp:ListItem Text="Image"></asp:ListItem>
+                        <asp:ListItem Text="Transcript"></asp:ListItem>
+                        <asp:ListItem Text="Video"></asp:ListItem>
+                        <asp:ListItem Text="Audio"></asp:ListItem>
+                        <asp:ListItem Text="Certification"></asp:ListItem>
+                        <asp:ListItem Text="Award"></asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:FileUpload ID="FileUploadMedia" runat="server" style="display:inline-block" />
+                    <asp:LinkButton ID="LinkButtonUploadMedia" runat="server" OnClick="LinkButtonUploadMedia_Click" CssClass="btn btn-sm">
+                        <span aria-hidden="true" class="glyphicon glyphicon-upload"></span>
+                    </asp:LinkButton>
+
+                    <table id="TableUploadedMedia" class="table">
+                        <tr>
+                            <th>Type</th>
+                            <th>Name</th>
+                            <th>Delete</th>
+                        </tr>
+                        <asp:Repeater runat="server" ID="RepeaterUploadedMedia" OnItemCommand="RepeaterUploadedMedia_ItemCommand">
+                            <ItemTemplate>
+                                <um:UploadMedia ID="uploadedMedia" runat="server" Data="<%# Container.DataItem %>"></um:UploadMedia>
+                                
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </table>
+
                 </asp:WizardStep>
                 <asp:WizardStep ID="WizardStepNewsletter" runat="server" Title="Stay Current">
                     <h4>Newletter</h4>
-                    <asp:CheckBox ID="CheckBoxNewsletter" Checked="true" Text="&nbsp;&nbsp;Keep me up-to-date on everything going on at LinkedU with weekly newsletters" runat="server"/>
+                    <asp:CheckBox ID="CheckBoxNewsletter" Checked="true" Text="&nbsp;&nbsp;Keep me up-to-date on everything going on at LinkedU with weekly newsletters" runat="server" />
                 </asp:WizardStep>
                 <asp:WizardStep ID="WizardStepSummary" runat="server" Title="Summary">
                     <h4>Demographics</h4>

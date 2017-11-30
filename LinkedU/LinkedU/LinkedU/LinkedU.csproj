@@ -75,6 +75,7 @@
     <Content Include="artwork\BANNER-2.psd" />
     <Content Include="artwork\BANNER-3.psd" />
     <Content Include="artwork\BANNER-4.psd" />
+    <Content Include="WebUserControlUploadedMedia.ascx" />
     <None Include="Connected Services\SMS\configuration91.svcinfo" />
     <None Include="Connected Services\SMS\configuration.svcinfo" />
     <Content Include="Connected Services\SMS\LinkedU.SMS.getCarriersResponse.datasource">
@@ -87,9 +88,11 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="img\Portrait_Placeholder.png" />
     <Content Include="Logoff.aspx" />
     <Content Include="PayPalCheckOut.aspx" />
     <Content Include="RequestMoreInfo.aspx" />
+    <Content Include="StudentLookup.aspx" />
     <Content Include="StudentSearch.aspx" />
     <Content Include="UniversityProfile.aspx" />
     <Content Include="WebUserControlExtraCurricular.ascx" />
@@ -116,19 +119,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Connected Services\StudentLookup\LinkedU.StudentLookup.HelloWorldResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <None Include="Connected Services\SMS\TextSenderService.wsdl" />
     <None Include="Connected Services\SMS\TextSenderService.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\StudentLookup\StudentLookup.disco" />
-    <None Include="Connected Services\StudentLookup\configuration91.svcinfo" />
-    <None Include="Connected Services\StudentLookup\configuration.svcinfo" />
-    <None Include="Connected Services\StudentLookup\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Contact.aspx" />
     <Content Include="StudentProfile.aspx" />
@@ -156,7 +149,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="Connected Services\DistanceFinder\DistanceFinder.wsdl" />
-    <None Include="Connected Services\StudentLookup\StudentLookup.wsdl" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -347,17 +339,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\StudentLookup\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StudentLookup.aspx.cs">
+      <DependentUpon>StudentLookup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StudentLookup.aspx.designer.cs">
+      <DependentUpon>StudentLookup.aspx</DependentUpon>
     </Compile>
     <Compile Include="StudentProfile.aspx.cs">
       <DependentUpon>StudentProfile.aspx</DependentUpon>
@@ -457,6 +451,12 @@
     <Compile Include="WebUserControlExtraCurricular.ascx.designer.cs">
       <DependentUpon>WebUserControlExtraCurricular.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebUserControlUploadedMedia.ascx.cs">
+      <DependentUpon>WebUserControlUploadedMedia.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUserControlUploadedMedia.ascx.designer.cs">
+      <DependentUpon>WebUserControlUploadedMedia.ascx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
@@ -464,7 +464,6 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\DistanceFinder\" />
     <WCFMetadataStorage Include="Connected Services\SMS\" />
-    <WCFMetadataStorage Include="Connected Services\StudentLookup\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

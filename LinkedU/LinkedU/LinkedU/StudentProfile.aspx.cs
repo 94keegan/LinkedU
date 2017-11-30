@@ -453,11 +453,70 @@ namespace LinkedU
             return list;
         }
 
+        private List<UploadMediaData> GetUploadedMedia()
+        {
+            List<UploadMediaData> list = new List<UploadMediaData>();
+            foreach (RepeaterItem item in RepeaterUploadedMedia.Items)
+            {
+
+                UploadMedia uc = (UploadMedia)item.FindControl("uploadedMedia");
+                if (uc != null && uc.Data.Type.Length > 0)
+                    list.Add(uc.Data);
+            }
+            return list;
+        }
+
         protected void TextBoxAddress1_TextChanged(object sender, EventArgs e)
         {
             HiddenFieldAddressLatitude.Value = null;
             HiddenFieldAddressLongitude.Value = null;
             HiddenFieldAddressFormatted.Value = null;
+        }
+
+        protected void RepeaterUploadedMedia_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+
+        }
+
+        protected void LinkButtonUploadMedia_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    using (SqlCommand comm = conn.CreateCommand())
+                    {
+                        comm.CommandText = "INSERT INTO student_files (userID, file_name, file_type, [file]) " +
+                            "SELECT @userID, @file_name, id, @file FROM student_file_types WHERE name = @file_type";
+
+                        comm.Parameters.AddWithValue("@userID", Session["UserID"]);
+                        comm.Parameters.AddWithValue("@file_name", FileUploadMedia.FileName);
+                        comm.Parameters.AddWithValue("@file_type", DropDownListMediaType.Text);
+                        comm.Parameters.Add("@file", System.Data.SqlDbType.VarBinary).Value = FileUploadMedia.FileBytes;
+
+                        comm.ExecuteNonQuery();
+
+                    }
+                }
+
+                //add item to repeater
+                List<UploadMediaData> data = GetUploadedMedia();
+                UploadMediaData newData = new UploadMediaData()
+                {
+                    Name = FileUploadMedia.FileName,
+                    Type = DropDownListMediaType.Text
+                };
+
+                data.Add(newData);
+                ExtraCurriculars.DataSource = data;
+                ExtraCurriculars.DataBind();
+
+            } catch
+            {
+
+            }
         }
     }
 }

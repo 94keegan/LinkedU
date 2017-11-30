@@ -14,10 +14,6 @@ namespace LinkedU
         public string Name { get; set; }
         public string TypeName { get; set; }
 
-        //public static explicit operator ExtraCurricular(Control v)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
     public partial class ExtraCurricular : System.Web.UI.UserControl
     {
