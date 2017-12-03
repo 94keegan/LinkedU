@@ -75,7 +75,7 @@
                                 if (Session["UserName"] != null)
                                 {
                                     if (Session["AccountType"].ToString() == "Student")
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Profile</a></li>");
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
                                     else
                                         Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
 
@@ -244,7 +244,7 @@
                     <asp:Button ID="ButtonAddExtraCurricular" runat="server" CssClass="btn" OnClick="ButtonAddExtraCurricular_Click" Text="Add Extra Curricular" />
                     <table id="TableExtraCurriculars" class="table">
                         <tr>
-                            <th>Type</th>
+                            <th>Category</th>
                             <th>Name</th>
                         </tr>
                         <asp:Repeater runat="server" ID="ExtraCurriculars">
@@ -264,21 +264,20 @@
                         <asp:ListItem Text="Certification"></asp:ListItem>
                         <asp:ListItem Text="Award"></asp:ListItem>
                     </asp:DropDownList>
-                    <asp:FileUpload ID="FileUploadMedia" runat="server" style="display:inline-block" />
-                    <asp:LinkButton ID="LinkButtonUploadMedia" runat="server" OnClick="LinkButtonUploadMedia_Click" CssClass="btn btn-sm">
-                        <span aria-hidden="true" class="glyphicon glyphicon-upload"></span>
+                    <asp:FileUpload ID="FileUploadMedia" runat="server" style="display:inline-block" accept="image/png" />
+                    <asp:LinkButton ID="LinkButtonUploadMedia" runat="server" OnClick="LinkButtonUploadMedia_Click" CssClass="btn btn-primary">
+                        <span aria-hidden="true" class="glyphicon glyphicon-upload"></span>Upload
                     </asp:LinkButton>
 
                     <table id="TableUploadedMedia" class="table">
                         <tr>
                             <th>Type</th>
                             <th>Name</th>
-                            <th>Delete</th>
+                            <th>Action</th>
                         </tr>
                         <asp:Repeater runat="server" ID="RepeaterUploadedMedia" OnItemCommand="RepeaterUploadedMedia_ItemCommand">
                             <ItemTemplate>
                                 <um:UploadMedia ID="uploadedMedia" runat="server" Data="<%# Container.DataItem %>"></um:UploadMedia>
-                                
                             </ItemTemplate>
                         </asp:Repeater>
                     </table>
@@ -361,7 +360,7 @@
                         <h4>Extra Curriculars</h4>
                         <asp:Table runat="server" CssClass="table" ID="SummaryExtraCurriculars">
                             <asp:TableHeaderRow>
-                                <asp:TableHeaderCell>Type</asp:TableHeaderCell>
+                                <asp:TableHeaderCell>Category</asp:TableHeaderCell>
                                 <asp:TableHeaderCell>Name</asp:TableHeaderCell>
                             </asp:TableHeaderRow>
                         </asp:Table>
@@ -415,6 +414,30 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
     <script type="text/javascript" src="js/index-slider.js"></script>
+
+    <script type="text/javascript">
+        $("#Wizard1_DropDownListMediaType").on("change", function () {
+            switch ($(this).val())
+            {
+                case "Profile Picture":
+                    $("#Wizard1_FileUploadMedia").prop("accept", "image/png");
+                    break;
+                case "Image":
+                    $("#Wizard1_FileUploadMedia").prop("accept", "image/*");
+                    break;
+                case "Video":
+                    $("#Wizard1_FileUploadMedia").prop("accept", "video/*");
+                    break;
+                case "Audio":
+                    $("#Wizard1_FileUploadMedia").prop("accept", "audio/*");
+                    break;
+                default:
+                    $("#Wizard1_FileUploadMedia").prop("accept", "application/pdf, .doc, .docx");
+
+
+            }
+        });
+    </script>
 </body>
 </html>
 

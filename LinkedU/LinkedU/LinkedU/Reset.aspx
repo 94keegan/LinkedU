@@ -68,7 +68,7 @@
                                 if (Session["UserName"] != null)
                                 {
                                     if (Session["AccountType"].ToString() == "Student")
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Profile</a></li>");
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
                                     else
                                         Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
 
@@ -103,17 +103,17 @@
                                         <ContentTemplate>
                                             <asp:Label runat="server" ID="lblAlert"></asp:Label><br /><br />
                                             <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" class="control-form" />
+                                            <div class="col-md-6 remember" id="RememberMe">
+                                                <label class="checkbox">
+                                                    <asp:CheckBox ID="chkPhone" runat="server" class="control-form" OnCheckedChanged="chkPhone_CheckedChanged" AutoPostBack="true" Text="Send SMS" />
+                                                </label>
+                                            </div>
                                             <asp:DropDownList ID="ddlCarrier" runat="server" class="control-form" Visible="false" />
                                             <asp:TextBox ID="txtPhone" runat="server" placeholder="Phone" class="control-form" Visible="false" />
                                             <asp:Label ID="lblQuestion" runat="server" Visible="false" style="text-align: left"/><br />
                                             <asp:TextBox ID="txtAnswer" runat="server" placeholder="Answer" class="control-form" Visible="false" />
                                             <asp:TextBox ID="txtNewPassword" runat="server" placeholder="New Password" class="control-form" Visible="false" />
                                             <asp:TextBox ID="txtNewPasswordConfirm" runat="server" placeholder="New Password Confirm" class="control-form" Visible="false" />
-                                            <div class="col-md-6 remember" id="RememberMe">
-                                                <label class="checkbox">
-                                                    <asp:CheckBox ID="chkPhone" runat="server" class="control-form" OnCheckedChanged="chkPhone_CheckedChanged" AutoPostBack="true" Text="Send SMS" />
-                                                </label>
-                                            </div>
                                             <asp:Button ID="btnSubmit" runat="server" Text="Reset Password" OnClick="btnSubmit_Click" />
                                         </ContentTemplate>
                                     </asp:UpdatePanel>

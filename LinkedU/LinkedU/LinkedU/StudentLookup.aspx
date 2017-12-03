@@ -72,7 +72,7 @@
                                 if (Session["UserName"] != null)
                                 {
                                     if (Session["AccountType"].ToString() == "Student")
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Profile</a></li>");
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
                                     else
                                         Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
 
@@ -91,27 +91,51 @@
 
     <form id="form1" runat="server">
         <div class="container-fluid">
-            <h3 class="h3">Student Details</h3>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-1">
                     </div>
                     <div class='col-md-4'>
-                        <asp:Panel runat="server" CssClass="jumbotron">
-                            <asp:Image ID="StudentImage" runat="server" Width="128px" Height="128px" ImageUrl="~/img/Portrait_Placeholder.png" />
-                            <asp:Label CssClass="h3 top" ID="StudentName" runat="server"></asp:Label>
+                        <asp:Panel runat="server" CssClass="jumbotron" style="float:left">
+                            <asp:Panel runat="server" CssClass="col-sm-4">
+                                <asp:Image ID="StudentImage" runat="server" CssClass="profile-picture" ImageUrl="~/img/Portrait_Placeholder.png" />
+                            </asp:Panel>
+                            <asp:Panel runat="server" CssClass="col-sm-8">
+                                <asp:Label CssClass="h3" ID="StudentName" runat="server"></asp:Label><br />
+                                <asp:Label CssClass="h5" ID="StudentGPA" runat="server"></asp:Label><br />
+                                <asp:Label CssClass="h5" ID="StudentHighSchool" runat="server"></asp:Label><br />
+                                <asp:Label CssClass="h5" ID="StudentGraduationYear" runat="server"></asp:Label>
+                            </asp:Panel>
                         </asp:Panel>
                         <br />
                         <asp:Panel ID="StudentInformation" runat="server">
+                            
                         </asp:Panel>
                     </div>
                     <div class='col-md-5'>
-                        <asp:Panel ID="StudentTestScores" runat="server">
-                        </asp:Panel>
                         <asp:Panel runat="server" HorizontalAlign="Right">
                             <asp:LinkButton runat="server" CssClass="btn btn-sm btn-default" PostBackUrl="~/RequestMoreInfo.aspx" Text="More Information">
-                                <span aria-hidden="true" class="glyphicon glyphicon-envelope">Request More Information</span>
+                                <span aria-hidden="true" class="glyphicon glyphicon-envelope" style="margin-right:.3em;"></span>Request More Information
                             </asp:LinkButton>
+                        </asp:Panel>
+                        <asp:Panel ID="StudentTestScores" runat="server">
+                            <h4>Test Scores</h4>
+                            <asp:Table ID="TableTestScores" CssClass="table" runat="server">
+                                <asp:TableHeaderRow>
+                                    <asp:TableHeaderCell>Test</asp:TableHeaderCell>
+                                    <asp:TableHeaderCell>Score</asp:TableHeaderCell>
+                                    <asp:TableHeaderCell>Percentile</asp:TableHeaderCell>
+                                </asp:TableHeaderRow>
+                            </asp:Table>
+                        </asp:Panel>
+                        <asp:Panel ID="StudentExtraCurriculars" runat="server">
+                            <h4>Extra Curriculars</h4>
+                            <asp:Table ID="TableExtraCurriculars" CssClass="table" runat="server">
+                                <asp:TableHeaderRow>
+                                    <asp:TableHeaderCell>Category</asp:TableHeaderCell>
+                                    <asp:TableHeaderCell>Name</asp:TableHeaderCell>
+                                </asp:TableHeaderRow>
+                            </asp:Table>
                         </asp:Panel>
                     </div>
                     <div class="col-md-2">
@@ -162,4 +186,5 @@
     <script type="text/javascript" src="js/index-slider.js"></script>
 </body>
 </html>
+
 

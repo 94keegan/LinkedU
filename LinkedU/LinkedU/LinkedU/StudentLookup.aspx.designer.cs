@@ -40,6 +40,33 @@ namespace LinkedU {
         protected global::System.Web.UI.WebControls.Label StudentName;
         
         /// <summary>
+        /// StudentGPA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label StudentGPA;
+        
+        /// <summary>
+        /// StudentHighSchool control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label StudentHighSchool;
+        
+        /// <summary>
+        /// StudentGraduationYear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label StudentGraduationYear;
+        
+        /// <summary>
         /// StudentInformation control.
         /// </summary>
         /// <remarks>
@@ -56,5 +83,32 @@ namespace LinkedU {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel StudentTestScores;
+        
+        /// <summary>
+        /// TableTestScores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table TableTestScores;
+        
+        /// <summary>
+        /// StudentExtraCurriculars control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel StudentExtraCurriculars;
+        
+        /// <summary>
+        /// TableExtraCurriculars control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table TableExtraCurriculars;
     }
 }

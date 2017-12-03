@@ -19,12 +19,11 @@ namespace LinkedU
                 if (string.IsNullOrWhiteSpace(Request.QueryString["email"]) && string.IsNullOrWhiteSpace(Request.QueryString["genString"]))
                 {
                     txtEmail.Visible = true;
+                    chkPhone.Visible = true;
                     lblQuestion.Visible = false;
                     txtAnswer.Visible = false;
                     txtNewPassword.Visible = false;
                     txtNewPasswordConfirm.Visible = false;
-                    ddlCarrier.Visible = true;
-                    chkPhone.Visible = true;
 
                     // Load carriers into dropdownlist
                     SMS.TextSenderClient client = new SMS.TextSenderClient();
@@ -55,12 +54,11 @@ namespace LinkedU
                             if (resetExists > 0)
                             {
                                 txtEmail.Visible = false;
+                                chkPhone.Visible = false;
                                 lblQuestion.Visible = true;
                                 txtAnswer.Visible = true;
                                 txtNewPassword.Visible = true;
                                 txtNewPasswordConfirm.Visible = true;
-                                ddlCarrier.Visible = false;
-                                chkPhone.Visible = false;
 
                                 // Set question
                                 using (SqlCommand comm = dbConnection.CreateCommand())
@@ -137,9 +135,8 @@ namespace LinkedU
                                 }
 
                                 // Send SMS
-                                if (chkPhone.Checked && !string.IsNullOrWhiteSpace(txtPhone.Text) && !string.IsNullOrWhiteSpace(ddlCarrier.SelectedValue))
+                                if (chkPhone.Checked && txtPhone.Text.Length == 10 && !string.IsNullOrWhiteSpace(ddlCarrier.SelectedValue))
                                 {
-                                    // TODO: Send SMS and check phone format
                                     SMS.TextSenderClient client = new SMS.TextSenderClient();
                                     client.sendSMS(ddlCarrier.SelectedValue, txtPhone.Text,
                                         string.Concat("This message was automatically generated via the LinkedU website.<br />",
@@ -147,6 +144,13 @@ namespace LinkedU
                                         Request.Url.Authority, "/Reset.aspx?",
                                         "email=" + txtEmail.Text,
                                         "&genString=" + genString));
+                                }
+                                else
+                                {
+                                    lblAlert.Visible = true;
+                                    lblAlert.Text = "Phone number is incorrect!";
+                                    lblAlert.Attributes["class"] = "alert alert-danger";
+                                    throw new Exception("Error sending SMS!");
                                 }
 
                                 // Send email
@@ -188,6 +192,7 @@ namespace LinkedU
                                 lblAlert.Visible = true;
                                 lblAlert.Text = "User does not exist with this email!";
                                 lblAlert.Attributes["class"] = "alert alert-danger";
+                                throw new Exception("Error sending SMS!");
                             }
 
                             transaction.Commit();
@@ -327,10 +332,12 @@ namespace LinkedU
             if (chkPhone.Checked)
             {
                 txtPhone.Visible = true;
+                ddlCarrier.Visible = true;
             }
             else
             {
                 txtPhone.Visible = false;
+                ddlCarrier.Visible = false;
             }
         }
     }

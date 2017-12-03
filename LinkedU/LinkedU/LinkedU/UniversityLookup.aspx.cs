@@ -18,7 +18,7 @@ namespace LinkedU
         string connStr = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
         Regex urltester = new Regex("^(https?://)?(?:www\\.)?[A-Za-z0-9\\-\\.]+\\.edu(/?)");
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_LoadComplete(object sender, EventArgs e)
         {
             if (Request.QueryString["uid"] != null)
             {
@@ -129,7 +129,7 @@ namespace LinkedU
                                     }
                                 }
 
-                                string destination = String.Format("{0},{1},{2},{3}", properties["Name"].Replace(" ", "+"), properties["Address"].Replace(" ", "+"), properties["City"].Replace(" ", "+"), properties["State"].Replace(" ", "+"));
+                                string destination = HttpUtility.UrlEncode(String.Format("{0},{1},{2},{3}", properties["Name"], properties["Address"], properties["City"], properties["State"]));
 
                                 if (source == "")
                                 {
