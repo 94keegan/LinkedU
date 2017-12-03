@@ -39,7 +39,7 @@
 
             <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class=""><a href="Default.aspx">HOME</a></li>
+                    <li><a href="Default.aspx">HOME</a></li>
                     <!--Add more menus here above the Contact Us-->
 
                     <li class="dropdown">
@@ -52,7 +52,7 @@
                             %>
                         </ul>
                     </li>
-                    <li><a href="Contact.aspx">CONTACT US</a></li>
+                    <li class="active"><a href="Contact.aspx">CONTACT US</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <%
@@ -86,20 +86,23 @@
             </div>
         </div>
     </div>
-
+   
+   
     <div id="contact">
         <div class="container">
             <div class="section_header">
                 <h3>Request more information</h3>
             </div>
             <div class="row contact">
-                <p>Please enter the email address that you would like to be contacted at. Your information will be sent to the University or Student that you&#39;re interested in. You may also enter a message to be sent to the interested party.</p>
+                <p>Please enter the email address that you would like to be contacted at. Your information will be sent to the University or Student that you&#39;re interested in. You may also enter a message to be sent to the interested party. If you would like to schedule an appointment instead, 
+                <a href="ScheduleAppointment.aspx">Click Here</a></p>
                     <div class ="button submit">
 
                     </div>
                     <div class="row form">
                         <div class="col-sm-6 row-col">
                             <div class="box">
+                                 <form id="form1" runat="server">
                                 <input class="name form-control" name="name" type="text" placeholder="Name" required="required" />
                                 <input class="mail form-control" name="email" type="text" placeholder="Email" required="required" />
                             </div>
@@ -116,6 +119,7 @@
             </div>
         </div>
     </div>
+        </form>
 
 	<!-- starts footer -->
     <footer id='footer'>
