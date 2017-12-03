@@ -1,9 +1,9 @@
 CREATE TABLE [dbo].[student_files](
+	[ID] [int] IDENTITY(1, 1) PRIMARY KEY NOT NULL,
 	[userID] [int] NOT NULL,
 	[file_name] [nvarchar](100) NOT NULL,
 	[file_type] [int] NOT NULL,
-	[file] [varbinary](max) NOT NULL,
-	primary key (userID, [file_name])
+	[file] [varbinary](max) NOT NULL
 )
 GO
 
