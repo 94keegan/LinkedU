@@ -72,7 +72,7 @@
                                 if (Session["UserName"] != null)
                                 {
                                     if (Session["AccountType"].ToString() == "Student")
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Profile</a></li>");
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
                                     else
                                         Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
 
@@ -106,10 +106,10 @@
                         </asp:Panel>
                         <asp:Panel runat="server" HorizontalAlign="Right">
                             <asp:LinkButton runat="server" CssClass="btn btn-sm btn-default" PostBackUrl="~/RequestMoreInfo.aspx" Text="More Information">
-                                <span aria-hidden="true" class="glyphicon glyphicon-envelope">&nbsp;Request More Information</span>
+                                <span aria-hidden="true" class="glyphicon glyphicon-envelope"></span>&nbsp;Request More Information
                             </asp:LinkButton>
                             <asp:LinkButton runat="server" CssClass="btn btn-sm btn-default" PostBackUrl="~/ApplyToUniversity.aspx" Text="Apply for Admission">
-                                <span aria-hidden="true" class="glyphicon glyphicon-shopping-cart">&nbsp;Apply for Admission</span>
+                                <span aria-hidden="true" class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Apply for Admission
                             </asp:LinkButton>
                         </asp:Panel>
                     </div>

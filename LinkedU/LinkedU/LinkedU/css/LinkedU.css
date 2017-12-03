@@ -26,13 +26,23 @@ span.search-label + input, span.search-label + text, span.search-label + select 
     margin-right: .75em;
 }
 
-#Wizard1 td:first-child table td[style*="font-weight"] a {
-    text-decoration: underline;
-    font-size: 1.1em;
+#Wizard1 td:first-child table td a {
     padding-left: .3em
 }
 
-#Wizard1 td:first-child table td a:hover {
+#Wizard1 td:first-child table td[style*="font-weight"] a {
     text-decoration: underline;
-    margin-left: .1em
+    font-size: 1.1em;
+    padding-left: 0;
+}
+
+#Wizard1 td:first-child table td:not([style*="font-weight"]) a:hover {
+    text-decoration: underline;
+    margin-left: -.1em;
+    margin-right: .1em;
+}
+
+.profile-picture {
+    max-width: 120%;
+    margin-left: -.5em;
 }

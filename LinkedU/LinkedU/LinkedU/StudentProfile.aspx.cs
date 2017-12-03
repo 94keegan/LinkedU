@@ -204,60 +204,61 @@ namespace LinkedU
                             comm.ExecuteNonQuery();
 
                             comm.Parameters.Add("@score", System.Data.SqlDbType.Float);
-                            comm.Parameters.Add("@type", System.Data.SqlDbType.Int);
-                            comm.CommandText = "INSERT INTO student_test_scores (userID, test_score, test_type) VALUES (@userID, @score, @type)";
+                            comm.Parameters.Add("@type", System.Data.SqlDbType.NVarChar, 100);
+                            comm.CommandText = "INSERT INTO student_test_scores (userID, test_score, test_type) " +
+                                "SELECT @userID, @score, [id] FROM student_test_types WHERE [name] = @type";
                             if (TextBoxActScore.Text.Length > 0)
                             {
                                 comm.Parameters["@score"].Value = TextBoxActScore.Text;
-                                comm.Parameters["@type"].Value = 9;
+                                comm.Parameters["@type"].Value = "ACT";
                                 comm.ExecuteNonQuery();
                             }
                             if (TextBoxSatScore.Text.Length > 0)
                             {
                                 comm.Parameters["@score"].Value = TextBoxSatScore.Text;
-                                comm.Parameters["@type"].Value = 8;
+                                comm.Parameters["@type"].Value = "SAT";
                                 comm.ExecuteNonQuery();
                             }
                             if (TextBoxPsat.Text.Length > 0)
                             {
                                 comm.Parameters["@score"].Value = TextBoxPsat.Text;
-                                comm.Parameters["@type"].Value = 13;
+                                comm.Parameters["@type"].Value = "PSAT";
                                 comm.ExecuteNonQuery();
                             }
                             if (TextBoxPsatNmsqt.Text.Length > 0)
                             {
                                 comm.Parameters["@score"].Value = TextBoxPsatNmsqt.Text;
-                                comm.Parameters["@type"].Value = 14;
+                                comm.Parameters["@type"].Value = "PSAT/NMSQT";
                                 comm.ExecuteNonQuery();
                             }
                             if (TextBoxGreVerbal.Text.Length > 0)
                             {
                                 comm.Parameters["@score"].Value = TextBoxGreVerbal.Text;
-                                comm.Parameters["@type"].Value = 10;
+                                comm.Parameters["@type"].Value = "GRE-V";
                                 comm.ExecuteNonQuery();
                             }
                             if (TextBoxGreQuantitative.Text.Length > 0)
                             {
                                 comm.Parameters["@score"].Value = TextBoxGreQuantitative.Text;
-                                comm.Parameters["@type"].Value = 11;
+                                comm.Parameters["@type"].Value = "GRE-Q";
                                 comm.ExecuteNonQuery();
                             }
                             if (TextBoxGreWritten.Text.Length > 0)
                             {
                                 comm.Parameters["@score"].Value = TextBoxGreWritten.Text;
-                                comm.Parameters["@type"].Value = 12;
+                                comm.Parameters["@type"].Value = "GRE-W";
                                 comm.ExecuteNonQuery();
                             }
                             if (TextBoxLsat.Text.Length > 0)
                             {
                                 comm.Parameters["@score"].Value = TextBoxLsat.Text;
-                                comm.Parameters["@type"].Value = 15;
+                                comm.Parameters["@type"].Value = "LSAT";
                                 comm.ExecuteNonQuery();
                             }
                             if (TextBoxMcat.Text.Length > 0)
                             {
                                 comm.Parameters["@score"].Value = TextBoxMcat.Text;
-                                comm.Parameters["@type"].Value = 16;
+                                comm.Parameters["@type"].Value = "MCAT";
                                 comm.ExecuteNonQuery();
                             }
 
@@ -420,6 +421,31 @@ namespace LinkedU
                                 ExtraCurriculars.DataBind();
                             }
                         }
+
+                        comm.CommandText = "select student_files.ID, [file_name], [name]  from student_files " +
+                            "inner join student_file_types ON student_files.file_type = student_file_types.id WHERE userID = @userID";
+                        using (SqlDataReader reader = comm.ExecuteReader())
+                        {
+                            if (reader != null && reader.HasRows)
+                            {
+                                List<UploadMediaData> list = new List<UploadMediaData>();
+
+                                while (reader.Read())
+                                {
+                                    UploadMediaData ec = new UploadMediaData()
+                                    {
+                                        ID = reader.GetInt32(0).ToString(),
+                                        Name = reader.GetString(1),
+                                        Type = reader.GetString(2)
+                                    };
+                                    list.Add(ec);
+                                }
+
+                                RepeaterUploadedMedia.DataSource = list;
+                                RepeaterUploadedMedia.DataBind();
+                            }
+                        }
+
                     }
                 }
             }
@@ -475,43 +501,107 @@ namespace LinkedU
 
         protected void RepeaterUploadedMedia_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
+            switch (e.CommandName)
+            {
+                case "Delete":
 
+                    try
+                    {
+                        using (SqlConnection conn = new SqlConnection(connectionString))
+                        {
+                            conn.Open();
+
+                            using (SqlCommand comm = conn.CreateCommand())
+                            {
+                                comm.Parameters.AddWithValue("@userID", Session["UserID"]);
+                                comm.Parameters.AddWithValue("@fileID", int.Parse(e.CommandArgument.ToString()));
+
+                                comm.CommandText = "DELETE FROM student_files WHERE userID = @userID AND ID = @fileID";
+                                comm.ExecuteNonQuery();
+
+                                List<UploadMediaData> list = new List<UploadMediaData>();
+                                foreach (RepeaterItem item in RepeaterUploadedMedia.Items)
+                                {
+
+                                    UploadMedia uc = (UploadMedia)item.FindControl("uploadedMedia");
+                                    if (uc != null && uc.Data.Type.Length > 0 && (uc.Data.ID != e.CommandArgument.ToString()))
+                                        list.Add(uc.Data);
+                                }
+
+                                RepeaterUploadedMedia.DataSource = list;
+                                RepeaterUploadedMedia.DataBind();
+
+                            }
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                    break;
+            }
         }
 
         protected void LinkButtonUploadMedia_Click(object sender, EventArgs e)
         {
             try
             {
+                string newID;
+
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
                     using (SqlCommand comm = conn.CreateCommand())
                     {
+                        comm.Parameters.AddWithValue("@userID", Session["UserID"]);
+
+                        List<UploadMediaData> data = GetUploadedMedia();
+
+                        if (DropDownListMediaType.Text == "Profile Picture")
+                        {
+                            //Change any existing profile picture type files for this user to type Image
+
+                            comm.CommandText = "UPDATE student_files " +
+                                "SET file_type = (SELECT id FROM student_file_types WHERE name = 'Image') " +
+                                "WHERE file_type = (SELECT id FROM student_file_Types WHERE name = 'Profile Picture') " +
+                                "AND userID = @userID";
+                            comm.ExecuteNonQuery();
+
+                            foreach(UploadMediaData m in data)
+                            {
+                                if (m.Type == "Profile Picture")
+                                    m.Type = "Image";
+                            }
+                        }
+
                         comm.CommandText = "INSERT INTO student_files (userID, file_name, file_type, [file]) " +
+                            "OUTPUT Inserted.ID " +
                             "SELECT @userID, @file_name, id, @file FROM student_file_types WHERE name = @file_type";
 
-                        comm.Parameters.AddWithValue("@userID", Session["UserID"]);
                         comm.Parameters.AddWithValue("@file_name", FileUploadMedia.FileName);
                         comm.Parameters.AddWithValue("@file_type", DropDownListMediaType.Text);
                         comm.Parameters.Add("@file", System.Data.SqlDbType.VarBinary).Value = FileUploadMedia.FileBytes;
 
-                        comm.ExecuteNonQuery();
+                        newID = comm.ExecuteScalar().ToString();
+
+                        //add item to repeater
+                        
+                        UploadMediaData newData = new UploadMediaData()
+                        {
+                            Name = FileUploadMedia.FileName,
+                            Type = DropDownListMediaType.Text,
+                            ID = newID
+                        };
+
+                        data.Add(newData);
+                        RepeaterUploadedMedia.DataSource = data;
+                        RepeaterUploadedMedia.DataBind();
 
                     }
                 }
 
-                //add item to repeater
-                List<UploadMediaData> data = GetUploadedMedia();
-                UploadMediaData newData = new UploadMediaData()
-                {
-                    Name = FileUploadMedia.FileName,
-                    Type = DropDownListMediaType.Text
-                };
 
-                data.Add(newData);
-                ExtraCurriculars.DataSource = data;
-                ExtraCurriculars.DataBind();
 
             } catch
             {

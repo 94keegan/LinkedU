@@ -13,6 +13,15 @@ namespace LinkedU {
     public partial class UploadMedia {
         
         /// <summary>
+        /// MediaID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField MediaID;
+        
+        /// <summary>
         /// LabelMediaType control.
         /// </summary>
         /// <remarks>
@@ -37,6 +46,6 @@ namespace LinkedU {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ButtonDeleteMedia;
+        protected global::System.Web.UI.WebControls.LinkButton ButtonDeleteMedia;
     }
 }

@@ -17,8 +17,8 @@ namespace LinkedU
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //if ((Session["UserID"] == null) || (Session["AccountType"].ToString() != "University"))
-            //    Response.Redirect("Default.aspx");
+            if ((Session["UserID"] == null) || ((Session["AccountType"].ToString() != "University") && (Session["UserID"].ToString() != Request.QueryString["id"])))
+                Response.Redirect("Default.aspx");
 
             if (Request.QueryString["id"] == null)
                 return;
@@ -29,13 +29,33 @@ namespace LinkedU
 
                 using (SqlCommand comm = conn.CreateCommand())
                 {
-                    comm.CommandText = "SELECT CONCAT(firstName, ' ', lastName) as fullName FROM users WHERE userID = @userID";
+
                     comm.Parameters.AddWithValue("@userID", Request.QueryString["id"]);
+
+                    comm.CommandText = "SELECT CONCAT(firstName, ' ', lastName) as fullName FROM users WHERE userID = @userID";
 
                     StudentName.Text = comm.ExecuteScalar().ToString();
 
+                    comm.CommandText = "SELECT highschool, graduationyear, gpa FROM student_profiles WHERE userID = @userID";
+                    using (SqlDataReader reader = comm.ExecuteReader())
+                    {
+                        if (reader.HasRows && reader.Read())
+                        {
+                            if (!reader.IsDBNull(2))
+                                StudentGPA.Text = String.Format("{0:N2} GPA", Math.Round(reader.GetDouble(2), 2));
 
-                    comm.CommandText = "SELECT [file] FROM student_files INNER JOIN student_file_types ON student_files.file_type = student_file_types.id AND student_file_types.name = 'Profile Picture' WHERE userID = @userID ";
+                            if (!reader.IsDBNull(0))
+                                StudentHighSchool.Text = reader.GetString(0);
+
+                            if (!reader.IsDBNull(1))
+                                StudentGraduationYear.Text = String.Format("Class of {0}", reader.GetInt32(1).ToString());
+                        }
+                    }
+
+
+                    comm.CommandText = "SELECT [file] FROM student_files " +
+                        "INNER JOIN student_file_types ON student_files.file_type = student_file_types.id AND student_file_types.name = 'Profile Picture' " +
+                        "WHERE userID = @userID ";
 
                     using (SqlDataReader reader = comm.ExecuteReader())
                     {
@@ -47,7 +67,71 @@ namespace LinkedU
                         }
                     }
 
-                    
+
+                    comm.CommandText = "select max(pct.test_percentile) percentile, tests.name, score.test_score from student_test_scores score " +
+                        "INNER JOIN student_test_percentiles pct ON pct.test_type = score.test_type AND pct.test_score <= score.test_score " +
+                        "INNER JOIN student_test_types tests ON tests.id = score.test_type " +
+                        "WHERE userID = @userID group by pct.test_type, tests.name, score.test_score order by percentile DESC";
+
+                    using (SqlDataReader reader = comm.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                TableRow row = new TableRow();
+
+                                TableCell cell1 = new TableCell()
+                                {
+                                    Text = reader.GetString(1)
+                                };
+                                TableCell cell2 = new TableCell()
+                                {
+                                    Text = reader.GetDouble(2).ToString()
+                                };
+                                TableCell cell3 = new TableCell()
+                                {
+                                    Text = reader.GetInt32(0).ToString()
+                                };
+
+                                row.Cells.Add(cell1);
+                                row.Cells.Add(cell2);
+                                row.Cells.Add(cell3);
+
+                                TableTestScores.Rows.Add(row);
+                            }
+                        }
+                    }
+
+                    comm.CommandText = "select ec_name, name from student_extracurriculars " +
+                        "inner join extracurricular_types ON extracurricular_types.id = student_extracurriculars.ec_type " +
+                        "WHERE userID = @userID";
+
+                    using (SqlDataReader reader = comm.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                TableRow row = new TableRow();
+
+                                TableCell cell1 = new TableCell()
+                                {
+                                    Text = reader.GetString(0)
+                                };
+                                TableCell cell2 = new TableCell()
+                                {
+                                    Text = reader.GetString(1)
+                                };
+
+                                row.Cells.Add(cell1);
+                                row.Cells.Add(cell2);
+
+                                TableExtraCurriculars.Rows.Add(row);
+                            }
+                        }
+                    }
+
                 }
             }
         }

@@ -12,6 +12,7 @@ namespace LinkedU
     {
         public string Type { get; set; }
         public string Name { get; set; }
+        public string ID { get; set; }
 
     }
 
@@ -25,7 +26,8 @@ namespace LinkedU
                 return new UploadMediaData()
                 {
                     Type = LabelMediaType.Text,
-                    Name = LabelMediaName.Text
+                    Name = LabelMediaName.Text,
+                    ID = MediaID.Value
                 };
             }
 
@@ -33,6 +35,7 @@ namespace LinkedU
             {
                 LabelMediaType.Text = value.Type;
                 LabelMediaName.Text = value.Name;
+                MediaID.Value = value.ID;
             }
         }
 
