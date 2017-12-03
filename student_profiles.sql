@@ -14,7 +14,8 @@ CREATE TABLE [dbo].[student_profiles](
 	[highschool] [nvarchar] (100) NULL,
 	[graduationyear] [int] NULL,
 	[gpa] [float] NULL,
-	[newsletter] [bit] NULL
+	[newsletter] [bit] NULL,
+	[personalStatement] NTEXT
 )
 GO
 
