@@ -361,7 +361,7 @@ namespace LinkedU
                             comm.Parameters.Add("@url", System.Data.SqlDbType.NText);
 
                             comm.CommandText = "INSERT INTO highlighted_programs (userID, program_name, program_type, program_url) " +
-                                "SELECT @userID, @name id, @url FROM university_program_types WHERE [name] = @typename";
+                                "SELECT @userID, @name, id, @url FROM university_program_types WHERE [name] = @typename";
                             List<HighlightedProgramData> hps = GetHighlightedPrograms();
                             if (hps.Count > 0)
                             {
