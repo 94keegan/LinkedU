@@ -2,6 +2,7 @@ CREATE TABLE [dbo].[highlighted_programs](
 	[userID] [int] NOT NULL,
 	[program_name] [nvarchar](100) NOT NULL,
 	[program_type] [int] NOT NULL,
+	[program_url] NTEXT,
 	primary key (userID, [program_name])
 )
 GO
