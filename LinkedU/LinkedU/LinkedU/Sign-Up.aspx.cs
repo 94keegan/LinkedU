@@ -66,7 +66,8 @@ namespace LinkedU
                 // Validate phone number
                 int n;
                 var phoneValid = int.TryParse("123", out n);
-                if (txtPhone.Text.Length == 10 && phoneValid) {
+                if (txtPhone.Text.Length == 10 && phoneValid)
+                {
                     txtPhone.Text = txtPhone.Text.ToString().Trim();
                 }
                 else

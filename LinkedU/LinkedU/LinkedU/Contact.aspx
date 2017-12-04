@@ -4,28 +4,28 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-	<title>LinkedU || Contact</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinkedU || Contact</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<!-- Styles -->
-	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="css/compiled/bootstrap-overrides.css" type="text/css" />
-	<link rel="stylesheet" type="text/css" href="css/compiled/theme.css" />
+    <!-- Styles -->
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/compiled/bootstrap-overrides.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="css/compiled/theme.css" />
 
-	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
 
-	<link rel="stylesheet" href="css/compiled/contact.css" type="text/css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/lib/animate.css" media="screen, projection" />
+    <link rel="stylesheet" href="css/compiled/contact.css" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/lib/animate.css" media="screen, projection" />
     <link rel="stylesheet" href="css/LinkedU.css" type="text/css" media="screen" />
 
-	<!--[if lt IE 9]>
+    <!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 </head>
 <body>
 
-	<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="navbar navbar-inverse navbar-static-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -64,30 +64,30 @@
                                 {
                                     Response.Write("Guest");
                                 }
-                               %>
-                            <b class="caret"></b></a>
-                            <%
-                                if (Session["UserName"] != null)
-                                {
-                                    if (Session["AccountType"].ToString() == "Student")
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
-                                    else
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
-
-                                    Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
-                                }
-                                else
-                                {
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
-                                }
                             %>
+                            <b class="caret"></b></a>
+                        <%
+                            if (Session["UserName"] != null)
+                            {
+                                if (Session["AccountType"].ToString() == "Student")
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
+                                else
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
+
+                                Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
+                            }
+                            else
+                            {
+                                Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
+                            }
+                        %>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <div id="contact" style="margin-top:0;padding-top:70px;">
+    <div id="contact" style="margin-top: 0; padding-top: 70px;">
         <div class="container">
             <div class="section_header">
                 <h3>Get in touch</h3>
@@ -105,14 +105,14 @@
                         </div>
                         <div class="col-sm-6 row-col">
                             <div class="box">
-                                <asp:TextBox id="txtMessage" TextMode="multiline" style="resize:none;" Columns="50" Rows="5" runat="server" class="form-control" required="required" placeholder="Type a message here..." />
+                                <asp:TextBox ID="txtMessage" TextMode="multiline" Style="resize: none;" Columns="50" Rows="5" runat="server" class="form-control" required="required" placeholder="Type a message here..." />
                             </div>
                         </div>
                     </div>
 
                     <div class="row submit">
                         <div class="col-md-3 right">
-                            <br/>
+                            <br />
                             <asp:Button ID="btnSubmit" runat="server" Text="Send your message" OnClick="btnSubmit_Click" />
                         </div>
                     </div>
@@ -121,7 +121,7 @@
         </div>
     </div>
 
-	<!-- starts footer -->
+    <!-- starts footer -->
     <footer id='footer'>
         <div class='container'>
             <div class='row info'>

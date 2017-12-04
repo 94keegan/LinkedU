@@ -71,10 +71,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin.aspx" />
     <Content Include="artwork\BANNER-1.psd" />
     <Content Include="artwork\BANNER-2.psd" />
     <Content Include="artwork\BANNER-3.psd" />
     <Content Include="artwork\BANNER-4.psd" />
+    <Content Include="favicon.ico" />
+    <Content Include="ScheduleAppointment.aspx" />
     <Content Include="WebUserControlUploadedMedia.ascx" />
     <None Include="Connected Services\SMS\configuration91.svcinfo" />
     <None Include="Connected Services\SMS\configuration.svcinfo" />
@@ -322,6 +325,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.aspx.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin.aspx.designer.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="autocomplete\UniversityName.aspx.cs">
       <DependentUpon>UniversityName.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -345,6 +355,13 @@
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ScheduleAppointment.aspx.cs">
+      <DependentUpon>ScheduleAppointment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ScheduleAppointment.aspx.designer.cs">
+      <DependentUpon>ScheduleAppointment.aspx</DependentUpon>
     </Compile>
     <Compile Include="StudentLookup.aspx.cs">
       <DependentUpon>StudentLookup.aspx</DependentUpon>
