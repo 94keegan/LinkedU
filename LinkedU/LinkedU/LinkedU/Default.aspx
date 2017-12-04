@@ -126,8 +126,9 @@
         <article class="slide" id="ideas" style="background: url('img/backgrounds/aqua.jpg') repeat-x top center;">
             <div class="info">
                 <h2>Featured University of the Day</h2>
-                <a href="http://localhost:64190/UniversityLookup.aspx?uid=145813">
-                    <img class="asset left-210 sp600 t113 z2" src="img/slides/scene2/illinoisstatebanner.png" /><b></b></a>
+                <asp:HyperLink ID="HyperLinkFeaturedUniversity" runat="server" NavigateUrl="~/UniversityLookup.aspx?uid={0}" >
+                    <asp:Image ID="ImageFeaturedUniversity" CssClass="asset left-210 sp600 t113 z2" runat="server" />
+                </asp:HyperLink>
             </div>
         </article>
         <article class="slide" id="tour" style="background: url('img/backgrounds/color-splash.jpg') repeat-x top center;">
