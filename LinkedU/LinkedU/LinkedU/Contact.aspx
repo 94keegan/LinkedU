@@ -66,6 +66,7 @@
                                 }
                             %>
                             <b class="caret"></b></a>
+
                             <%
                                 if (Session["UserName"] != null)
                                 {
@@ -78,21 +79,11 @@
 
                                     Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
                                 }
-                        <%
-                            if (Session["UserName"] != null)
-                            {
-                                if (Session["AccountType"].ToString() == "Student")
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
                                 else
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
-
-                                Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
-                            }
-                            else
-                            {
-                                Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
-                            }
-                        %>
+                                {
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
+                                }
+                            %>
                     </li>
                     <li>
                         <a href="#" class="btn btn-sm">

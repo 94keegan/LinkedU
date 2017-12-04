@@ -74,6 +74,7 @@
                             {
                                 if (Session["AccountType"].ToString() == "Student")
                                     Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
+
                                 else if (Session["AccountType"].ToString() == "University")
                                     Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Edit Profile</a></li>");
                                 else if (Session["AccountType"].ToString() == "Admin")

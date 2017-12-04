@@ -68,25 +68,16 @@
                                 }
                             %>
                             <b class="caret"></b></a>
-                            <%
-                                if (Session["UserName"] != null)
-                                {
-                                    if (Session["AccountType"].ToString() == "Student")
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
-                                    else if (Session["AccountType"].ToString() == "University")
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Edit Profile</a></li>");
-                                    else if (Session["AccountType"].ToString() == "Admin")
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Admin.aspx\">Administration</a></li>");
-
-                                    Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
-                                }
                         <%
                             if (Session["UserName"] != null)
                             {
                                 if (Session["AccountType"].ToString() == "Student")
                                     Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
-                                else
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
+
+                                else if (Session["AccountType"].ToString() == "University")
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Edit Profile</a></li>");
+                                else if (Session["AccountType"].ToString() == "Admin")
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Admin.aspx\">Administration</a></li>");
 
                                 Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
                             }
@@ -127,7 +118,6 @@
                                         <ContentTemplate>
                                             <asp:Panel Visible="false" runat="server" ID="PanelSignupError" ForeColor="Red">
                                                 <asp:Label runat="server" ID="lblSignupError" class="alert alert-danger"></asp:Label>
-                                            </asp:Panel><br />
                                             </asp:Panel>
                                             <br />
                                             <asp:TextBox ID="txtUserName" runat="server" placeholder="User Name" class="control-form" required="required" OnTextChanged="txtUserName_OnTextChanged" AutoPostBack="true" />
