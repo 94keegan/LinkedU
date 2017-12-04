@@ -79,6 +79,7 @@
     <Content Include="artwork\BANNER-4.psd" />
     <Content Include="css\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="img\ajax-loader.gif" />
+    <Content Include="favicon.ico" />
     <Content Include="ScheduleAppointment.aspx" />
     <Content Include="WebUserControlUploadedMedia.ascx" />
     <None Include="Connected Services\SMS\configuration91.svcinfo" />

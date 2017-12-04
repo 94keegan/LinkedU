@@ -62,7 +62,7 @@
                                 {
                                     Response.Write("Guest");
                                 }
-                               %>
+                            %>
                             <b class="caret"></b></a>
                             <%
                                 if (Session["UserName"] != null)
@@ -76,11 +76,21 @@
 
                                     Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
                                 }
+                        <%
+                            if (Session["UserName"] != null)
+                            {
+                                if (Session["AccountType"].ToString() == "Student")
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
                                 else
-                                {
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
-                                }
-                            %>
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
+
+                                Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
+                            }
+                            else
+                            {
+                                Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
+                            }
+                        %>
                     </li>
                     <li>
                         <a href="#" class="btn btn-sm">
@@ -111,7 +121,8 @@
                                     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                                     <asp:UpdatePanel ID="pnlReset" runat="server">
                                         <ContentTemplate>
-                                            <asp:Label runat="server" ID="lblAlert"></asp:Label><br /><br />
+                                            <asp:Label runat="server" ID="lblAlert"></asp:Label><br />
+                                            <br />
                                             <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" class="control-form" />
                                             <div class="col-md-6 remember" id="RememberMe">
                                                 <label class="checkbox">
@@ -120,7 +131,7 @@
                                             </div>
                                             <asp:DropDownList ID="ddlCarrier" runat="server" class="control-form" Visible="false" />
                                             <asp:TextBox ID="txtPhone" runat="server" placeholder="Phone" class="control-form" Visible="false" />
-                                            <asp:Label ID="lblQuestion" runat="server" Visible="false" style="text-align: left"/><br />
+                                            <asp:Label ID="lblQuestion" runat="server" Visible="false" Style="text-align: left" /><br />
                                             <asp:TextBox ID="txtAnswer" runat="server" placeholder="Answer" class="control-form" Visible="false" />
                                             <asp:TextBox ID="txtNewPassword" runat="server" placeholder="New Password" class="control-form" Visible="false" />
                                             <asp:TextBox ID="txtNewPasswordConfirm" runat="server" placeholder="New Password Confirm" class="control-form" Visible="false" />

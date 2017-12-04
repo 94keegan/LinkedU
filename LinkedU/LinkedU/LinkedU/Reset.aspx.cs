@@ -40,7 +40,6 @@ namespace LinkedU
                         dbConnection.Open();
                         try
                         {
-
                             // Check if gen_string/email combo is in DB
                             int resetExists = 0;
                             using (SqlCommand comm = dbConnection.CreateCommand())
@@ -111,14 +110,29 @@ namespace LinkedU
                         SqlTransaction transaction = dbConnection.BeginTransaction();
                         try
                         {
-                            // Check if email is in DB
                             int userExists = 0;
-                            using (SqlCommand comm = dbConnection.CreateCommand())
+                            if (chkPhone.Checked)
                             {
-                                comm.Transaction = transaction;
-                                comm.CommandText = "SELECT userID FROM users WHERE email = @email";
-                                comm.Parameters.AddWithValue("@email", txtEmail.Text);
-                                userExists = comm.ExecuteScalar() == null ? 0 : int.Parse(comm.ExecuteScalar().ToString());
+                                // Check if email/phone combo is in DB
+                                using (SqlCommand comm = dbConnection.CreateCommand())
+                                {
+                                    comm.Transaction = transaction;
+                                    comm.CommandText = "SELECT userID FROM users WHERE email = @email AND phone = @phone";
+                                    comm.Parameters.AddWithValue("@email", txtEmail.Text);
+                                    comm.Parameters.AddWithValue("@phone", txtPhone.Text);
+                                    userExists = comm.ExecuteScalar() == null ? 0 : int.Parse(comm.ExecuteScalar().ToString());
+                                }
+                            }
+                            else
+                            {
+                                // Check if email is in DB
+                                using (SqlCommand comm = dbConnection.CreateCommand())
+                                {
+                                    comm.Transaction = transaction;
+                                    comm.CommandText = "SELECT userID FROM users WHERE email = @email";
+                                    comm.Parameters.AddWithValue("@email", txtEmail.Text);
+                                    userExists = comm.ExecuteScalar() == null ? 0 : int.Parse(comm.ExecuteScalar().ToString());
+                                }
                             }
 
                             if (userExists > 0)
@@ -139,7 +153,7 @@ namespace LinkedU
                                 {
                                     SMS.TextSenderClient client = new SMS.TextSenderClient();
                                     client.sendSMS(ddlCarrier.SelectedValue, txtPhone.Text,
-                                        string.Concat("Click the link to reset your password. -> ",
+                                        string.Concat("Use the link to reset your password. -> ",
                                         Request.Url.Authority, "/Reset.aspx?",
                                         "email=" + txtEmail.Text,
                                         "&genString=" + genString));
@@ -160,8 +174,8 @@ namespace LinkedU
                                 emailMessage.From = messageFrom;
                                 emailMessage.Subject = "LinkedU || Reset";
                                 string body = string.Concat("This message was automatically generated via the LinkedU website.<br />",
-                                    "<p>Click the link to reset your password. -> ",
-                                    Request.Url.Authority,"/Reset.aspx?",
+                                    "<p>Use the link to reset your password. -> ",
+                                    Request.Url.Authority, "/Reset.aspx?",
                                     "email=" + txtEmail.Text,
                                     "&genString=" + genString, "</p>");
                                 emailMessage.Body = body;
@@ -183,13 +197,13 @@ namespace LinkedU
                                 // Clean up.
                                 emailMessage.Dispose();
                                 lblAlert.Visible = true;
-                                lblAlert.Text = "Email has been sent!";
+                                lblAlert.Text = "Message has been sent!";
                                 lblAlert.Attributes["class"] = "alert alert-success";
                             }
                             else
                             {
                                 lblAlert.Visible = true;
-                                lblAlert.Text = "User does not exist with this email!";
+                                lblAlert.Text = "User does not exist with this email\\phone combo!";
                                 lblAlert.Attributes["class"] = "alert alert-danger";
                                 throw new Exception("Error sending SMS!");
                             }
@@ -202,7 +216,7 @@ namespace LinkedU
                             throw ex;
                         }
                     }
-                    catch (SqlException ex)
+                    catch
                     {
                         lblAlert.Visible = true;
                         lblAlert.Text = "Error Resetting Password!";
@@ -294,7 +308,7 @@ namespace LinkedU
                             lblAlert.Attributes["class"] = "alert alert-danger";
                         }
                     }
-                    catch (SqlException ex)
+                    catch
                     {
                         lblAlert.Visible = true;
                         lblAlert.Text = "Error Resetting Password!";

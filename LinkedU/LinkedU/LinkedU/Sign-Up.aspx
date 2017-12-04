@@ -66,7 +66,7 @@
                                 {
                                     Response.Write("Guest");
                                 }
-                               %>
+                            %>
                             <b class="caret"></b></a>
                             <%
                                 if (Session["UserName"] != null)
@@ -80,11 +80,21 @@
 
                                     Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
                                 }
+                        <%
+                            if (Session["UserName"] != null)
+                            {
+                                if (Session["AccountType"].ToString() == "Student")
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
                                 else
-                                {
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
-                                }
-                            %>
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
+
+                                Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
+                            }
+                            else
+                            {
+                                Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
+                            }
+                        %>
                     </li>
                     <li>
                         <a href="#" class="btn btn-sm">
@@ -118,6 +128,8 @@
                                             <asp:Panel Visible="false" runat="server" ID="PanelSignupError" ForeColor="Red">
                                                 <asp:Label runat="server" ID="lblSignupError" class="alert alert-danger"></asp:Label>
                                             </asp:Panel><br />
+                                            </asp:Panel>
+                                            <br />
                                             <asp:TextBox ID="txtUserName" runat="server" placeholder="User Name" class="control-form" required="required" OnTextChanged="txtUserName_OnTextChanged" AutoPostBack="true" />
                                             <asp:DropDownList ID="ddlAccountType" runat="server" class="control-form" OnSelectedIndexChanged="ddlAccountType_SelectedIndexChanged" AutoPostBack="true">
                                                 <asp:ListItem Text="Student" />
@@ -132,6 +144,7 @@
                                     <asp:TextBox ID="txtQuestion" runat="server" placeholder="Security Question" class="control-form" required="required" />
                                     <asp:TextBox ID="txtAnswer" runat="server" placeholder="Security Answer" class="control-form" required="required" />
                                     <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" class="control-form" required="required" />
+                                    <asp:TextBox ID="txtPhone" runat="server" placeholder="Phone Number" class="control-form" required="required" />
                                     <asp:TextBox ID="txtPassword" runat="server" placeholder="Password" class="control-form" required="required" />
                                     <asp:TextBox ID="txtConfPassword" runat="server" placeholder="Confirm Password" class="control-form" required="required" />
                                     <asp:Button ID="btnSignUp" runat="server" Text="Sign Up" OnClick="btnSignUp_Click" />
@@ -181,11 +194,12 @@
 
     <!-- Scripts -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
     <script type="text/javascript" src="js/index-slider.js"></script>
     <script type="text/javascript">
-       function pageLoad() {
+        function pageLoad() {
             $("#txtUniversityName").autocomplete({
                 source: "autocomplete/UniversityName.aspx",
                 minlength: 10,
@@ -195,10 +209,9 @@
                 }
             });
 
-            $("#txtUniversityName").on("keypress", function() {
+            $("#txtUniversityName").on("keypress", function () {
                 $("#UniversityID").val("");
             });
-
         };
     </script>
 </body>
