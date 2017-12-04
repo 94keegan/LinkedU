@@ -5,6 +5,6 @@ CREATE TABLE applications (
 	applied DATETIME,
 	notification_seen DATETIME,
   constraint fk_app_userid foreign key (userID) REFERENCES student_profiles(userID) ON DELETE CASCADE,
-  constraint fk_app_universityID foreign key (universityID) REFERENCES university_profiles(universityID) ON DELETE NO ACTION,
+  constraint fk_app_universityID foreign key (universityID) REFERENCES universities(UNITID) ON DELETE CASCADE,
   constraint pk_applications primary key (userID, universityID)
 );
