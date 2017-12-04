@@ -14,7 +14,7 @@ GO
 ALTER TABLE [dbo].[highlighted_programs] CHECK CONSTRAINT [fk_highlighted_programs_userid]
 GO
 
-ALTER TABLE [dbo].[highlighted_programs]  WITH CHECK ADD  CONSTRAINT [fk_program_type] FOREIGN KEY([ec_type])
+ALTER TABLE [dbo].[highlighted_programs]  WITH CHECK ADD  CONSTRAINT [fk_program_type] FOREIGN KEY([program_type])
 REFERENCES [dbo].[university_program_types] ([id])
 ON DELETE CASCADE
 GO
