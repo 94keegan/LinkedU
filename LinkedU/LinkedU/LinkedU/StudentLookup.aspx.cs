@@ -24,7 +24,11 @@ namespace LinkedU
                 return;
 
             if (Session["AccountType"].ToString() == "Student")
+            {
                 StudentProfileNotice.Visible = true;
+                ButtonRequestMoreInformation.Enabled = false;
+                ButtonPromoteToStudent.Enabled = false;
+            }
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -120,11 +124,11 @@ namespace LinkedU
 
                                 TableCell cell1 = new TableCell()
                                 {
-                                    Text = reader.GetString(0)
+                                    Text = reader.GetString(1)
                                 };
                                 TableCell cell2 = new TableCell()
                                 {
-                                    Text = reader.GetString(1)
+                                    Text = reader.GetString(0)
                                 };
 
                                 row.Cells.Add(cell1);

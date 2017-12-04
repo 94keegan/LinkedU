@@ -44,7 +44,8 @@ namespace LinkedU
                         comm.CommandText = "SELECT TOP 10 a.id, a.notification_seen, INSTNM FROM promotions a " +
                             "inner join universities promoter ON promoter.UNITID = a.universityID " +
                             "inner join users ON users.userID = a.userID " +
-                            "where users.userID = @userID";
+                            "where users.userID = @userID " +
+                            "ORDER BY a.notification_seen, a.id DESC";
                     }
                     else if (Session["AccountType"].ToString() == "University")
                     {
@@ -52,11 +53,13 @@ namespace LinkedU
                         comm.CommandText = "SELECT TOP 10 a.id, a.notification_seen, CONCAT(applicant.firstName, ' ', applicant.lastName) FROM applications a " +
                             "inner join users ON users.universityID = a.universityID " +
                             "inner join users applicant ON applicant.userID = a.userID " +
-                            "where users.userID = @userID";
+                            "where users.userID = @userID " +
+                            "ORDER BY a.notification_seen, a.id DESC";
                     }
                     else
                     {
-                        comm.CommandText = "";
+                        GlobalNotifications.Visible = false;
+                        return;
                     }
 
                     using (SqlDataReader reader = comm.ExecuteReader())

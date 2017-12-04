@@ -94,6 +94,24 @@ namespace LinkedU {
         protected global::System.Web.UI.WebControls.Panel StudentInformation;
         
         /// <summary>
+        /// ButtonRequestMoreInformation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton ButtonRequestMoreInformation;
+        
+        /// <summary>
+        /// ButtonPromoteToStudent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton ButtonPromoteToStudent;
+        
+        /// <summary>
         /// StudentTestScores control.
         /// </summary>
         /// <remarks>
