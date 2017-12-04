@@ -22,7 +22,7 @@ namespace LinkedU.autocomplete
 
                     using (SqlCommand comm = conn.CreateCommand())
                     {
-                        comm.CommandText = "SELECT UNITID, INSTNM FROM universities WHERE INSTNM LIKE @name ORDER BY INSTNM";
+                        comm.CommandText = "SELECT TOP 10 UNITID, INSTNM FROM universities WHERE INSTNM LIKE @name ORDER BY INSTNM";
                         comm.Parameters.AddWithValue("@name", "%" + Request.QueryString["term"] + "%");
 
                         using (SqlDataReader reader = comm.ExecuteReader())
