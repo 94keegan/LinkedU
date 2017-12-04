@@ -73,7 +73,7 @@ namespace LinkedU
                     {
 
                         comm.Parameters.AddWithValue("@userID", Session["UserID"]);
-                        comm.CommandText = "SELECT newsletter FROM university_profiles WHERE userID = @userID";
+                        comm.CommandText = "SELECT newsletter FROM university_profiles WHERE universityID = @userID";
 
                         using (SqlDataReader reader = comm.ExecuteReader())
                         {
@@ -81,7 +81,7 @@ namespace LinkedU
                             {
                                
                                 if (!reader.IsDBNull(0))
-                                    CheckBoxNewsletter.Checked = reader.GetBoolean(14);
+                                    CheckBoxNewsletter.Checked = reader.GetBoolean(0);
 
                             }
                         }
@@ -141,7 +141,7 @@ namespace LinkedU
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
 
             }
@@ -347,11 +347,11 @@ namespace LinkedU
                            
                             comm.Parameters.AddWithValue("@userID", Session["UserID"]);
 
-                            comm.CommandText = "DELETE FROM university_profiles WHERE userID = @userID";
+                            comm.CommandText = "DELETE FROM university_profiles WHERE universityID = @userID";
                             comm.ExecuteNonQuery();
 
                             comm.Parameters.AddWithValue("@newsletter", CheckBoxNewsletter.Checked);
-                            comm.CommandText = "INSERT INTO university_profiles (userID, newsletter) VALUES (@userID, @newsletter)";
+                            comm.CommandText = "INSERT INTO university_profiles (universityID, newsletter) VALUES (@userID, @newsletter)";
 
                             comm.CommandText = "DELETE FROM highlighted_programs WHERE userID = @userID";
                             comm.ExecuteNonQuery();
