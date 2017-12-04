@@ -139,8 +139,7 @@ namespace LinkedU
                                 {
                                     SMS.TextSenderClient client = new SMS.TextSenderClient();
                                     client.sendSMS(ddlCarrier.SelectedValue, txtPhone.Text,
-                                        string.Concat("This message was automatically generated via the LinkedU website.<br />",
-                                        "<p>Click the link to reset your password. -> ",
+                                        string.Concat("Click the link to reset your password. -> ",
                                         Request.Url.Authority, "/Reset.aspx?",
                                         "email=" + txtEmail.Text,
                                         "&genString=" + genString));
@@ -164,7 +163,7 @@ namespace LinkedU
                                     "<p>Click the link to reset your password. -> ",
                                     Request.Url.Authority,"/Reset.aspx?",
                                     "email=" + txtEmail.Text,
-                                    "&genString=" + genString);
+                                    "&genString=" + genString, "</p>");
                                 emailMessage.Body = body;
                                 emailMessage.IsBodyHtml = true;
                                 SmtpClient smtp = new SmtpClient();
