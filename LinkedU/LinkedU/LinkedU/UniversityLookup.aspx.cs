@@ -149,5 +149,13 @@ namespace LinkedU
                 }
             }
         }
+
+        protected void Apply_Click(object sender, EventArgs e)
+        {
+            var page = "ApplyToUniversity.aspx";
+            var url = String.Format("{0}?uid={1}", page, Request.QueryString["uid"]);
+
+            Response.Redirect(url);
+        }
     }
 }

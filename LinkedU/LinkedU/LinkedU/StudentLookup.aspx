@@ -73,8 +73,10 @@
                                 {
                                     if (Session["AccountType"].ToString() == "Student")
                                         Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
-                                    else
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
+                                    else if (Session["AccountType"].ToString() == "University")
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Edit Profile</a></li>");
+                                    else if (Session["AccountType"].ToString() == "Admin")
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Admin.aspx\">Administration</a></li>");
 
                                     Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
                                 }
@@ -84,12 +86,22 @@
                                 }
                             %>
                     </li>
+                    <li>
+                        <a href="#" class="btn btn-sm">
+                            <span class="glyphicon-bell"></span>
+                            <asp:Label runat="server" ForeColor="Red"></asp:Label>
+                        </a>
+                        <ul class="dropdown-menu notify-drop">
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
-
     <form id="form1" runat="server">
+        <asp:Panel ID="StudentProfileNotice" runat="server" CssClass="panel panel-primary panel-body" Visible="false">
+            You are currently viewing your profile as a university would see it
+        </asp:Panel>
         <div class="container-fluid">
             <div class="container-fluid">
                 <div class="row">
@@ -116,6 +128,9 @@
                         <asp:Panel runat="server" HorizontalAlign="Right">
                             <asp:LinkButton runat="server" CssClass="btn btn-sm btn-default" PostBackUrl="~/RequestMoreInfo.aspx" Text="More Information">
                                 <span aria-hidden="true" class="glyphicon glyphicon-envelope" style="margin-right:.3em;"></span>Request More Information
+                            </asp:LinkButton>
+                            <asp:LinkButton runat="server" CssClass="btn btn-sm btn-default" PostBackUrl="~/PromoteToStudent.aspx" Text="More Information">
+                                <span aria-hidden="true" class="glyphicon glyphicon-send" style="margin-right:.3em;"></span>Promote Your School
                             </asp:LinkButton>
                         </asp:Panel>
                         <asp:Panel ID="StudentTestScores" runat="server">

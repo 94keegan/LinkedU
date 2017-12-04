@@ -661,6 +661,24 @@ namespace LinkedU {
         protected global::System.Web.UI.WebControls.Repeater RepeaterUploadedMedia;
         
         /// <summary>
+        /// WizardStepPersonalStatement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.WizardStep WizardStepPersonalStatement;
+        
+        /// <summary>
+        /// TextBoxPersonalStatement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxPersonalStatement;
+        
+        /// <summary>
         /// WizardStepNewsletter control.
         /// </summary>
         /// <remarks>
@@ -974,5 +992,23 @@ namespace LinkedU {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label SummaryNewsletter;
+        
+        /// <summary>
+        /// PanelPersonalStatement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelPersonalStatement;
+        
+        /// <summary>
+        /// SummaryPersonalStatement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SummaryPersonalStatement;
     }
 }

@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="LinkedU.Contact" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ApplyToUniversity.aspx.cs" Inherits="LinkedU.ApplyToUniversity" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-	<title>LinkedU || Contact</title>
+	<title>LinkedU || Apply</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -52,7 +52,7 @@
                             %>
                         </ul>
                     </li>
-                    <li class="active"><a href="Contact.aspx">CONTACT US</a></li>
+                    <li class=""><a href="Contact.aspx">CONTACT US</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <%
@@ -100,22 +100,17 @@
     <div id="contact" style="margin-top:0;padding-top:70px;">
         <div class="container">
             <div class="section_header">
-                <h3>Get in touch</h3>
+                <h3>Apply for admission</h3>
             </div>
             <div class="row contact">
-                <p>What you think is important to us, and we've got you covered 110%. Our team will review your message and reply back as soon as possible.</p>
+                <p>Your application will include the achievements, test scores, transcripts, and media you added to your profile, as well as your personal statement. In addition, you want to let the school know why this school is the right fit for you, and to let them know why they should be interested in you.</p>
                 <asp:Label ID="lblAlert" runat="server" Visible="false" /><br />
                 <form id="form1" runat="server">
                     <div class="row form">
-                        <div class="col-sm-6 row-col">
+                        <div class="col-sm-12 row-col">
                             <div class="box">
-                                <asp:TextBox ID="txtName" runat="server" class="name form-control" placeholder="Name" required="required" />
-                                <asp:TextBox ID="txtEmail" runat="server" class="mail form-control" placeholder="Email" required="required" />
-                            </div>
-                        </div>
-                        <div class="col-sm-6 row-col">
-                            <div class="box">
-                                <asp:TextBox id="txtMessage" TextMode="multiline" style="resize:none;" Columns="50" Rows="5" runat="server" class="form-control" required="required" placeholder="Type a message here..." />
+                                <h5>Why you're choosing this school:</h5>
+                                <asp:TextBox id="TextBoxMessage" TextMode="multiline" style="resize:none;width:100%"  Rows="5" runat="server" class="form-control" required="required" placeholder="Type a personal message here..." />
                             </div>
                         </div>
                     </div>
@@ -123,7 +118,7 @@
                     <div class="row submit">
                         <div class="col-md-3 right">
                             <br/>
-                            <asp:Button ID="btnSubmit" runat="server" Text="Send your message" OnClick="btnSubmit_Click" />
+                            <asp:Button ID="ButtonSubmit" runat="server" Text="Submit Application" OnClick="ButtonSubmit_Click" />
                         </div>
                     </div>
                 </form>

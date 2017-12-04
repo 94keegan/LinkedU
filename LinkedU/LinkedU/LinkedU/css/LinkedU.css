@@ -46,3 +46,7 @@ span.search-label + input, span.search-label + text, span.search-label + select 
     max-width: 120%;
     margin-left: -.5em;
 }
+
+div.iframe-loading {
+    background: url(../img/ajax-loader.gif) center center no-repeat;
+}

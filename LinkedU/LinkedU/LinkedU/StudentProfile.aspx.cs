@@ -124,6 +124,8 @@ namespace LinkedU
                     SummaryExtraCurriculars.Rows.Add(ecrow);
                 }
             }
+
+            SummaryPersonalStatement.Text = TextBoxPersonalStatement.Text;
         }
 
         protected void Wizard1_NextButtonClick(object sender, WizardNavigationEventArgs e)
@@ -175,7 +177,7 @@ namespace LinkedU
                             comm.CommandText = "DELETE FROM student_profiles WHERE userID = @userID";
                             comm.ExecuteNonQuery();
 
-                            comm.CommandText = "INSERT INTO student_profiles (userID, age, gender, race, address1, address2, city, state, zipcode, formatted_address, latitude, longitude, highschool, gpa, graduationyear, newsletter) VALUES (@userID, @age, @gender, @race, @address1, @address2, @city, @state, @zipcode, @formatted_address, @latitude, @longitude, @highschool, @gpa, @graduationyear, @newsletter)";
+                            comm.CommandText = "INSERT INTO student_profiles (userID, age, gender, race, address1, address2, city, state, zipcode, formatted_address, latitude, longitude, highschool, gpa, graduationyear, newsletter, personalStatement) VALUES (@userID, @age, @gender, @race, @address1, @address2, @city, @state, @zipcode, @formatted_address, @latitude, @longitude, @highschool, @gpa, @graduationyear, @newsletter, @personalStatement)";
                             comm.Parameters.AddWithValue("@age", int.Parse(TextBoxAge.Text));
                             comm.Parameters.AddWithValue("@gender", RadioButtonGender.SelectedValue);
                             comm.Parameters.AddWithValue("@race", RadioButtonRace.SelectedValue);
@@ -190,6 +192,7 @@ namespace LinkedU
                             comm.Parameters.AddWithValue("@highschool", TextBoxHighSchool.Text);
                             comm.Parameters.AddWithValue("@graduationyear", TextBoxGraduationYear.Text);
                             comm.Parameters.AddWithValue("@newsletter", CheckBoxNewsletter.Checked);
+                            comm.Parameters.AddWithValue("@personalStatement", TextBoxPersonalStatement.Text);
                             comm.Parameters.Add("@gpa", System.Data.SqlDbType.Float);
 
                             if (TextBoxGpa.Text.Length > 0)
@@ -312,7 +315,7 @@ namespace LinkedU
                     {
 
                         comm.Parameters.AddWithValue("@userID", Session["UserID"]);
-                        comm.CommandText = "SELECT age, gender, race, address1, address2, city, state, zipcode, formatted_address, latitude, longitude, highschool, gpa, graduationyear, newsletter FROM student_profiles WHERE userID = @userID";
+                        comm.CommandText = "SELECT age, gender, race, address1, address2, city, state, zipcode, formatted_address, latitude, longitude, highschool, gpa, graduationyear, newsletter, personalStatement FROM student_profiles WHERE userID = @userID";
 
                         using (SqlDataReader reader = comm.ExecuteReader())
                         {
@@ -356,6 +359,9 @@ namespace LinkedU
 
                                 if (!reader.IsDBNull(14))
                                     CheckBoxNewsletter.Checked = reader.GetBoolean(14);
+
+                                if (!reader.IsDBNull(15))
+                                    TextBoxPersonalStatement.Text = reader.GetString(15);
                             }
                         }
 

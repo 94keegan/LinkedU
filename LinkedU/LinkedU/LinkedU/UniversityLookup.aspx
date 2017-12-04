@@ -73,8 +73,10 @@
                                 {
                                     if (Session["AccountType"].ToString() == "Student")
                                         Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
-                                    else
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
+                                    else if (Session["AccountType"].ToString() == "University")
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Edit Profile</a></li>");
+                                    else if (Session["AccountType"].ToString() == "Admin")
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Admin.aspx\">Administration</a></li>");
 
                                     Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
                                 }
@@ -83,6 +85,14 @@
                                     Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
                                 }
                             %>
+                    </li>
+                    <li>
+                        <a href="#" class="btn btn-sm">
+                            <span class="glyphicon-bell"></span>
+                            <asp:Label runat="server" ForeColor="Red"></asp:Label>
+                        </a>
+                        <ul class="dropdown-menu notify-drop">
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -102,15 +112,15 @@
                         </asp:Panel>
                     </div>
                     <div class='col-md-5'>
-                        <asp:Panel ID="UniversityMap" runat="server">
-                        </asp:Panel>
                         <asp:Panel runat="server" HorizontalAlign="Right">
                             <asp:LinkButton runat="server" CssClass="btn btn-sm btn-default" PostBackUrl="~/RequestMoreInfo.aspx" Text="More Information">
                                 <span aria-hidden="true" class="glyphicon glyphicon-envelope"></span>&nbsp;Request More Information
                             </asp:LinkButton>
-                            <asp:LinkButton runat="server" CssClass="btn btn-sm btn-default" PostBackUrl="~/ApplyToUniversity.aspx" Text="Apply for Admission">
-                                <span aria-hidden="true" class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Apply for Admission
+                            <asp:LinkButton runat="server" CssClass="btn btn-sm btn-default" OnClick="Apply_Click" Text="Apply for Admission">
+                                <span aria-hidden="true" class="glyphicon glyphicon-send"></span>&nbsp;Apply for Admission
                             </asp:LinkButton>
+                        </asp:Panel>
+                        <asp:Panel ID="UniversityMap" runat="server" CssClass="iframe-loading">
                         </asp:Panel>
                     </div>
                     <div class="col-md-2">

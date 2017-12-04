@@ -94,13 +94,15 @@
                                 }
                                %>
                             <b class="caret"></b></a>
-                        <%
+                            <%
                                 if (Session["UserName"] != null)
                                 {
                                     if (Session["AccountType"].ToString() == "Student")
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Profile</a></li>");
-                                    else
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
+                                    else if (Session["AccountType"].ToString() == "University")
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Edit Profile</a></li>");
+                                    else if (Session["AccountType"].ToString() == "Admin")
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Admin.aspx\">Administration</a></li>");
 
                                     Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
                                 }
@@ -109,6 +111,14 @@
                                     Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
                                 }
                             %>
+                    </li>
+                    <li>
+                        <a href="#" class="btn btn-sm">
+                            <span class="glyphicon-bell"></span>
+                            <asp:Label runat="server" ForeColor="Red"></asp:Label>
+                        </a>
+                        <ul class="dropdown-menu notify-drop">
+                        </ul>
                     </li>
                 </ul>
             </div>

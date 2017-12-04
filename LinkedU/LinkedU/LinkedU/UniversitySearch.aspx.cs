@@ -44,25 +44,6 @@ namespace LinkedU
                     }
                 }
             }
-            /*
-            using (SqlConnection conn = new SqlConnection(connStr))
-            {
-                conn.Open();
-
-                using (SqlCommand comm = conn.CreateCommand())
-                {
-                    comm.CommandText = "SELECT DISTINCT STABBR FROM universities ORDER BY STABBR";
-
-                    using (SqlDataReader reader = comm.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            SearchState.Items.Add(new ListItem(reader.GetString(0)));
-                        }
-                    }
-                }
-            }
-            */
         }
 
         protected void SearchValue_TextChanged(object sender, EventArgs e)
@@ -93,7 +74,7 @@ namespace LinkedU
                 {
 
                     comm.CommandText = "SELECT UNITID, INSTNM, ADDR, CITY, STABBR, ZIP, " +
-                      "   ( 3959 * " +
+                      "   CASE WHEN @lat IS NOT NULL AND @lng IS NOT NULL THEN ( 3959 * " +
                       "    acos( " +
                       "        cos( radians( @lat ) ) * " +
                       "        cos( radians( LATITUDE ) ) * " +
@@ -103,7 +84,7 @@ namespace LinkedU
                       "        sin(radians(@lat)) * " +
                       "        sin(radians(LATITUDE)) " +
                       "    ) " +
-                      ") as distance " +
+                      ") ELSE NULL END as distance " +
                       "FROM universities " +
                       "WHERE (INSTNM LIKE @query " +
                       "OR WEBADDR LIKE @query " +
@@ -113,7 +94,7 @@ namespace LinkedU
                       "OR COUNTYNM LIKE @query " +
                       ") " +
                       "AND (@hloffer = -1 OR HLOFFER >= @hloffer) " +
-                      "AND ( " +
+                      "AND (@lng IS NULL OR ( " +
                       "    3959 * " +
                       "    acos( " +
                       "        cos( radians( @lat ) ) * " +
@@ -124,13 +105,20 @@ namespace LinkedU
                       "        sin(radians(@lat)) * " +
                       "        sin(radians(LATITUDE)) " +
                       "    )" +
-                      ") < @dist " +
+                      ") < @dist) " +
                       "ORDER BY distance";
 
                     comm.Parameters.Add("@query", SqlDbType.VarChar).Value = "%" + SearchName.Text + "%";
                     comm.Parameters.Add("@hloffer", SqlDbType.Int).Value = SearchHighestLevel.SelectedValue;
-                    comm.Parameters.Add("@lat", SqlDbType.Decimal).Value = latitude;
-                    comm.Parameters.Add("@lng", SqlDbType.Decimal).Value = longitude;
+                    comm.Parameters.Add("@lat", SqlDbType.Decimal).Value = DBNull.Value;
+                    comm.Parameters.Add("@lng", SqlDbType.Decimal).Value = DBNull.Value;
+
+                    if (longitude != 0)
+                    {
+                        comm.Parameters["@lng"].Value = longitude;
+                        comm.Parameters["@lat"].Value = latitude;
+                    }
+
                     comm.Parameters.Add("@dist", SqlDbType.Int).Value = TextBoxSearchRadius.Text;
 
                     using (SqlDataReader reader = comm.ExecuteReader())
@@ -146,7 +134,10 @@ namespace LinkedU
                             cells[2] = new TableCell() { Text = reader.GetString(3) };
                             cells[3] = new TableCell() { Text = reader.GetString(4) };
                             cells[4] = new TableCell() { Text = reader.GetString(5) };
-                            cells[5] = new TableCell() { Text = String.Format("{0,2:n} Miles", reader.GetDouble(6)) };
+                            if (!reader.IsDBNull(6))
+                                cells[5] = new TableCell() { Text = String.Format("{0,2:n} Miles", reader.GetDouble(6)) };
+                            else
+                                cells[5] = new TableCell() { Text = "N/A" };
 
 
                             row.Cells.AddRange(cells);

@@ -23,6 +23,9 @@ namespace LinkedU
             if (Request.QueryString["id"] == null)
                 return;
 
+            if (Session["AccountType"].ToString() == "Student")
+                StudentProfileNotice.Visible = true;
+
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();

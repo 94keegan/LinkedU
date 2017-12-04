@@ -76,8 +76,10 @@
                                 {
                                     if (Session["AccountType"].ToString() == "Student")
                                         Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
-                                    else
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
+                                    else if (Session["AccountType"].ToString() == "University")
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Edit Profile</a></li>");
+                                    else if (Session["AccountType"].ToString() == "Admin")
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Admin.aspx\">Administration</a></li>");
 
                                     Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
                                 }
@@ -86,6 +88,14 @@
                                     Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
                                 }
                             %>
+                    </li>
+                    <li>
+                        <a href="#" class="btn btn-sm">
+                            <span class="glyphicon-bell"></span>
+                            <asp:Label runat="server" ForeColor="Red"></asp:Label>
+                        </a>
+                        <ul class="dropdown-menu notify-drop">
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -283,6 +293,17 @@
                     </table>
 
                 </asp:WizardStep>
+                <asp:WizardStep ID="WizardStepPersonalStatement" runat="server" Title="Personal Statement">
+                    <h4>Personal Statement</h4>
+                    <div class="row form">
+                        <div class="col-sm-12 row-col">
+                            <div class="box">
+                                <h5>What makes you unique?</h5>
+                                <asp:TextBox id="TextBoxPersonalStatement" TextMode="multiline" style="resize:none;width:100%" Columns="100" Rows="5" runat="server" class="form-control" required="required" placeholder="Type a personal statement here..." />
+                            </div>
+                        </div>
+                    </div>
+                </asp:WizardStep>
                 <asp:WizardStep ID="WizardStepNewsletter" runat="server" Title="Stay Current">
                     <h4>Newletter</h4>
                     <asp:CheckBox ID="CheckBoxNewsletter" Checked="true" Text="&nbsp;&nbsp;Keep me up-to-date on everything going on at LinkedU with weekly newsletters" runat="server" />
@@ -369,6 +390,10 @@
                     <asp:Panel runat="server" ID="PanelSummaryNewsletter">
                         <asp:Label runat="server" Text="Opt-in" />
                         <asp:Label runat="server" ID="SummaryNewsletter" />
+                    </asp:Panel>
+                    <h4>Personal Statement</h4>
+                    <asp:Panel runat="server" ID="PanelPersonalStatement">
+                        <asp:Label runat="server" ID="SummaryPersonalStatement"></asp:Label>
                     </asp:Panel>
                 </asp:WizardStep>
             </WizardSteps>
