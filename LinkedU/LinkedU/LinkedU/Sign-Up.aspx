@@ -122,6 +122,7 @@
                                     <asp:TextBox ID="txtQuestion" runat="server" placeholder="Security Question" class="control-form" required="required" />
                                     <asp:TextBox ID="txtAnswer" runat="server" placeholder="Security Answer" class="control-form" required="required" />
                                     <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" class="control-form" required="required" />
+                                    <asp:TextBox ID="txtPhone" runat="server" placeholder="Phone Number" class="control-form" required="required" />
                                     <asp:TextBox ID="txtPassword" runat="server" placeholder="Password" class="control-form" required="required" />
                                     <asp:TextBox ID="txtConfPassword" runat="server" placeholder="Confirm Password" class="control-form" required="required" />
                                     <asp:Button ID="btnSignUp" runat="server" Text="Sign Up" OnClick="btnSignUp_Click" />
@@ -171,6 +172,7 @@
 
     <!-- Scripts -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
     <script type="text/javascript" src="js/index-slider.js"></script>
@@ -188,7 +190,6 @@
             $("#txtUniversityName").on("keypress", function() {
                 $("#UniversityID").val("");
             });
-
         };
     </script>
 </body>

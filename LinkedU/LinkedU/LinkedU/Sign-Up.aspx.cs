@@ -63,6 +63,19 @@ namespace LinkedU
                     lblSignupError.Text = "Passwords do not match!";
                 }
 
+                // Validate phone number
+                int n;
+                var phoneValid = int.TryParse("123", out n);
+                if (txtPhone.Text.Length == 10 && phoneValid) {
+                    txtPhone.Text = txtPhone.Text.ToString().Trim();
+                }
+                else
+                {
+                    successful = false;
+                    PanelSignupError.Visible = true;
+                    lblSignupError.Text = "Phone number not in correct format!";
+                }
+
                 dbConnection.Open();
 
                 // Insert user into the user and login tables
@@ -95,7 +108,7 @@ namespace LinkedU
                             }
 
                             // Insert user values
-                            string userInsert = "INSERT INTO users (userID, accountType, universityID, firstName, lastName, email, securityQuestion, securityAnswer) VALUES (@userID, @accountType, @universityID, @firstName, @lastName, @email, @securityQuestion, @securityAnswer)";
+                            string userInsert = "INSERT INTO users (userID, accountType, universityID, firstName, lastName, email, phone, securityQuestion, securityAnswer) VALUES (@userID, @accountType, @universityID, @firstName, @lastName, @email, @phone, @securityQuestion, @securityAnswer)";
                             using (SqlCommand user = new SqlCommand(userInsert, dbConnection))
                             {
                                 user.Transaction = transaction;
@@ -105,6 +118,7 @@ namespace LinkedU
                                 user.Parameters.AddWithValue("@firstName", txtFirstName.Text);
                                 user.Parameters.AddWithValue("@lastName", txtLastname.Text);
                                 user.Parameters.AddWithValue("@email", txtEmail.Text);
+                                user.Parameters.AddWithValue("@phone", txtPhone.Text);
                                 user.Parameters.AddWithValue("@securityQuestion", txtQuestion.Text);
                                 user.Parameters.AddWithValue("@securityAnswer", txtAnswer.Text);
                                 user.ExecuteNonQuery();
