@@ -116,11 +116,16 @@
                                             </div>
                                             <asp:DropDownList ID="ddlCarrier" runat="server" class="control-form" Visible="false" />
                                             <asp:TextBox ID="txtPhone" runat="server" placeholder="Phone" class="control-form" Visible="false" />
-                                            <asp:Label ID="lblQuestion" runat="server" Visible="false" Style="text-align: left" /><br />
+                                            <asp:Label ID="lblQuestion" runat="server" Visible="false" Style="text-align: left; position: absolute; display: block;" /><br />
                                             <asp:TextBox ID="txtAnswer" runat="server" placeholder="Answer" class="control-form" Visible="false" />
                                             <asp:TextBox ID="txtNewPassword" runat="server" placeholder="New Password" class="control-form" Visible="false" />
                                             <asp:TextBox ID="txtNewPasswordConfirm" runat="server" placeholder="New Password Confirm" class="control-form" Visible="false" />
                                             <asp:Button ID="btnSubmit" runat="server" Text="Reset Password" OnClick="btnSubmit_Click" />
+                                            <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="pnlReset">
+                                                <ProgressTemplate>
+                                                    <asp:Image ID="UpdateInProgress" AlternateText="loading..." ImageUrl="~/img/ajax-loader.gif" runat="server" />
+                                                </ProgressTemplate>
+                                            </asp:UpdateProgress>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </form>

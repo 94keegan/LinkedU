@@ -69,23 +69,23 @@
                             %>
                             <b class="caret"></b></a>
 
-                            <%
-                                if (Session["UserName"] != null)
-                                {
-                                    if (Session["AccountType"].ToString() == "Student")
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
-                                    else if (Session["AccountType"].ToString() == "University")
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Edit Profile</a></li>");
-                                    else if (Session["AccountType"].ToString() == "Admin")
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Admin.aspx\">Administration</a></li>");
+                        <%
+                            if (Session["UserName"] != null)
+                            {
+                                if (Session["AccountType"].ToString() == "Student")
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
+                                else if (Session["AccountType"].ToString() == "University")
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Edit Profile</a></li>");
+                                else if (Session["AccountType"].ToString() == "Admin")
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Admin.aspx\">Administration</a></li>");
 
-                                    Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
-                                }
-                                else
-                                {
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
-                                }
-                            %>
+                                Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
+                            }
+                            else
+                            {
+                                Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
+                            }
+                        %>
                     </li>
                     <gn:GlobalNotifications ID="GlobalNotificationControl" runat="server" />
                 </ul>
@@ -100,28 +100,39 @@
             </div>
             <div class="row contact">
                 <p>What you think is important to us, and we've got you covered 110%. Our team will review your message and reply back as soon as possible.</p>
-                <asp:Label ID="lblAlert" runat="server" Visible="false" /><br />
                 <form id="form1" runat="server">
-                    <div class="row form">
-                        <div class="col-sm-6 row-col">
-                            <div class="box">
-                                <asp:TextBox ID="txtName" runat="server" class="name form-control" placeholder="Name" required="required" />
-                                <asp:TextBox ID="txtEmail" runat="server" class="mail form-control" placeholder="Email" required="required" />
-                            </div>
-                        </div>
-                        <div class="col-sm-6 row-col">
-                            <div class="box">
-                                <asp:TextBox ID="txtMessage" TextMode="multiline" Style="resize: none;" Columns="50" Rows="5" runat="server" class="form-control" required="required" placeholder="Type a message here..." />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row submit">
-                        <div class="col-md-3 right">
+                    <asp:ScriptManager ID="ScriptManager1" runat="server" />
+                    <asp:UpdatePanel ID="pnlContact" runat="server">
+                        <ContentTemplate>
+                            <asp:Label ID="lblAlert" runat="server" Visible="false" /><br />
                             <br />
-                            <asp:Button ID="btnSubmit" runat="server" Text="Send your message" OnClick="btnSubmit_Click" />
-                        </div>
-                    </div>
+                            <div class="row form">
+                                <div class="col-sm-6 row-col">
+                                    <div class="box">
+                                        <asp:TextBox ID="txtName" runat="server" class="name form-control" placeholder="Name" required="required" />
+                                        <asp:TextBox ID="txtEmail" runat="server" class="mail form-control" placeholder="Email" required="required" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 row-col">
+                                    <div class="box">
+                                        <asp:TextBox ID="txtMessage" TextMode="multiline" Style="resize: none;" Columns="50" Rows="5" runat="server" class="form-control" required="required" placeholder="Type a message here..." />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row submit">
+                                <div class="col-md-3 right">
+                                    <br />
+                                    <asp:Button ID="btnSubmit" runat="server" Text="Send your message" OnClick="btnSubmit_Click" />
+                                    <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="pnlContact">
+                                        <ProgressTemplate>
+                                            <asp:Image ID="UpdateInProgress" AlternateText="loading..." ImageUrl="~/img/ajax-loader.gif" runat="server" />
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </form>
             </div>
         </div>

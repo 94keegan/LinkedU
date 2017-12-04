@@ -14,7 +14,12 @@ namespace LinkedU
         {
             if (!IsPostBack)
             {
-                lblAlert.Attributes["class"] = "";
+                if (!string.IsNullOrWhiteSpace(Request.QueryString["error"]))
+                {
+                    lblAlert.Visible = true;
+                    lblAlert.Text = Request.QueryString["error"];
+                    lblAlert.Attributes["class"] = "alert alert-danger";
+                }
                 // Display email to reset password if nothing in GET
                 if (string.IsNullOrWhiteSpace(Request.QueryString["email"]) && string.IsNullOrWhiteSpace(Request.QueryString["genString"]))
                 {
@@ -73,9 +78,7 @@ namespace LinkedU
                             }
                             else
                             {
-                                lblAlert.Visible = true;
-                                lblAlert.Text = "Error in URL!";
-                                lblAlert.Attributes["class"] = "alert alert-danger";
+                                Response.Redirect("/Reset.aspx?error=Error in URL!");
                             }
                         }
                         catch
