@@ -30,25 +30,10 @@ namespace LinkedU
             }
             set
             {
-                if (value.Type > 0)
-                {
-                    ectype.SelectedValue = value.Type.ToString();
-                }
+                ectype.SelectedValue = value.Type.ToString();
                 ecname.Text = value.Name;
             }
         }
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (int.Parse(ectype.SelectedValue) == 0)
-            {
-                ecname.Text = "";
-                ecname.Visible = false;
-            }
-            else
-            {
-                ecname.Visible = true;
-            }
-        }
     }
 }

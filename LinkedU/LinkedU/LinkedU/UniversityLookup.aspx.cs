@@ -48,6 +48,25 @@ namespace LinkedU
 
                     using (SqlCommand comm = conn.CreateCommand())
                     {
+
+                        comm.Parameters.Add("@uid", SqlDbType.Float).Value = Request.QueryString["uid"];
+
+                        comm.CommandText = "SELECT [file] FROM university_files " +
+                            "INNER JOIN university_file_types ON university_files.file_type = university_file_types.id AND university_file_types.name = 'Logo'" +
+                            "INNER JOIN users ON users.userID = university_files.userID " +
+                            "INNER JOIN universities ON universities.UNITID = users.universityID " +
+                            "WHERE UNITID = @uid";
+
+                        using (SqlDataReader reader = comm.ExecuteReader())
+                        {
+                            if (reader.HasRows && reader.Read())
+                            {
+                                byte[] bytes = (byte[])reader.GetValue(0);
+                                string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                                UniversityLogo.ImageUrl = "data:image/png;base64," + base64String;
+                            }
+                        }
+
                         comm.CommandText = "SELECT INSTNM as [Name], ADDR as [Address], CITY as [City]," +
                             "STABBR as [State], ZIP as [Zip Code], CHFNM as [Administrator], CHFTITLE as [Title], " +
                             "GENTELE as [Telephone], " +
@@ -78,8 +97,6 @@ namespace LinkedU
                             "WEBADDR as [Web Address], APPLURL [Applications] " +
                             "FROM universities WHERE UNITID = @uid";
 
-                        comm.Parameters.Add("@uid", SqlDbType.Float).Value = Request.QueryString["uid"];
-
                         using (SqlDataReader reader = comm.ExecuteReader())
                         {
                             if (reader.Read())
@@ -87,7 +104,9 @@ namespace LinkedU
 
                                 Dictionary<string, string> properties = new Dictionary<string, string>();
 
-                                for (int i = 0; i < reader.FieldCount; i++)
+                                UniversityName.Text = reader.GetString(0);
+
+                                for (int i = 1; i < reader.FieldCount; i++)
                                 {
 
                                     properties.Add(reader.GetName(i), reader.GetValue(i).ToString());
@@ -129,7 +148,7 @@ namespace LinkedU
                                     }
                                 }
 
-                                string destination = HttpUtility.UrlEncode(String.Format("{0},{1},{2},{3}", properties["Name"], properties["Address"], properties["City"], properties["State"]));
+                                string destination = HttpUtility.UrlEncode(String.Format("{0},{1},{2},{3}", UniversityName.Text, properties["Address"], properties["City"], properties["State"]));
 
                                 if (source == "")
                                 {

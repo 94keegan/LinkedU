@@ -3,16 +3,6 @@
     <tr>
         <td>
             <asp:DropDownList runat="server" ID="ectype">
-                <%-- 
-                    1	Student Government
-                    2	Academic Team/Club
-                    3	Internship
-                    4	Culture Club
-                    5	Volunteer/Community Service
-                    6	Student Newspaper
-                    7	Athletics
-                    8	Arts
-                 --%>
                 <asp:ListItem Text="Student Government" Value="1"></asp:ListItem>
                 <asp:ListItem Text="Academic Team/Club" Value="2"></asp:ListItem>
                 <asp:ListItem Text="Internship" Value="3"></asp:ListItem>
@@ -21,10 +11,14 @@
                 <asp:ListItem Text="Student Newspaper" Value="6"></asp:ListItem>
                 <asp:ListItem Text="Athletics" Value="7"></asp:ListItem>
                 <asp:ListItem Text="Arts" Value="8"></asp:ListItem>
-                <asp:ListItem Text="< Remove >" Value="0"></asp:ListItem>
             </asp:DropDownList>
         </td>
         <td>
             <asp:TextBox ID="ecname" runat="server" Width="15em" />
+        </td>
+        <td>
+            <asp:LinkButton CssClass="btn" CommandName="Delete" CommandArgument='<%# ecname.Text  %>' ID="ButtonDeleteExtraCurricular" runat="server">
+                <span aria-hidden="true" class="glyphicon glyphicon-trash"></span>Delete
+            </asp:LinkButton>
         </td>
     </tr>

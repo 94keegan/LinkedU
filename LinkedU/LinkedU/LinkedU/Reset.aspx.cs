@@ -78,7 +78,7 @@ namespace LinkedU
                                 lblAlert.Attributes["class"] = "alert alert-danger";
                             }
                         }
-                        catch (SqlException ex)
+                        catch
                         {
                             lblAlert.Visible = true;
                             lblAlert.Text = "Error Resetting Password!";

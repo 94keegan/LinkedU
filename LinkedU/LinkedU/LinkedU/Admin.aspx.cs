@@ -38,7 +38,7 @@ namespace LinkedU
             {
 
                 dbConnection.Open();
-                String invalidUni = "Error, Please enter the ID of a valid University";
+                // String invalidUni = "Error, Please enter the ID of a valid University";
                 string adminquery = "SELECT UserLogin from admins WHERE UserLogin = @UserLogin";
                 SqlCommand command = new SqlCommand(adminquery, dbConnection);
                 SqlDataAdapter da = new SqlDataAdapter(adminquery, dbConnection);
@@ -114,8 +114,8 @@ namespace LinkedU
                 dataReader = command.ExecuteReader();
                 if (dt.Rows.Count == 0)
                 {
-                    return invalidUni;
                     lblResult.Text = UniversityName;
+                    return invalidUni;
                 }
                 else
                 {

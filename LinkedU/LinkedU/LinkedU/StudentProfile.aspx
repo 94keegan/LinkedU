@@ -2,8 +2,8 @@
 
 <%@ Import Namespace="LinkedU" %>
 
-<%@ Register src="WebUserControlExtraCurricular.ascx" tagname="ExtraCurricular" tagprefix="ec" %>
-<%@ Register src="WebUserControlUploadedMedia.ascx" tagname="UploadMedia" tagprefix="um" %>
+<%@ Register Src="WebUserControlExtraCurricular.ascx" TagName="ExtraCurricular" TagPrefix="ec" %>
+<%@ Register Src="WebUserControlUploadedMedia.ascx" TagName="UploadMedia" TagPrefix="um" %>
 
 
 <!DOCTYPE html>
@@ -42,7 +42,7 @@
                 </button>
                 <a href="Default.aspx" class="navbar-brand"><strong>LinkedU</strong></a>
             </div>
-                        <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
+            <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
                 <ul class="nav navbar-nav navbar-right">
                     <li class=""><a href="Default.aspx">HOME</a></li>
                     <!--Add more menus here above the Contact Us-->
@@ -69,25 +69,25 @@
                                 {
                                     Response.Write("Guest");
                                 }
-                               %>
-                            <b class="caret"></b></a>
-                            <%
-                                if (Session["UserName"] != null)
-                                {
-                                    if (Session["AccountType"].ToString() == "Student")
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
-                                    else if (Session["AccountType"].ToString() == "University")
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Edit Profile</a></li>");
-                                    else if (Session["AccountType"].ToString() == "Admin")
-                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Admin.aspx\">Administration</a></li>");
-
-                                    Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
-                                }
-                                else
-                                {
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
-                                }
                             %>
+                            <b class="caret"></b></a>
+                        <%
+                            if (Session["UserName"] != null)
+                            {
+                                if (Session["AccountType"].ToString() == "Student")
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
+                                else if (Session["AccountType"].ToString() == "University")
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Edit Profile</a></li>");
+                                else if (Session["AccountType"].ToString() == "Admin")
+                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Admin.aspx\">Administration</a></li>");
+
+                                Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
+                            }
+                            else
+                            {
+                                Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
+                            }
+                        %>
                     </li>
                     <li>
                         <a href="#" class="btn btn-sm">
@@ -108,15 +108,13 @@
             <CancelButtonStyle CssClass="btn btn-sm" />
             <FinishCompleteButtonStyle CssClass="btn btn-sm" />
             <FinishPreviousButtonStyle CssClass="btn btn-sm" />
-
-<NavigationStyle HorizontalAlign="Left"></NavigationStyle>
-
+            <NavigationStyle HorizontalAlign="Left"></NavigationStyle>
             <StartNextButtonStyle CssClass="btn btn-sm" />
             <StepNextButtonStyle CssClass="btn btn-sm" />
             <StepPreviousButtonStyle CssClass="btn btn-sm" />
             <SideBarStyle VerticalAlign="Top" Wrap="True" HorizontalAlign="Left"></SideBarStyle>
 
-<StepStyle Wrap="True" Font-Bold="False"></StepStyle>
+            <StepStyle Wrap="True" Font-Bold="False"></StepStyle>
             <WizardSteps>
                 <asp:WizardStep ID="WizardStepBasicInformation" runat="server" Title="Demographics">
                     <asp:ValidationSummary ID="ValidationSummaryDemographics" runat="server" ValidationGroup="Demographics" HeaderText="Correct the following before continuing:" />
@@ -198,7 +196,7 @@
                         <asp:TextBox ID="TextBoxGraduationYear" runat="server" Width="5em" TextMode="Number"></asp:TextBox>
                         <asp:RangeValidator ID="RangeValidatorGraduationYear" runat="server" ErrorMessage="Graduation Year specified is not valid" MinimumValue="1900" MaximumValue="2020" Type="Integer" ValidationGroup="Education" Display="None" ControlToValidate="TextBoxGraduationYear"></asp:RangeValidator>
                     </asp:Panel>
-                    </asp:WizardStep>
+                </asp:WizardStep>
                 <asp:WizardStep ID="WizardStepTestScores" runat="server" Title="Test Scores">
                     <asp:ValidationSummary ID="ValidationSummaryTestSCores" runat="server" ValidationGroup="TestScores" HeaderText="Correct the following before continuing:" />
                     <h5>Undergraduate</h5>
@@ -256,8 +254,9 @@
                         <tr>
                             <th>Category</th>
                             <th>Name</th>
+                            <th>Action</th>
                         </tr>
-                        <asp:Repeater runat="server" ID="ExtraCurriculars">
+                        <asp:Repeater runat="server" ID="ExtraCurriculars" OnItemCommand="ExtraCurriculars_ItemCommand">
                             <ItemTemplate>
                                 <ec:ExtraCurricular ID="extraCurricular" runat="server" Data="<%# Container.DataItem %>"></ec:ExtraCurricular>
                             </ItemTemplate>
@@ -274,7 +273,7 @@
                         <asp:ListItem Text="Certification"></asp:ListItem>
                         <asp:ListItem Text="Award"></asp:ListItem>
                     </asp:DropDownList>
-                    <asp:FileUpload ID="FileUploadMedia" runat="server" style="display:inline-block" accept="image/png" />
+                    <asp:FileUpload ID="FileUploadMedia" runat="server" Style="display: inline-block" accept="image/png" />
                     <asp:LinkButton ID="LinkButtonUploadMedia" runat="server" OnClick="LinkButtonUploadMedia_Click" CssClass="btn btn-primary">
                         <span aria-hidden="true" class="glyphicon glyphicon-upload"></span>Upload
                     </asp:LinkButton>
@@ -299,7 +298,7 @@
                         <div class="col-sm-12 row-col">
                             <div class="box">
                                 <h5>What makes you unique?</h5>
-                                <asp:TextBox id="TextBoxPersonalStatement" TextMode="multiline" style="resize:none;width:100%" Columns="100" Rows="5" runat="server" class="form-control" required="required" placeholder="Type a personal statement here..." />
+                                <asp:TextBox ID="TextBoxPersonalStatement" TextMode="multiline" Style="resize: none; width: 100%" Columns="100" Rows="5" runat="server" class="form-control" required="required" placeholder="Type a personal statement here..." />
                             </div>
                         </div>
                     </div>
@@ -442,8 +441,7 @@
 
     <script type="text/javascript">
         $("#Wizard1_DropDownListMediaType").on("change", function () {
-            switch ($(this).val())
-            {
+            switch ($(this).val()) {
                 case "Profile Picture":
                     $("#Wizard1_FileUploadMedia").prop("accept", "image/png");
                     break;

@@ -80,7 +80,9 @@
     <Content Include="css\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="img\ajax-loader.gif" />
     <Content Include="favicon.ico" />
+    <Content Include="img\Logo_Placeholder.png" />
     <Content Include="ScheduleAppointment.aspx" />
+    <Content Include="WebUserControlHighlightedPrograms.ascx" />
     <Content Include="WebUserControlUploadedMedia.ascx" />
     <None Include="Connected Services\SMS\configuration91.svcinfo" />
     <None Include="Connected Services\SMS\configuration.svcinfo" />
@@ -480,6 +482,12 @@
     </Compile>
     <Compile Include="WebUserControlExtraCurricular.ascx.designer.cs">
       <DependentUpon>WebUserControlExtraCurricular.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUserControlHighlightedPrograms.ascx.cs">
+      <DependentUpon>WebUserControlHighlightedPrograms.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUserControlHighlightedPrograms.ascx.designer.cs">
+      <DependentUpon>WebUserControlHighlightedPrograms.ascx</DependentUpon>
     </Compile>
     <Compile Include="WebUserControlUploadedMedia.ascx.cs">
       <DependentUpon>WebUserControlUploadedMedia.ascx</DependentUpon>

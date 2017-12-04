@@ -89,7 +89,7 @@ namespace LinkedU
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.Send(msg);
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -119,7 +119,7 @@ namespace LinkedU
                 client2.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client2.Send(msg2);
             }
-            catch (Exception ex)
+            catch
             {
 
             }

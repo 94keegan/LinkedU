@@ -10,33 +10,42 @@
 namespace LinkedU {
     
     
-    public partial class ExtraCurricular {
+    public partial class HighlightedProgram {
         
         /// <summary>
-        /// ectype control.
+        /// ProgramType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ectype;
+        protected global::System.Web.UI.WebControls.DropDownList ProgramType;
         
         /// <summary>
-        /// ecname control.
+        /// ProgramName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ecname;
+        protected global::System.Web.UI.WebControls.TextBox ProgramName;
         
         /// <summary>
-        /// ButtonDeleteExtraCurricular control.
+        /// ProgramURL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ButtonDeleteExtraCurricular;
+        protected global::System.Web.UI.WebControls.TextBox ProgramURL;
+        
+        /// <summary>
+        /// ButtonDeleteProgram control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton ButtonDeleteProgram;
     }
 }

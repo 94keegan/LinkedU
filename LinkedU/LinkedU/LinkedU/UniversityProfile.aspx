@@ -1,5 +1,10 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UniversityProfile.aspx.cs" Inherits="LinkedU.UniversityProfile" %>
 
+<%@ Import Namespace="LinkedU" %>
+
+<%@ Register src="~/WebUserControlUploadedMedia.ascx" tagname="UploadMedia" tagprefix="um" %>
+<%@ Register Src="~/WebUserControlHighlightedPrograms.ascx" TagName="HighlightedProgram" TagPrefix="hp" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -95,8 +100,87 @@
             </div>
         </div>
     </div>
+
     <form id="form1" runat="server">
         <h2>Edit Profile</h2>
+        <asp:Wizard ID="Wizard1" runat="server" StepStyle-Wrap="False" StepStyle-VerticalAlign="Top" SideBarStyle-VerticalAlign="Top" CancelDestinationPageUrl="~/Default.aspx" CellPadding="5" CellSpacing="5" DisplayCancelButton="True" ActiveStepIndex="0" ValidateRequestMode="Enabled" OnNextButtonClick="Wizard1_NextButtonClick" OnFinishButtonClick="Wizard1_FinishButtonClick" NavigationStyle-HorizontalAlign="Left">
+            <CancelButtonStyle CssClass="btn btn-sm" />
+            <FinishCompleteButtonStyle CssClass="btn btn-sm" />
+            <FinishPreviousButtonStyle CssClass="btn btn-sm" />
+            <NavigationStyle HorizontalAlign="Left"></NavigationStyle>
+            <StartNextButtonStyle CssClass="btn btn-sm" />
+            <StepNextButtonStyle CssClass="btn btn-sm" />
+            <StepPreviousButtonStyle CssClass="btn btn-sm" />
+            <SideBarStyle VerticalAlign="Top" Wrap="True" HorizontalAlign="Left"></SideBarStyle>
+            <StepStyle Wrap="True" Font-Bold="False"></StepStyle>
+            <WizardSteps>
+                <asp:WizardStep ID="WizardStepHighlightedPrograms" runat="server" Title="Highlighted Programs">
+                    <asp:Button ID="ButtonAddProgram" runat="server" CssClass="btn" OnClick="ButtonAddProgram_Click" Text="Add Program" />
+                    <table id="TableHighlightedPrograms" class="table">
+                        <tr>
+                            <th>Category</th>
+                            <th>Name</th>
+                            <th>URL</th>
+                            <th>Action</th>
+                        </tr>
+                        <asp:Repeater runat="server" ID="RepeaterHighlightedPrograms" OnItemCommand="RepeaterHighlightedPrograms_ItemCommand">
+                            <ItemTemplate>
+                                <hp:HighlightedProgram ID="highlightedProgram" runat="server" Data="<%# Container.DataItem %>" />
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </table>
+                </asp:WizardStep>
+                <asp:WizardStep ID="WizardStepUploadFiles" runat="server" Title="Upload Media">
+                    <asp:DropDownList ID="DropDownListMediaType" runat="server">
+                        <asp:ListItem Text="Logo"></asp:ListItem>
+                        <asp:ListItem Text="Brochure"></asp:ListItem>
+                        <asp:ListItem Text="Campus Map"></asp:ListItem>
+                        <asp:ListItem Text="Image"></asp:ListItem>
+                        <asp:ListItem Text="Video"></asp:ListItem>
+                        <asp:ListItem Text="Audio"></asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:FileUpload ID="FileUploadMedia" runat="server" Style="display: inline-block" accept="image/png" />
+                    <asp:LinkButton ID="LinkButtonUploadMedia" runat="server" OnClick="LinkButtonUploadMedia_Click" CssClass="btn btn-primary">
+                        <span aria-hidden="true" class="glyphicon glyphicon-upload"></span>Upload
+                    </asp:LinkButton>
+
+                    <table id="TableUploadedMedia" class="table">
+                        <tr>
+                            <th>Type</th>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                        <asp:Repeater runat="server" ID="RepeaterUploadedMedia" OnItemCommand="RepeaterUploadedMedia_ItemCommand">
+                            <ItemTemplate>
+                                <um:UploadMedia ID="uploadedMedia" runat="server" Data="<%# Container.DataItem %>"></um:UploadMedia>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </table>
+
+                </asp:WizardStep>
+                <asp:WizardStep ID="WizardStepNewsletter" runat="server" Title="Stay Current">
+                    <h4>Newletter</h4>
+                    <asp:CheckBox ID="CheckBoxNewsletter" Checked="true" Text="&nbsp;&nbsp;Keep me up-to-date on everything going on at LinkedU with weekly newsletters" runat="server" />
+                </asp:WizardStep>
+                <asp:WizardStep ID="WizardStepSummary" runat="server" Title="Summary">
+                    <asp:Panel runat="server" Visible="false" ID="PanelSummaryPrograms">
+                        <h4>Highlighted Programs</h4>
+                        <asp:Table runat="server" CssClass="table" ID="SummaryPrograms">
+                            <asp:TableHeaderRow>
+                                <asp:TableHeaderCell>Category</asp:TableHeaderCell>
+                                <asp:TableHeaderCell>Name</asp:TableHeaderCell>
+                                <asp:TableHeaderCell>URL</asp:TableHeaderCell>
+                            </asp:TableHeaderRow>
+                        </asp:Table>
+                    </asp:Panel>
+                    <h4>Newsletter</h4>
+                    <asp:Panel runat="server" ID="PanelSummaryNewsletter">
+                        <asp:Label runat="server" Text="Opt-in" />
+                        <asp:Label runat="server" ID="SummaryNewsletter" />
+                    </asp:Panel>
+                </asp:WizardStep>
+            </WizardSteps>
+        </asp:Wizard>
     </form>
 
     <!-- starts footer -->
@@ -138,5 +222,28 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
     <script type="text/javascript" src="js/index-slider.js"></script>
+
+    <script type="text/javascript">
+        $("#Wizard1_DropDownListMediaType").on("change", function () {
+            switch ($(this).val()) {
+                case "Logo":
+                    $("#Wizard1_FileUploadMedia").prop("accept", "image/png");
+                    break;
+                case "Image":
+                    $("#Wizard1_FileUploadMedia").prop("accept", "image/*");
+                    break;
+                case "Video":
+                    $("#Wizard1_FileUploadMedia").prop("accept", "video/*");
+                    break;
+                case "Audio":
+                    $("#Wizard1_FileUploadMedia").prop("accept", "audio/*");
+                    break;
+                default:
+                    $("#Wizard1_FileUploadMedia").prop("accept", "application/pdf, .doc, .docx");
+
+
+            }
+        });
+    </script>
 </body>
 </html>

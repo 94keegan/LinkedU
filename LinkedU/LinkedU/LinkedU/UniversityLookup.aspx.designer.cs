@@ -22,6 +22,24 @@ namespace LinkedU {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// UniversityName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label UniversityName;
+        
+        /// <summary>
+        /// UniversityLogo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image UniversityLogo;
+        
+        /// <summary>
         /// UniversityInformation control.
         /// </summary>
         /// <remarks>

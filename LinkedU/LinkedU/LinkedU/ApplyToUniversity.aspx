@@ -109,7 +109,7 @@
                     <div class="row form">
                         <div class="col-sm-12 row-col">
                             <div class="box">
-                                <h5>Why you're choosing this school:</h5>
+                                <h5>Why you're intersted in this school:</h5>
                                 <asp:TextBox id="TextBoxMessage" TextMode="multiline" style="resize:none;width:100%"  Rows="5" runat="server" class="form-control" required="required" placeholder="Type a personal message here..." />
                             </div>
                         </div>

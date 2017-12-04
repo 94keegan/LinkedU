@@ -43,7 +43,7 @@ namespace LinkedU
                 lblTest.Visible = true;
                 lblTest.Text = "Your request was sent! An email was sent to the university you're interested in!";
             }
-            catch (Exception ex)
+            catch
             {
 
             }

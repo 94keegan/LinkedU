@@ -101,13 +101,21 @@
 
     <form id="form1" runat="server">
         <div class="container-fluid">
-            <h3 class="h3">University Details</h3>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-1">
                     </div>
+                    <div class='col-lg-push-10'>
+                        <asp:Panel runat="server">
+                            <asp:Label CssClass="h1" ID="UniversityName" runat="server"></asp:Label>
+                        </asp:Panel>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
                     <div class='col-md-4'>
-                        <br />
+                        <asp:Image ID="UniversityLogo" runat="server" ImageUrl="~/img/Logo_Placeholder.png" />
                         <asp:Panel ID="UniversityInformation" runat="server">
                         </asp:Panel>
                     </div>

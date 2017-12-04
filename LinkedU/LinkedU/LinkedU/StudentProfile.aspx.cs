@@ -614,5 +614,48 @@ namespace LinkedU
 
             }
         }
+
+        protected void ExtraCurriculars_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "Delete":
+
+                    try
+                    {
+                        using (SqlConnection conn = new SqlConnection(connectionString))
+                        {
+                            conn.Open();
+
+                            using (SqlCommand comm = conn.CreateCommand())
+                            {
+                                comm.Parameters.AddWithValue("@userID", Session["UserID"]);
+                                comm.Parameters.AddWithValue("@ecname", e.CommandArgument.ToString());
+
+                                comm.CommandText = "DELETE FROM student_extracurriculars WHERE userID = @userID AND ec_name = @ecname";
+                                comm.ExecuteNonQuery();
+
+                                List<ExtraCurricularData> list = new List<ExtraCurricularData>();
+                                foreach (RepeaterItem item in ExtraCurriculars.Items)
+                                {
+
+                                    ExtraCurricular uc = (ExtraCurricular)item.FindControl("extraCurricular");
+                                    if (uc != null && uc.Data.Name.Length > 0 && (uc.Data.Name != e.CommandArgument.ToString()))
+                                        list.Add(uc.Data);
+                                }
+
+                                ExtraCurriculars.DataSource = list;
+                                ExtraCurriculars.DataBind();
+
+                            }
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                    break;
+            }
+        }
     }
 }
