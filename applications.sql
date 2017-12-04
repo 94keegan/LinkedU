@@ -5,7 +5,7 @@ CREATE TABLE applications (
 	personalMessage NTEXT,
 	applied DATETIME,
 	notification_seen DATETIME,
-  constraint fk_app_userid foreign key (userID) REFERENCES student_profiles(userID) ON DELETE CASCADE,
+  constraint fk_app_userid foreign key (userID) REFERENCES users(userID) ON DELETE CASCADE,
   constraint fk_app_universityID foreign key (universityID) REFERENCES universities(UNITID) ON DELETE CASCADE,
   constraint pk_applications primary key (userID, universityID)
 );
