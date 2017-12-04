@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace LinkedU
 {
-    public partial class StudentLookup : System.Web.UI.Page
+    public partial class ViewApplication : System.Web.UI.Page
     {
 
         string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
@@ -23,9 +23,6 @@ namespace LinkedU
             if (Request.QueryString["id"] == null)
                 return;
 
-            if (Session["AccountType"].ToString() == "Student")
-                StudentProfileNotice.Visible = true;
-
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -33,8 +30,33 @@ namespace LinkedU
                 using (SqlCommand comm = conn.CreateCommand())
                 {
 
-                    comm.Parameters.AddWithValue("@userID", Request.QueryString["id"]);
+                    comm.Parameters.AddWithValue("@id", Request.QueryString["id"]);
+                    comm.Parameters.AddWithValue("@universityUserID", Session["UserID"]);
 
+                    comm.CommandText = "SELECT personalMessage, userID FROM applications WHERE id = @id AND universityID = (SELECT universityID FROM users WHERE userID = @universityUserID)";
+                    using (SqlDataReader reader = comm.ExecuteReader())
+                    {
+                        if (!reader.HasRows)
+                        {
+                            Response.Redirect("Default.aspx");
+                        }
+                        else
+                        {
+                            reader.Read();
+                            PanelPersonalMessage.Controls.Add(new Label()
+                            {
+                                Text = reader.GetString(0)
+                            });
+                            comm.Parameters.AddWithValue("@userID", reader.GetInt32(1));
+                        }
+                    }
+
+
+                    comm.CommandText = "UPDATE applications SET notification_seen = GETDATE() WHERE id = @id AND notification_seen IS NULL";
+                    comm.ExecuteNonQuery();
+
+                    GlobalNotificationControl.Refresh();
+          
                     comm.CommandText = "SELECT CONCAT(firstName, ' ', lastName) as fullName FROM users WHERE userID = @userID";
 
                     StudentName.Text = comm.ExecuteScalar().ToString();
@@ -137,14 +159,6 @@ namespace LinkedU
 
                 }
             }
-        }
-
-        protected void Promote_Click(object sender, EventArgs e)
-        {
-            var page = "PromoteToStudent.aspx";
-            var url = String.Format("{0}?id={1}", page, Request.QueryString["id"]);
-
-            Response.Redirect(url);
         }
     }
 }

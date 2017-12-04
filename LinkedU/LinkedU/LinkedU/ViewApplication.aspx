@@ -1,12 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ApplyToUniversity.aspx.cs" Inherits="LinkedU.ApplyToUniversity" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewApplication.aspx.cs" Inherits="LinkedU.ViewApplication" %>
 
 <%@ Register Src="~/WebUserControlNotifications.ascx" TagName="GlobalNotifications" TagPrefix="gn" %>
 
+<%@ Import Namespace="LinkedU" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-	<title>LinkedU || Apply</title>
+	<title>LinkedU || Application Details</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -39,9 +40,10 @@
                 <a href="Default.aspx" class="navbar-brand"><strong>LinkedU</strong></a>
             </div>
 
+
             <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="Default.aspx">HOME</a></li>
+                    <li class=""><a href="Default.aspx">HOME</a></li>
                     <!--Add more menus here above the Contact Us-->
 
                     <li class="dropdown">
@@ -54,7 +56,7 @@
                             %>
                         </ul>
                     </li>
-                    <li class=""><a href="Contact.aspx">CONTACT US</a></li>
+                    <li><a href="Contact.aspx">CONTACT US</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <%
@@ -91,37 +93,61 @@
             </div>
         </div>
     </div>
-
-    <div id="contact" style="margin-top:0;padding-top:70px;">
-        <div class="container">
-            <div class="section_header">
-                <h3>Apply for admission</h3>
-            </div>
-            <div class="row contact">
-                <p>Your application will include the achievements, test scores, transcripts, and media you added to your profile, as well as your personal statement. In addition, you want to let the school know why this school is the right fit for you, and to let them know why they should be interested in you.</p>
-                <asp:Label ID="lblAlert" runat="server" Visible="false" /><br />
-                <form id="form1" runat="server">
-                    <div class="row form">
-                        <div class="col-sm-12 row-col">
-                            <div class="box">
-                                <h5>Why you're intersted in this school:</h5>
-                                <asp:TextBox id="TextBoxMessage" TextMode="multiline" style="resize:none;width:100%"  Rows="5" runat="server" class="form-control" required="required" placeholder="Type a personal message here..." />
-                            </div>
-                        </div>
+    <form id="form1" runat="server">
+        <asp:Panel ID="PanelPersonalMessage" runat="server" CssClass="panel panel-primary panel-body">
+            <h4>Applicant's personal message</h4>
+        </asp:Panel>
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">
                     </div>
-
-                    <div class="row submit">
-                        <div class="col-md-3 right">
-                            <br/>
-                            <asp:Button ID="ButtonSubmit" runat="server" Text="Apply" OnClick="ButtonSubmit_Click" />
-                        </div>
+                    <div class='col-md-4'>
+                        <asp:Panel runat="server" CssClass="jumbotron" style="float:left">
+                            <asp:Panel runat="server" CssClass="col-sm-4">
+                                <asp:Image ID="StudentImage" runat="server" CssClass="profile-picture" ImageUrl="~/img/Portrait_Placeholder.png" />
+                            </asp:Panel>
+                            <asp:Panel runat="server" CssClass="col-sm-8">
+                                <asp:Label CssClass="h3" ID="StudentName" runat="server"></asp:Label><br />
+                                <asp:Label CssClass="h5" ID="StudentGPA" runat="server"></asp:Label><br />
+                                <asp:Label CssClass="h5" ID="StudentHighSchool" runat="server"></asp:Label><br />
+                                <asp:Label CssClass="h5" ID="StudentGraduationYear" runat="server"></asp:Label>
+                            </asp:Panel>
+                        </asp:Panel>
+                        <br />
+                        <asp:Panel ID="StudentInformation" runat="server">
+                            
+                        </asp:Panel>
                     </div>
-                </form>
+                    <div class='col-md-5'>
+                        <asp:Panel ID="StudentTestScores" runat="server">
+                            <h4>Test Scores</h4>
+                            <asp:Table ID="TableTestScores" CssClass="table" runat="server">
+                                <asp:TableHeaderRow>
+                                    <asp:TableHeaderCell>Test</asp:TableHeaderCell>
+                                    <asp:TableHeaderCell>Score</asp:TableHeaderCell>
+                                    <asp:TableHeaderCell>Percentile</asp:TableHeaderCell>
+                                </asp:TableHeaderRow>
+                            </asp:Table>
+                        </asp:Panel>
+                        <asp:Panel ID="StudentExtraCurriculars" runat="server">
+                            <h4>Extra Curriculars</h4>
+                            <asp:Table ID="TableExtraCurriculars" CssClass="table" runat="server">
+                                <asp:TableHeaderRow>
+                                    <asp:TableHeaderCell>Category</asp:TableHeaderCell>
+                                    <asp:TableHeaderCell>Name</asp:TableHeaderCell>
+                                </asp:TableHeaderRow>
+                            </asp:Table>
+                        </asp:Panel>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 
-	<!-- starts footer -->
+    <!-- starts footer -->
     <footer id='footer'>
         <div class='container'>
             <div class='row info'>
@@ -131,7 +157,7 @@
                         <li>Normal, IL</li>
                     </ul>
                 </div>
-                <div class='col-sm-5'>
+                <div class='col-sm-5 touch'>
                     <ul>
                         <li><strong>Contact</strong></li>
                         <li><a href='Contact.aspx'>Click Here to Send Us A Note</a></li>
@@ -162,3 +188,5 @@
     <script type="text/javascript" src="js/index-slider.js"></script>
 </body>
 </html>
+
+

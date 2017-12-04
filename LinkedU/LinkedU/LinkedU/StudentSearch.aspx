@@ -130,8 +130,6 @@
                             <asp:ListItem Text="Any" Value="N"></asp:ListItem>
                             <asp:ListItem Text="Minority" Value="Y"></asp:ListItem>
                         </asp:DropDownList>
-                    </p>
-                    <p>
                         <asp:Label CssClass="search-label" Text="Within " runat="server"></asp:Label>
                         <asp:TextBox ID="TextBoxSearchRadius" TextMode="Number" runat="server" Text="50" Width="5em"></asp:TextBox>
                         <asp:Label CssClass="search-label" Text=" miles" runat="server"></asp:Label>

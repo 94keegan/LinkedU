@@ -18,8 +18,8 @@ namespace LinkedU
             if ((Session["UserID"] == null) || (Session["AccountType"].ToString() != "University"))
                 Response.Redirect("Sign-In.aspx");
 
-            if (Request.QueryString["uid"] == null)
-                return;
+            if (Request.QueryString["id"] == null)
+                Response.Redirect("Default.aspx");
         }
 
         protected void ButtonSubmit_Click(object sender, EventArgs e)
@@ -34,11 +34,12 @@ namespace LinkedU
 
                 using (SqlCommand comm = conn.CreateCommand())
                 {
-                    comm.Parameters.AddWithValue("@userID", Session["UserID"]);
-                    comm.Parameters.AddWithValue("@universityID", Request.QueryString["uid"]);
+                    comm.Parameters.AddWithValue("@userID", Request.QueryString["id"]);
+                    comm.Parameters.AddWithValue("@universityID", Session["UserID"]);
                     comm.Parameters.AddWithValue("@personalMessage", TextBoxMessage.Text);
 
-                    comm.CommandText = "INSERT INTO promotions (userID, universityID, personalMessage, promoted) VALUES (@userID, @universityID, @personalMessage, GETDATE())";
+                    comm.CommandText = "INSERT INTO promotions (userID, universityID, personalMessage, promoted) " +
+                        "SELECT @userID, universityID, @personalMessage, GETDATE() FROM users WHERE userID = @universityID";
                     comm.ExecuteNonQuery();
 
                     TextBoxMessage.ReadOnly = true;

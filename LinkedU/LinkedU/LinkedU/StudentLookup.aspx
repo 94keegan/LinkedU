@@ -124,7 +124,7 @@
                             <asp:LinkButton runat="server" CssClass="btn btn-sm btn-default" PostBackUrl="~/RequestMoreInfo.aspx" Text="More Information">
                                 <span aria-hidden="true" class="glyphicon glyphicon-envelope" style="margin-right:.3em;"></span>Request More Information
                             </asp:LinkButton>
-                            <asp:LinkButton runat="server" CssClass="btn btn-sm btn-default" PostBackUrl="~/PromoteToStudent.aspx" Text="More Information">
+                            <asp:LinkButton runat="server" CssClass="btn btn-sm btn-default" OnClick="Promote_Click" Text="Promote">
                                 <span aria-hidden="true" class="glyphicon glyphicon-send" style="margin-right:.3em;"></span>Promote Your School
                             </asp:LinkButton>
                         </asp:Panel>

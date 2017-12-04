@@ -114,7 +114,7 @@
                     <div class="row submit">
                         <div class="col-md-3 right">
                             <br/>
-                            <asp:Button ID="ButtonSubmit" runat="server" Text="Submit Promotion" OnClick="ButtonSubmit_Click" />
+                            <asp:Button ID="ButtonSubmit" runat="server" Text="Promote" OnClick="ButtonSubmit_Click" />
                         </div>
                     </div>
                 </form>

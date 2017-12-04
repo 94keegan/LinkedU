@@ -14,6 +14,11 @@ namespace LinkedU
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Refresh();
+        }
+
+        public void Refresh()
+        {
             string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
 
             if (Session["UserID"] == null)
@@ -21,6 +26,8 @@ namespace LinkedU
                 GlobalNotifications.Visible = false;
                 return;
             }
+
+            GlobalNotificationItems.Controls.Clear();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -59,27 +66,36 @@ namespace LinkedU
                             int newNotifications = 0;
                             int totalNotifications = 0;
 
-                            
+
                             while (reader.Read())
                             {
+                                string icon = "unchecked";
+                                if (reader.IsDBNull(1))
+                                    newNotifications++;
+                                else
+                                    icon = "check";
+
                                 HtmlGenericControl li = new HtmlGenericControl("li");
-                                li.InnerHtml = String.Format("<a href=\"View{2}.asmx?id={0}\">{2} received from {1}</a>", reader.GetInt32(0), reader.GetString(2), interest);
+                                li.InnerHtml = String.Format("<a href=\"View{2}.aspx?id={0}\"><span class=\"glyphicon glyphicon-{3}\"></span> {2} received from {1}</a>", reader.GetInt32(0), reader.GetString(2), interest, icon);
                                 GlobalNotificationItems.Controls.Add(li);
                                 totalNotifications++;
 
-                                if (reader.IsDBNull(1))
-                                    newNotifications++;
                             }
 
                             if (newNotifications > 0)
                             {
-                                GlobalNotifications.Attributes["class"] += " active";
+                                GlobalNotifications.Attributes["class"] = "dropdown active";
                                 GlobalNotificationCount.Text = newNotifications.ToString();
+                            }
+                            else if (totalNotifications == 0)
+                            {
+                                GlobalNotifications.Attributes["class"] = "disabled";
+                                GlobalNotificationCount.Text = "";
                             }
                             else
                             {
-                                if (totalNotifications == 0)
-                                    GlobalNotifications.Attributes["class"] = "disabled";
+                                GlobalNotifications.Attributes["class"] = "dropdown";
+                                GlobalNotificationCount.Text = "";
                             }
                         }
                     }

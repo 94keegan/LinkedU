@@ -83,6 +83,8 @@
     <Content Include="img\Logo_Placeholder.png" />
     <Content Include="PromoteToStudent.aspx" />
     <Content Include="ScheduleAppointment.aspx" />
+    <Content Include="ViewApplication.aspx" />
+    <Content Include="ViewPromotion.aspx" />
     <Content Include="WebUserControlHighlightedPrograms.ascx" />
     <Content Include="WebUserControlNotifications.ascx" />
     <Content Include="WebUserControlUploadedMedia.ascx" />
@@ -485,6 +487,20 @@
     </Compile>
     <Compile Include="UniversitySearch.aspx.designer.cs">
       <DependentUpon>UniversitySearch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewApplication.aspx.cs">
+      <DependentUpon>ViewApplication.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewApplication.aspx.designer.cs">
+      <DependentUpon>ViewApplication.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewPromotion.aspx.cs">
+      <DependentUpon>ViewPromotion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewPromotion.aspx.designer.cs">
+      <DependentUpon>ViewPromotion.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebUserControlExtraCurricular.ascx.cs">
       <DependentUpon>WebUserControlExtraCurricular.ascx</DependentUpon>

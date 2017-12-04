@@ -1,12 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ApplyToUniversity.aspx.cs" Inherits="LinkedU.ApplyToUniversity" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewPromotion.aspx.cs" Inherits="LinkedU.ViewPromotion" %>
 
 <%@ Register Src="~/WebUserControlNotifications.ascx" TagName="GlobalNotifications" TagPrefix="gn" %>
 
+<%@ Import Namespace="LinkedU" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-	<title>LinkedU || Apply</title>
+	<title>LinkedU || Promotion Details</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -39,9 +40,10 @@
                 <a href="Default.aspx" class="navbar-brand"><strong>LinkedU</strong></a>
             </div>
 
+
             <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="Default.aspx">HOME</a></li>
+                    <li class=""><a href="Default.aspx">HOME</a></li>
                     <!--Add more menus here above the Contact Us-->
 
                     <li class="dropdown">
@@ -54,7 +56,7 @@
                             %>
                         </ul>
                     </li>
-                    <li class=""><a href="Contact.aspx">CONTACT US</a></li>
+                    <li><a href="Contact.aspx">CONTACT US</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <%
@@ -92,36 +94,41 @@
         </div>
     </div>
 
-    <div id="contact" style="margin-top:0;padding-top:70px;">
-        <div class="container">
-            <div class="section_header">
-                <h3>Apply for admission</h3>
-            </div>
-            <div class="row contact">
-                <p>Your application will include the achievements, test scores, transcripts, and media you added to your profile, as well as your personal statement. In addition, you want to let the school know why this school is the right fit for you, and to let them know why they should be interested in you.</p>
-                <asp:Label ID="lblAlert" runat="server" Visible="false" /><br />
-                <form id="form1" runat="server">
-                    <div class="row form">
-                        <div class="col-sm-12 row-col">
-                            <div class="box">
-                                <h5>Why you're intersted in this school:</h5>
-                                <asp:TextBox id="TextBoxMessage" TextMode="multiline" style="resize:none;width:100%"  Rows="5" runat="server" class="form-control" required="required" placeholder="Type a personal message here..." />
-                            </div>
-                        </div>
+    <form id="form2" runat="server">
+        <asp:Panel ID="PanelPersonalMessage" runat="server" CssClass="panel panel-primary panel-body">
+            <h4>University's personal message</h4>
+        </asp:Panel>
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">
                     </div>
-
-                    <div class="row submit">
-                        <div class="col-md-3 right">
-                            <br/>
-                            <asp:Button ID="ButtonSubmit" runat="server" Text="Apply" OnClick="ButtonSubmit_Click" />
-                        </div>
+                    <div class='col-lg-push-10'>
+                        <asp:Panel runat="server">
+                            <asp:Label CssClass="h1" ID="UniversityName" runat="server"></asp:Label>
+                        </asp:Panel>
                     </div>
-                </form>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                    <div class='col-md-4'>
+                        <asp:Image ID="UniversityLogo" runat="server" ImageUrl="~/img/Logo_Placeholder.png" style="width:100%" />
+                        <asp:Panel ID="UniversityInformation" runat="server">
+                        </asp:Panel>
+                    </div>
+                    <div class='col-md-5'>
+                        <asp:Panel ID="UniversityMap" runat="server" CssClass="iframe-loading">
+                        </asp:Panel>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 
-	<!-- starts footer -->
+    <!-- starts footer -->
     <footer id='footer'>
         <div class='container'>
             <div class='row info'>
@@ -131,7 +138,7 @@
                         <li>Normal, IL</li>
                     </ul>
                 </div>
-                <div class='col-sm-5'>
+                <div class='col-sm-5 touch'>
                     <ul>
                         <li><strong>Contact</strong></li>
                         <li><a href='Contact.aspx'>Click Here to Send Us A Note</a></li>
@@ -162,3 +169,4 @@
     <script type="text/javascript" src="js/index-slider.js"></script>
 </body>
 </html>
+
