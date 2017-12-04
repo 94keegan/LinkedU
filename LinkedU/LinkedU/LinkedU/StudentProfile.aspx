@@ -2,6 +2,7 @@
 
 <%@ Import Namespace="LinkedU" %>
 
+<%@ Register Src="~/WebUserControlNotifications.ascx" TagName="GlobalNotifications" TagPrefix="gn" %>
 <%@ Register Src="WebUserControlExtraCurricular.ascx" TagName="ExtraCurricular" TagPrefix="ec" %>
 <%@ Register Src="WebUserControlUploadedMedia.ascx" TagName="UploadMedia" TagPrefix="um" %>
 
@@ -89,14 +90,7 @@
                             }
                         %>
                     </li>
-                    <li>
-                        <a href="#" class="btn btn-sm">
-                            <span class="glyphicon-bell"></span>
-                            <asp:Label runat="server" ForeColor="Red"></asp:Label>
-                        </a>
-                        <ul class="dropdown-menu notify-drop">
-                        </ul>
-                    </li>
+                    <gn:GlobalNotifications ID="GlobalNotificationControl" runat="server" />
                 </ul>
             </div>
         </div>

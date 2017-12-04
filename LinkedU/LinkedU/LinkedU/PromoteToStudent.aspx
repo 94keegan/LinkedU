@@ -1,13 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UniversitySearch.aspx.cs" Inherits="LinkedU.UniversitySearch" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PromoteToStudent.aspx.cs" Inherits="LinkedU.PromoteToStudent" %>
 
 <%@ Register Src="~/WebUserControlNotifications.ascx" TagName="GlobalNotifications" TagPrefix="gn" %>
 
-<%@ Import Namespace="LinkedU" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-	<title>LinkedU || University Search</title>
+	<title>LinkedU || Promote</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -25,6 +24,7 @@
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+
 </head>
 <body>
 
@@ -40,13 +40,12 @@
                 <a href="Default.aspx" class="navbar-brand"><strong>LinkedU</strong></a>
             </div>
 
-
-                        <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
+            <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class=""><a href="Default.aspx">HOME</a></li>
+                    <li><a href="Default.aspx">HOME</a></li>
                     <!--Add more menus here above the Contact Us-->
 
-                    <li class="dropdown active">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">SEARCH<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="UniversitySearch.aspx">Universities</a></li>
@@ -56,7 +55,7 @@
                             %>
                         </ul>
                     </li>
-                    <li><a href="Contact.aspx">CONTACT US</a></li>
+                    <li class=""><a href="Contact.aspx">CONTACT US</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <%
@@ -94,67 +93,36 @@
         </div>
     </div>
 
-    <form id="form1" runat="server">
+    <div id="contact" style="margin-top:0;padding-top:70px;">
+        <div class="container">
+            <div class="section_header">
+                <h3>Promote your University</h3>
+            </div>
+            <div class="row contact">
+                <p>Let this student know what your University has to offer them.</p>
+                <asp:Label ID="lblAlert" runat="server" Visible="false" /><br />
+                <form id="form1" runat="server">
+                    <div class="row form">
+                        <div class="col-sm-12 row-col">
+                            <div class="box">
+                                <h5>What your school has to offer:</h5>
+                                <asp:TextBox id="TextBoxMessage" TextMode="multiline" style="resize:none;width:100%"  Rows="5" runat="server" class="form-control" required="required" placeholder="Type a personal message here..." />
+                            </div>
+                        </div>
+                    </div>
 
-        <h3>University Search</h3>
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-            <ContentTemplate>
-                <div class="container">
-                    <p>
-                        <asp:Label CssClass="search-label" Text="Name:" runat="server" />
-                        <asp:TextBox ID="SearchName" runat="server" Width="400"></asp:TextBox>
-                    </p>
-                    <p>
-                        <asp:Label CssClass="search-label" Text="Degree offering:" runat="server" />
-                        <asp:DropDownList ID="SearchHighestLevel" runat="server" Width="400">
-                            <asp:ListItem Value="-1">All</asp:ListItem>
-                            <asp:ListItem Value="1">Award of less than one academic year</asp:ListItem>
-                            <asp:ListItem Value="2">At least 1, but less than 2 academic yrs</asp:ListItem>
-                            <asp:ListItem Value="3">Associate's degree</asp:ListItem>
-                            <asp:ListItem Value="4">At least 2, but less than 4 academic yrs</asp:ListItem>
-                            <asp:ListItem Value="5">Bachelor's degree</asp:ListItem>
-                            <asp:ListItem Value="6">Postbaccalaureate certificate</asp:ListItem>
-                            <asp:ListItem Value="7">Master's degree</asp:ListItem>
-                            <asp:ListItem Value="8">Post-master's certificate</asp:ListItem>
-                            <asp:ListItem Value="9">Doctor's degree</asp:ListItem>
-                        </asp:DropDownList>
-                    </p>
-                    <p>
-                        <asp:Label CssClass="search-label" Text="Within " runat="server"></asp:Label>
-                        <asp:TextBox ID="TextBoxSearchRadius" TextMode="Number" runat="server" Text="50" Width="5em"></asp:TextBox>
-                        <asp:Label CssClass="search-label" Text=" miles of " runat="server"></asp:Label>
-                        <asp:DropDownList ID="DropDownRadiusCenter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownRadiusCenter_SelectedIndexChanged">
-                            <asp:ListItem Text="My Home" Value="me" Enabled="false"></asp:ListItem>
-                            <asp:ListItem Text="Address" Value="addr"></asp:ListItem>
-                        </asp:DropDownList>
-                        <asp:TextBox ID="TextBoxSearchCenter" runat="server" Width="20em"></asp:TextBox>
-                    </p>
-                    <asp:Button Text="Search" OnClick="SearchValue_TextChanged" runat="server" CssClass="btn-sm" />
-                    <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="UpdatePanel1">
-                        <ProgressTemplate>
-                            <asp:Image ID="UpdateInProgress" AlternateText="loading..." ImageUrl="~/img/ajax-loader.gif" runat="server" />
-                        </ProgressTemplate>
-                    </asp:UpdateProgress>
-                </div>
-                <div class="container-fluid">
-                    <asp:Table ID="ResultTable" Caption="Results" runat="server" CssClass="table" Visible="false">
-                        <asp:TableHeaderRow>
-                            <asp:TableHeaderCell>School Name</asp:TableHeaderCell>
-                            <asp:TableHeaderCell>Address</asp:TableHeaderCell>
-                            <asp:TableHeaderCell>City</asp:TableHeaderCell>
-                            <asp:TableHeaderCell>State</asp:TableHeaderCell>
-                            <asp:TableHeaderCell>Zip Code</asp:TableHeaderCell>
-                            <asp:TableHeaderCell>Distance</asp:TableHeaderCell>
-                        </asp:TableHeaderRow>
-                    </asp:Table>
-                </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+                    <div class="row submit">
+                        <div class="col-md-3 right">
+                            <br/>
+                            <asp:Button ID="ButtonSubmit" runat="server" Text="Submit Promotion" OnClick="ButtonSubmit_Click" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-    </form>
-
-    <!-- starts footer -->
+	<!-- starts footer -->
     <footer id='footer'>
         <div class='container'>
             <div class='row info'>
@@ -164,7 +132,7 @@
                         <li>Normal, IL</li>
                     </ul>
                 </div>
-                <div class='col-sm-5 touch'>
+                <div class='col-sm-5'>
                     <ul>
                         <li><strong>Contact</strong></li>
                         <li><a href='Contact.aspx'>Click Here to Send Us A Note</a></li>
@@ -195,4 +163,3 @@
     <script type="text/javascript" src="js/index-slider.js"></script>
 </body>
 </html>
-

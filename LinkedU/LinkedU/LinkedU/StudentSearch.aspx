@@ -1,6 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StudentSearch.aspx.cs" Inherits="LinkedU.StudentSearch" %>
 
 <%@ Import Namespace="LinkedU" %>
+
+<%@ Register Src="~/WebUserControlNotifications.ascx" TagName="GlobalNotifications" TagPrefix="gn" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -86,14 +88,7 @@
                                 }
                             %>
                     </li>
-                    <li>
-                        <a href="#" class="btn btn-sm">
-                            <span class="glyphicon-bell"></span>
-                            <asp:Label runat="server" ForeColor="Red"></asp:Label>
-                        </a>
-                        <ul class="dropdown-menu notify-drop">
-                        </ul>
-                    </li>
+                    <gn:GlobalNotifications ID="GlobalNotificationControl" runat="server" />
                 </ul>
             </div>
         </div>

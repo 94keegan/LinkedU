@@ -10,7 +10,7 @@
 namespace LinkedU {
     
     
-    public partial class Sign_In {
+    public partial class PromoteToStudent {
         
         /// <summary>
         /// GlobalNotificationControl control.
@@ -22,57 +22,39 @@ namespace LinkedU {
         protected global::LinkedU.WebUserControlNotifications GlobalNotificationControl;
         
         /// <summary>
-        /// form control.
+        /// lblAlert control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form;
+        protected global::System.Web.UI.WebControls.Label lblAlert;
         
         /// <summary>
-        /// txtUserName control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUserName;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// txtPassword control.
+        /// TextBoxMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxMessage;
         
         /// <summary>
-        /// chkRememberMe control.
+        /// ButtonSubmit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkRememberMe;
-        
-        /// <summary>
-        /// btnSignIn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSignIn;
-        
-        /// <summary>
-        /// SignInReferrer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField SignInReferrer;
+        protected global::System.Web.UI.WebControls.Button ButtonSubmit;
     }
 }

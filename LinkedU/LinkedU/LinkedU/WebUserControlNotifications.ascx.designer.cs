@@ -10,51 +10,33 @@
 namespace LinkedU {
     
     
-    public partial class ApplyToUniversity {
+    public partial class WebUserControlNotifications {
         
         /// <summary>
-        /// GlobalNotificationControl control.
+        /// GlobalNotifications control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::LinkedU.WebUserControlNotifications GlobalNotificationControl;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl GlobalNotifications;
         
         /// <summary>
-        /// lblAlert control.
+        /// GlobalNotificationCount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAlert;
+        protected global::System.Web.UI.WebControls.Label GlobalNotificationCount;
         
         /// <summary>
-        /// form1 control.
+        /// GlobalNotificationItems control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
-        /// TextBoxMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxMessage;
-        
-        /// <summary>
-        /// ButtonSubmit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonSubmit;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl GlobalNotificationItems;
     }
 }

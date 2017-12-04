@@ -13,6 +13,15 @@ namespace LinkedU {
     public partial class Contact {
         
         /// <summary>
+        /// GlobalNotificationControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::LinkedU.WebUserControlNotifications GlobalNotificationControl;
+        
+        /// <summary>
         /// lblAlert control.
         /// </summary>
         /// <remarks>

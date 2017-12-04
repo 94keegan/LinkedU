@@ -81,8 +81,10 @@
     <Content Include="img\ajax-loader.gif" />
     <Content Include="favicon.ico" />
     <Content Include="img\Logo_Placeholder.png" />
+    <Content Include="PromoteToStudent.aspx" />
     <Content Include="ScheduleAppointment.aspx" />
     <Content Include="WebUserControlHighlightedPrograms.ascx" />
+    <Content Include="WebUserControlNotifications.ascx" />
     <Content Include="WebUserControlUploadedMedia.ascx" />
     <None Include="Connected Services\SMS\configuration91.svcinfo" />
     <None Include="Connected Services\SMS\configuration.svcinfo" />
@@ -371,6 +373,13 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PromoteToStudent.aspx.cs">
+      <DependentUpon>PromoteToStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PromoteToStudent.aspx.designer.cs">
+      <DependentUpon>PromoteToStudent.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ScheduleAppointment.aspx.cs">
       <DependentUpon>ScheduleAppointment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -488,6 +497,13 @@
     </Compile>
     <Compile Include="WebUserControlHighlightedPrograms.ascx.designer.cs">
       <DependentUpon>WebUserControlHighlightedPrograms.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUserControlNotifications.ascx.cs">
+      <DependentUpon>WebUserControlNotifications.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUserControlNotifications.ascx.designer.cs">
+      <DependentUpon>WebUserControlNotifications.ascx</DependentUpon>
     </Compile>
     <Compile Include="WebUserControlUploadedMedia.ascx.cs">
       <DependentUpon>WebUserControlUploadedMedia.ascx</DependentUpon>
