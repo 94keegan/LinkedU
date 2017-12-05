@@ -26,6 +26,15 @@ span.search-label + input, span.search-label + text, span.search-label + select 
     margin-right: .75em;
 }
 
+span.search-label-suffix {
+    margin-left: -.6em;
+    margin-right: .75em;
+}
+
+span.search-label-between {
+    margin-left: -.6em;
+}
+
 #Wizard1 td:first-child table td a {
     padding-left: .3em
 }

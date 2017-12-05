@@ -123,7 +123,7 @@
                     <p>
                         <asp:Label CssClass="search-label" Text="Within " runat="server"></asp:Label>
                         <asp:TextBox ID="TextBoxSearchRadius" TextMode="Number" runat="server" Text="50" Width="5em"></asp:TextBox>
-                        <asp:Label CssClass="search-label" Text=" miles of " runat="server"></asp:Label>
+                        <asp:Label CssClass="search-label search-label-between" Text=" miles of " runat="server"></asp:Label>
                         <asp:DropDownList ID="DropDownRadiusCenter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownRadiusCenter_SelectedIndexChanged">
                             <asp:ListItem Text="My Home" Value="me" Enabled="false"></asp:ListItem>
                             <asp:ListItem Text="Address" Value="addr"></asp:ListItem>
@@ -146,6 +146,7 @@
                             <asp:TableHeaderCell>State</asp:TableHeaderCell>
                             <asp:TableHeaderCell>Zip Code</asp:TableHeaderCell>
                             <asp:TableHeaderCell>Distance</asp:TableHeaderCell>
+                            <asp:TableHeaderCell>Application Status</asp:TableHeaderCell>
                         </asp:TableHeaderRow>
                     </asp:Table>
                 </div>

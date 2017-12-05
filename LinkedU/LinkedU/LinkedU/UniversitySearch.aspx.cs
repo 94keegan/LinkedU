@@ -72,6 +72,9 @@ namespace LinkedU
 
                 using (SqlCommand comm = conn.CreateCommand())
                 {
+                    comm.Parameters.Add("@userID", SqlDbType.Int).Value = DBNull.Value;
+                    if (Session["UserID"] != null)
+                        comm.Parameters["@userID"].Value = Session["UserID"];
 
                     comm.CommandText = "SELECT UNITID, INSTNM, ADDR, CITY, STABBR, ZIP, " +
                       "   CASE WHEN @lat IS NOT NULL AND @lng IS NOT NULL THEN ( 3959 * " +
@@ -84,8 +87,12 @@ namespace LinkedU
                       "        sin(radians(@lat)) * " +
                       "        sin(radians(LATITUDE)) " +
                       "    ) " +
-                      ") ELSE NULL END as distance " +
+                      ") ELSE NULL END as distance," +
+                      "CASE WHEN a.notification_seen IS NOT NULL THEN 'Viewed' " +
+                      "WHEN a.applied IS NOT NULL THEN 'Submitted' " +
+                      "ELSE '' END as applicationStatus " +
                       "FROM universities " +
+                      "LEFT OUTER JOIN applications a ON universities.UNITID = a.universityID AND a.userID = @userID " +
                       "WHERE (INSTNM LIKE @query " +
                       "OR WEBADDR LIKE @query " +
                       "OR ADMINURL LIKE @query " +
@@ -127,7 +134,7 @@ namespace LinkedU
                         {
                             TableRow row = new TableRow();
 
-                            TableCell[] cells = new TableCell[6];
+                            TableCell[] cells = new TableCell[7];
 
                             cells[0] = new TableCell() { Text = string.Format("<a href=\"UniversityLookup.aspx?uid={0}\" target=\"_blank\">{1}</a>", reader.GetInt32(0), reader.GetString(1)) };
                             cells[1] = new TableCell() { Text = reader.GetString(2) };
@@ -138,6 +145,8 @@ namespace LinkedU
                                 cells[5] = new TableCell() { Text = String.Format("{0,2:n} Miles", reader.GetDouble(6)) };
                             else
                                 cells[5] = new TableCell() { Text = "N/A" };
+
+                            cells[6] = new TableCell() { Text = reader.GetString(7) };
 
 
                             row.Cells.AddRange(cells);

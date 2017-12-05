@@ -88,17 +88,17 @@ namespace LinkedU
                             if (newNotifications > 0)
                             {
                                 GlobalNotifications.Attributes["class"] = "dropdown active";
-                                GlobalNotificationCount.Text = newNotifications.ToString();
+                                GlobalNotificationCount.InnerText = newNotifications.ToString();
                             }
                             else if (totalNotifications == 0)
                             {
                                 GlobalNotifications.Attributes["class"] = "disabled";
-                                GlobalNotificationCount.Text = "";
+                                GlobalNotificationCount.InnerText = "";
                             }
                             else
                             {
                                 GlobalNotifications.Attributes["class"] = "dropdown";
-                                GlobalNotificationCount.Text = "";
+                                GlobalNotificationCount.InnerText = "";
                             }
                         }
                     }

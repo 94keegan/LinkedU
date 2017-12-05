@@ -132,7 +132,7 @@
                         </asp:DropDownList>
                         <asp:Label CssClass="search-label" Text="Within " runat="server"></asp:Label>
                         <asp:TextBox ID="TextBoxSearchRadius" TextMode="Number" runat="server" Text="50" Width="5em"></asp:TextBox>
-                        <asp:Label CssClass="search-label" Text=" miles" runat="server"></asp:Label>
+                        <asp:Label CssClass="search-label search-label-suffix" Text=" miles" runat="server"></asp:Label>
                     </p>
                     <asp:Button Text="Search" OnClick="Search_Click" runat="server" CssClass="btn-sm" />
                     <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="UpdatePanel1">
@@ -149,6 +149,7 @@
                             <asp:TableHeaderCell>Graduation Year</asp:TableHeaderCell>
                             <asp:TableHeaderCell>Best Score</asp:TableHeaderCell>
                             <asp:TableHeaderCell>Extra Curriculars</asp:TableHeaderCell>
+                            <asp:TableHeaderCell>Promotion Status</asp:TableHeaderCell>
                         </asp:TableHeaderRow>
                     </asp:Table>
                 </div>

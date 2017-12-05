@@ -58,8 +58,10 @@ namespace LinkedU
                 {
 
                     comm.CommandText = "select users.userID, concat(lastName, ', ', firstName) as name, round(gpa, 2), graduationyear, eccount, " +
-                      "highscore.name as highesttest, highscore.percentile as highestpctl " +
+                      "highscore.name as highesttest, highscore.percentile as highestpctl," +
+                      "CASE WHEN myp.notification_seen IS NOT NULL THEN 'Viewed' WHEN myp.promoted IS NOT NULL THEN 'Sent' ELSE '' END as pstatus " +
                       "FROM users inner join student_profiles ON users.userID = student_profiles.userID " +
+                      "LEFT OUTER JOIN promotions myp ON myp.userID = users.userID AND myp.universityID = (SELECT universityID FROM users WHERE userID = @userID) " +
                       "OUTER APPLY (SELECT COUNT(*) as eccount FROM student_extracurriculars WHERE userID = users.userID) as extracurriculars " +
                       "OUTER APPLY (" +
                       "  SELECT TOP 1 max(pct.test_percentile) percentile, pct.test_type, tests.name " +
@@ -97,6 +99,7 @@ namespace LinkedU
                         comm.Parameters.Add("@pct", SqlDbType.Float).Value = float.Parse(SearchMinimumPercentile.Text);
                     }
 
+                    comm.Parameters.AddWithValue("@userID", Session["UserID"]);
                     comm.Parameters.Add("@gpa", SqlDbType.Float).Value = SearchMinimumGPA.Text.Length > 0? float.Parse(SearchMinimumGPA.Text): 0F;
                     comm.Parameters.Add("@eccount", SqlDbType.Float).Value = SearchMinimumExtraCurriculars.Text.Length > 0 ? float.Parse(SearchMinimumExtraCurriculars.Text) : 0F;
                     comm.Parameters.Add("@ecpref", SqlDbType.Int).Value = SearchExtraCurricular.SelectedValue;
@@ -118,13 +121,14 @@ namespace LinkedU
 
                             TableRow row = new TableRow();
 
-                            TableCell[] cells = new TableCell[5];
+                            TableCell[] cells = new TableCell[6];
 
                             cells[0] = new TableCell() { Text = string.Format("<a href=\"StudentLookup.aspx?id={0}\" target=\"_blank\">{1}</a>", reader.GetInt32(0), reader.GetString(1)) };
                             cells[1] = new TableCell() { Text = reader.GetDouble(2).ToString() };
                             cells[2] = new TableCell() { Text = reader.GetInt32(3).ToString() };
                             cells[3] = new TableCell() { Text = highscore };
                             cells[4] = new TableCell() { Text = reader.GetInt32(4).ToString() };
+                            cells[5] = new TableCell() { Text = reader.GetString(7) };
 
 
                             row.Cells.AddRange(cells);
