@@ -63,10 +63,10 @@ namespace LinkedU
                     comm.CommandText = "INSERT INTO applications (userID, universityID, personalMessage, applied) VALUES (@userID, @universityID, @personalMessage, GETDATE())";
                     comm.ExecuteNonQuery();
 
-                    TextBoxMessage.ReadOnly = true;
-                    ButtonSubmit.Enabled = false;
+                    Response.Redirect(String.Format("UniversityLookup.aspx?uid={0}", Request.QueryString["uid"]));
                 }
             }
         }
+
     }
 }

@@ -17,7 +17,7 @@ namespace LinkedU
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if ((Session["UserID"] == null) || ((Session["AccountType"].ToString() != "University") && (Session["UserID"].ToString() != Request.QueryString["id"])))
+            if (Session["UserID"] == null)
                 Response.Redirect("Default.aspx");
 
             if (Request.QueryString["id"] == null)
@@ -31,9 +31,8 @@ namespace LinkedU
                 {
 
                     comm.Parameters.AddWithValue("@id", Request.QueryString["id"]);
-                    comm.Parameters.AddWithValue("@universityUserID", Session["UserID"]);
 
-                    comm.CommandText = "SELECT personalMessage, userID FROM applications WHERE id = @id AND universityID = (SELECT universityID FROM users WHERE userID = @universityUserID)";
+                    comm.CommandText = "SELECT personalMessage, applications.userID as stu, COALESCE(users.userID, 0) as uni, applications.applied, applications.notification_seen FROM applications left outer join users ON users.universityID = applications.universityID WHERE id = @id";
                     using (SqlDataReader reader = comm.ExecuteReader())
                     {
                         if (!reader.HasRows)
@@ -43,17 +42,34 @@ namespace LinkedU
                         else
                         {
                             reader.Read();
+
+                            if ((Session["AccountType"].ToString() == "Student" && reader.GetInt32(1).ToString() != Session["UserID"].ToString()) || (Session["AccountType"].ToString() == "University" && reader.GetInt32(2).ToString() != Session["UserID"].ToString()))
+                                Response.Redirect("Default.aspx");
+
                             PanelPersonalMessage.Controls.Add(new Label()
                             {
                                 Text = reader.GetString(0)
                             });
                             comm.Parameters.AddWithValue("@userID", reader.GetInt32(1));
+
+                            if (Session["AccountType"].ToString() == "Student")
+                            {
+                                LabelInitiatorViewSubmitted.Text = String.Format("Application Sent: {0}", reader.GetDateTime(3).ToString());
+                                if (reader.IsDBNull(4))
+                                    LabelInitiatorViewViewed.Text = "Application Viewed: Never";
+                                else
+                                    LabelInitiatorViewViewed.Text = String.Format("Application Viewed: {0}", reader.GetDateTime(4).ToString());
+
+                                PanelInitiatorView.Visible = true;
+                            }
                         }
                     }
 
-
-                    comm.CommandText = "UPDATE applications SET notification_seen = GETDATE() WHERE id = @id AND notification_seen IS NULL";
-                    comm.ExecuteNonQuery();
+                    if (Session["AccountType"].ToString() == "University")
+                    {
+                        comm.CommandText = "UPDATE applications SET notification_seen = GETDATE() WHERE id = @id AND notification_seen IS NULL";
+                        comm.ExecuteNonQuery();
+                    }
 
                     GlobalNotificationControl.Refresh();
           

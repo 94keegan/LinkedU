@@ -42,10 +42,11 @@ namespace LinkedU
                         "SELECT @userID, universityID, @personalMessage, GETDATE() FROM users WHERE userID = @universityID";
                     comm.ExecuteNonQuery();
 
-                    TextBoxMessage.ReadOnly = true;
-                    ButtonSubmit.Enabled = false;
+                    Response.Redirect(String.Format("StudentLookup.aspx?id={0}", Request.QueryString["id"]));
+
                 }
             }
         }
+
     }
 }

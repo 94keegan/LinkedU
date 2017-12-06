@@ -21,7 +21,7 @@ namespace LinkedU
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if ((Session["UserID"] == null) || (Session["AccountType"].ToString() != "Student"))
+            if (Session["UserID"] == null)
                 Response.Redirect("Default.aspx");
 
             if (Request.QueryString["id"] == null)
@@ -37,9 +37,8 @@ namespace LinkedU
                 {
 
                     comm.Parameters.AddWithValue("@id", Request.QueryString["id"]);
-                    comm.Parameters.AddWithValue("@userID", Session["UserID"]);
 
-                    comm.CommandText = "SELECT personalMessage, universityID FROM promotions WHERE id = @id AND userID = @userID";
+                    comm.CommandText = "SELECT personalMessage, users.userID as uni, promotions.userID as stu, promotions.universityID, promotions.promoted, promotions.notification_seen FROM promotions INNER JOIN users ON users.universityID = promotions.universityID WHERE id = @id";
                     using (SqlDataReader reader = comm.ExecuteReader())
                     {
                         if (!reader.HasRows)
@@ -49,17 +48,34 @@ namespace LinkedU
                         else
                         {
                             reader.Read();
+
+                            if ((Session["AccountType"].ToString() == "University" && reader.GetInt32(1).ToString() != Session["UserID"].ToString()) || (Session["AccountType"].ToString() == "Student" && reader.GetInt32(2).ToString() != Session["UserID"].ToString()))
+                                Response.Redirect("Default.aspx");
+
                             PanelPersonalMessage.Controls.Add(new Label()
                             {
                                 Text = reader.GetString(0)
                             });
-                            universityID = reader.GetInt32(1);
+                            universityID = reader.GetInt32(3);
+
+                            if (Session["AccountType"].ToString() == "University")
+                            {
+                                LabelInitiatorViewSubmitted.Text = String.Format("Promotion Sent: {0}", reader.GetDateTime(4).ToString());
+                                if (reader.IsDBNull(5))
+                                    LabelInitiatorViewViewed.Text = "Promotion Viewed: Never";
+                                else
+                                    LabelInitiatorViewViewed.Text = String.Format("Promotion Viewed: {0}", reader.GetDateTime(5).ToString());
+
+                                PanelInitiatorView.Visible = true;
+                            }
                         }
                     }
 
-
-                    comm.CommandText = "UPDATE promotions SET notification_seen = GETDATE() WHERE id = @id AND notification_seen IS NULL";
-                    comm.ExecuteNonQuery();
+                    if (Session["AccountType"].ToString() == "Student")
+                    {
+                        comm.CommandText = "UPDATE promotions SET notification_seen = GETDATE() WHERE id = @id AND notification_seen IS NULL";
+                        comm.ExecuteNonQuery();
+                    }
 
                     GlobalNotificationControl.Refresh();
 
@@ -67,22 +83,17 @@ namespace LinkedU
 
                 string source = "";
 
-                if (Session["UserID"] != null)
+                using (SqlCommand comm = conn.CreateCommand())
                 {
+                    comm.CommandText = "SELECT formatted_address FROM student_profiles WHERE userID = @userID";
+                    comm.Parameters.AddWithValue("@userID", Session["UserID"]);
 
-                    using (SqlCommand comm = conn.CreateCommand())
+                    object formatted_address = comm.ExecuteScalar();
+                    if (formatted_address != null)
                     {
-                        comm.CommandText = "SELECT formatted_address FROM student_profiles WHERE userID = @userID";
-                        comm.Parameters.AddWithValue("@userID", Session["UserID"]);
-
-                        object formatted_address = comm.ExecuteScalar();
-                        if (formatted_address != null)
-                        {
-                            source = formatted_address.ToString();
-                        }
+                        source = formatted_address.ToString();
                     }
                 }
-
 
 
                 using (SqlCommand comm = conn.CreateCommand())

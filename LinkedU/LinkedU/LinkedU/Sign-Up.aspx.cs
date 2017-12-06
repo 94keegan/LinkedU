@@ -43,6 +43,10 @@ namespace LinkedU
                 }
                 Response.Write(JsonConvert.SerializeObject(universities));
             }
+            else
+            {
+                txtUserName.Focus();
+            }
         }
 
         protected void btnSignUp_Click(object sender, EventArgs e)
@@ -189,6 +193,8 @@ namespace LinkedU
                 default:
                     break;
             }
+
+            txtUserName.Focus();
         }
 
         /// <summary>
@@ -219,6 +225,12 @@ namespace LinkedU
                         {
                             valid = true;
                             PanelSignupError.Visible = false;
+
+                            if (ddlAccountType.SelectedValue == "Student")
+                                txtFirstName.Focus();
+                            else
+                                txtUniversityName.Focus();
+
                         }
                     }
                 }

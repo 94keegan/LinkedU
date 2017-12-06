@@ -100,10 +100,17 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
-                <div class="container">
+                <div class="col-md-12">
                     <p>
                         <asp:Label CssClass="search-label" Text="Name:" runat="server" />
-                        <asp:TextBox ID="SearchName" runat="server" Width="400"></asp:TextBox>
+                        <asp:TextBox ID="SearchName" runat="server" Width="300"></asp:TextBox>
+                        <asp:Label CssClass="search-label" Text="Application Status:" runat="server"></asp:Label>
+                        <asp:DropDownList ID="DropDownListApplicationStatus" runat="server">
+                            <asp:ListItem Text="Any" Value="X"></asp:ListItem>
+                            <asp:ListItem Text="Not Submitted" Value="N"></asp:ListItem>
+                            <asp:ListItem Text="Submitted" Value="S"></asp:ListItem>
+                            <asp:ListItem Text="Viewed" Value="V"></asp:ListItem>
+                        </asp:DropDownList>
                     </p>
                     <p>
                         <asp:Label CssClass="search-label" Text="Degree offering:" runat="server" />
@@ -130,10 +137,10 @@
                         </asp:DropDownList>
                         <asp:TextBox ID="TextBoxSearchCenter" runat="server" Width="20em"></asp:TextBox>
                     </p>
-                    <asp:Button Text="Search" OnClick="SearchValue_TextChanged" runat="server" CssClass="btn-sm" />
-                    <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="UpdatePanel1">
+                    <asp:Button Text="Search" OnClick="SearchValue_TextChanged" runat="server"  CssClass="btn-primary" style="float:left;margin-right:1em;" />
+                    <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="UpdatePanel1" style="float:left;margin-top:.25em;">
                         <ProgressTemplate>
-                            <asp:Image ID="UpdateInProgress" AlternateText="loading..." ImageUrl="~/img/ajax-loader.gif" runat="server" />
+                            <asp:Image ID="UpdateInProgress" AlternateText="loading..." ImageUrl="~/img/ajax-loader.gif" runat="server"  />
                         </ProgressTemplate>
                     </asp:UpdateProgress>
                 </div>

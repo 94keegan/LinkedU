@@ -59,7 +59,7 @@ namespace LinkedU
 
                     comm.CommandText = "select users.userID, concat(lastName, ', ', firstName) as name, round(gpa, 2), graduationyear, eccount, " +
                       "highscore.name as highesttest, highscore.percentile as highestpctl," +
-                      "CASE WHEN myp.notification_seen IS NOT NULL THEN 'Viewed' WHEN myp.promoted IS NOT NULL THEN 'Sent' ELSE '' END as pstatus " +
+                      "CASE WHEN myp.notification_seen IS NOT NULL THEN 'Viewed' WHEN myp.promoted IS NOT NULL THEN 'Sent' ELSE '' END as pstatus, myp.id " +
                       "FROM users inner join student_profiles ON users.userID = student_profiles.userID " +
                       "LEFT OUTER JOIN promotions myp ON myp.userID = users.userID AND myp.universityID = (SELECT universityID FROM users WHERE userID = @userID) " +
                       "OUTER APPLY (SELECT COUNT(*) as eccount FROM student_extracurriculars WHERE userID = users.userID) as extracurriculars " +
@@ -88,6 +88,19 @@ namespace LinkedU
 
                     if (SearchMinorityStatus.SelectedValue == "Y")
                         comm.CommandText += " AND (gender != 'M' AND race != 'W') ";
+
+                    switch (DropDownListPromotionStatus.SelectedValue)
+                    {
+                        case "N":
+                            comm.CommandText += "AND myp.promoted IS NULL ";
+                            break;
+                        case "V":
+                            comm.CommandText += "AND myp.notification_seen IS NOT NULL ";
+                            break;
+                        case "S":
+                            comm.CommandText += "AND (myp.promoted IS NOT NULL AND myp.notification_seen IS NULL) ";
+                            break;
+                    }
 
                     if (SearchMinimumPercentile.Text.Length > 0)
                     {
@@ -128,7 +141,11 @@ namespace LinkedU
                             cells[2] = new TableCell() { Text = reader.GetInt32(3).ToString() };
                             cells[3] = new TableCell() { Text = highscore };
                             cells[4] = new TableCell() { Text = reader.GetInt32(4).ToString() };
-                            cells[5] = new TableCell() { Text = reader.GetString(7) };
+
+                            if (!reader.IsDBNull(8))
+                                cells[5] = new TableCell() { Text = String.Format("<a href=\"ViewPromotion.aspx?id={0}\" target=\"_blank\">{1}</a>", reader.GetInt32(8), reader.GetString(7)) };
+                            else
+                                cells[5] = new TableCell() { Text = "" };
 
 
                             row.Cells.AddRange(cells);

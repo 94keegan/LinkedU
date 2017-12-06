@@ -30,7 +30,8 @@ namespace LinkedU
             }
             set
             {
-                ectype.SelectedValue = value.Type.ToString();
+                if (value.Type >= 1)
+                    ectype.SelectedValue = value.Type.ToString();
                 ecname.Text = value.Name;
             }
         }

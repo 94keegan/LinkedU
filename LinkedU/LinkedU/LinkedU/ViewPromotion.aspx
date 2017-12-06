@@ -95,6 +95,11 @@
     </div>
 
     <form id="form2" runat="server">
+        <asp:Panel ID="PanelInitiatorView" runat="server" CssClass="panel panel-primary panel-body" Visible="false">
+            <h4>Status</h4>
+            <asp:Label ID="LabelInitiatorViewSubmitted" runat="server"></asp:Label><br />
+            <asp:Label ID="LabelInitiatorViewViewed" runat="server"></asp:Label>
+        </asp:Panel>
         <asp:Panel ID="PanelPersonalMessage" runat="server" CssClass="panel panel-primary panel-body">
             <h4>University's personal message</h4>
         </asp:Panel>
