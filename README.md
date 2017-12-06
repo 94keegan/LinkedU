@@ -1,4 +1,4 @@
 # LinkedU
-Added initial project and bootstrap theme
 
-Group project for IT368
+Group project for IT368 Fall 2017
+Jason, Keegan, Zack
