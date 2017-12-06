@@ -1,7 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PayPalCheckOut.aspx.cs" Inherits="LinkedU.PayPalCheckOut" %>
 
-<%@ Register Src="~/WebUserControlNotifications.ascx" TagName="GlobalNotifications" TagPrefix="gn" %>
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -77,31 +75,24 @@
                             <b class="caret"></b></a>
                         <%
                             if (Session["UserName"] != null)
-                            {
-                                if (Session["AccountType"].ToString() == "Student")
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
-                                else if (Session["AccountType"].ToString() == "University")
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Edit Profile</a></li>");
-                                else if (Session["AccountType"].ToString() == "Admin")
-                                    Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Admin.aspx\">Administration</a></li>");
-
-                                Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
-                            }
+                                {
+                                    if (Session["AccountType"].ToString() == "Student")
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"StudentProfile.aspx\">Edit Profile</a></li><li><a href=\"StudentLookup.aspx?id=" + Session["UserID"] + "\">View Profile</a></li>");
+                                    else
+                                        Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"UniversityProfile.aspx\">Profile</a></li>");
+                                    Response.Write("<li><a href=\"Logoff.aspx\">Logoff</a></li></ul>");
+                                }
                             else
                             {
                                 Response.Write("<ul class=\"dropdown-menu\"><li><a href=\"Sign-In.aspx\">Login</a></li><li><a href=\"Sign-Up.aspx\">Sign Up</a></li></ul>");
                             }
                         %>
                     </li>
-                    <gn:GlobalNotifications ID="GlobalNotificationControl" runat="server" />
                 </ul>
             </div>
         </div>
     </div>
 
-    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-        &nbsp;&nbsp;&nbsp;
-    </form>
     <div id="contact">
         <div class="container">
             <div class="section_header">
@@ -110,23 +101,14 @@
             <div class="row contact">
                 <p>Click below to purchase one day as the &quot;Featured&quot; University on the home page. </p>
                 <p>One day costs $10. You may not purchase multiple days at this time. </p>
-                <p>&nbsp;</p>
+
                 <br />
-                <form id="form1" runat="server">
-
-                    <div class="row submit">
-                        <div class="col-md-3 right">
-                            <br />
-                        </div>
-                    </div>
-                </form>
-
-
+                
                 <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
                     <input type="hidden" name="cmd" value="_xclick" />
                     <input type="hidden" name="business" value="linkedu368@gmail.com" />
 
-                    <input type="hidden" name="item_name" value="My painting" />
+                    <input type="hidden" name="item_name" value="One day as featured University" />
                     <input type="hidden" name="amount" value="10.00" />
                     <input type="submit" value="Purchase a spot!" class="auto-style2" />
                 </form>

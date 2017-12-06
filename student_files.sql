@@ -8,14 +8,14 @@ CREATE TABLE [dbo].[student_files](
 GO
 
 ALTER TABLE [dbo].[student_files]  WITH CHECK ADD  CONSTRAINT [fk_student_files_userid] FOREIGN KEY([userID])
-REFERENCES [dbo].[logins] ([userID])
+REFERENCES [dbo].[logins] ([userID]) ON DELETE CASCADE
 GO
 
 ALTER TABLE [dbo].[student_files] CHECK CONSTRAINT [fk_student_files_userid]
 GO
 
 ALTER TABLE [dbo].[student_files]  WITH CHECK ADD  CONSTRAINT [fk_student_files_type] FOREIGN KEY([file_type])
-REFERENCES [dbo].[student_file_types] ([id])
+REFERENCES [dbo].[student_file_types] ([id]) ON DELETE CASCADE
 GO
 
 ALTER TABLE [dbo].[student_files] CHECK CONSTRAINT [fk_student_files_type]
