@@ -42,6 +42,10 @@
         .auto-style5 {
             height: 42px;
         }
+        .auto-style6 {
+            width: 79%;
+            margin-right: 541px;
+        }
     </style>
 </head>
 <body>
@@ -78,7 +82,7 @@
                     <li class="active"><a href="Contact.aspx">CONTACT US</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <%
+                        <%
                                 if (Session["UserName"] != null)
                                 {
                                     Response.Write(Session["UserName"]);
@@ -119,31 +123,47 @@
                 <h3>Admin Page</h3>
             </div>
             <div class="row contact">
-                <p>Enter the University you would like to make for review below.</p>
+                <p>Enter the University you would like to mark for review below.</p>
                 <br />
-                <table class="nav-justified">
+                <table class="auto-style6">
                     <tr>
                         <td class="auto-style3">Enter the school ID you wish to be marked for review</td>
                         <td class="auto-style4">
-                            <input class="name form-control" name="UniversityID" type="text" placeholder="UniversityID" required="required" />
-                            <asp:Label ID="lblResult" runat="server" Text="Label" Visible="False"></asp:Label>
+                            &nbsp;<asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+                                <asp:ListItem Text="Mark for Review" Value="1"></asp:ListItem>
+                     <asp:ListItem Text="UnMark for Review" Value="2"></asp:ListItem>
+                                <asp:ListItem Text="View all marked Universities" Value="3"></asp:ListItem>
+
+                            </asp:DropDownList>
+
                         </td>
+                        <td class="auto-style4">
+
+                            <input class="name form-control" name="UniversityID" type="text" placeholder="UniversityID" style="width: 85%" /></td>
                         <td class="auto-style5">
 
-                <asp:Button ID="btnRequest" runat="server" OnClick="btnRequest_Click" Text="Mark for Review" CssClass="btn-primary" />
+                <asp:Button ID="btnRequest" runat="server" OnClick="btnRequest_Click" Text="Submit" CssClass="btn-primary" />
 
-                <asp:Button ID="btnRequest0" runat="server" OnClick="btnRequest0_Click" Text="Remove from Review" CssClass="btn-primary" />
                         </td>
                     </tr>
                     <tr>
                         <td class="auto-style1">&nbsp;</td>
                         <td class="auto-style2">
-                            &nbsp;</td>
+                            <asp:Label ID="Label1" runat="server" Visible="False"></asp:Label>
+                        </td>
+                        <td class="auto-style2">
+                            <asp:Label ID="lblID" runat="server" Visible="False"></asp:Label>
+                        </td>
                         <td>
-                            &nbsp;</td>
+
+                            <asp:Label ID="lblResult" runat="server" Text="Label" Visible="False"></asp:Label>
+                        </td>
                     </tr>
                     <tr>
                         <td class="auto-style1">&nbsp;</td>
+                        
+                        <td class="auto-style2">
+                            &nbsp;</td>
                         
                         <td class="auto-style2">
                             &nbsp;</td>
