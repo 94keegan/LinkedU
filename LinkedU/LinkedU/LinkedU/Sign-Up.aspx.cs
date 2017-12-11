@@ -54,7 +54,7 @@ namespace LinkedU
             string connectionString = ConfigurationManager.ConnectionStrings["LinkedUConnectionString"].ConnectionString;
             using (SqlConnection dbConnection = new SqlConnection(connectionString))
             {
-                // Check if passwords match
+                // Validate that passwords match
                 if (!string.IsNullOrWhiteSpace(txtPassword.Text) && !string.IsNullOrWhiteSpace(txtConfPassword.Text) && txtPassword.Text.Equals(txtConfPassword.Text))
                 {
                     successful = true;
@@ -65,6 +65,14 @@ namespace LinkedU
                     successful = false;
                     PanelSignupError.Visible = true;
                     lblSignupError.Text = "Passwords do not match!";
+                }
+
+                // Validate that universityID is not null when signing up as a university
+                if (ddlAccountType.Text == "University" && string.IsNullOrWhiteSpace(UniversityID.Value))
+                {
+                    successful = false;
+                    PanelSignupError.Visible = true;
+                    lblSignupError.Text = "Select university after typing name!";
                 }
 
                 // Validate phone number
