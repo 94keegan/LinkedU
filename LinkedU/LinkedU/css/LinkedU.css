@@ -1,0 +1,61 @@
+﻿#RememberMe {
+    text-align: left;
+    font-size: 16px;
+    height: 40px;
+    margin-top: -30px;
+    width: 100%;
+}
+
+#Wizard1 div span:first-child {
+    display: inline-block;
+    width: 8em;
+    font-weight: bold;
+}
+
+.floatleft {
+    float: left;
+    padding-right: 1em;
+}
+
+div.navbar + div, div.navbar + form {
+    min-height: 65vh;
+}
+
+span.search-label + input, span.search-label + text, span.search-label + select {
+    margin-left: .25em;
+    margin-right: .75em;
+}
+
+span.search-label-suffix {
+    margin-left: -.6em;
+    margin-right: .75em;
+}
+
+span.search-label-between {
+    margin-left: -.6em;
+}
+
+#Wizard1 td:first-child table td a {
+    padding-left: .3em
+}
+
+#Wizard1 td:first-child table td[style*="font-weight"] a {
+    text-decoration: underline;
+    font-size: 1.1em;
+    padding-left: 0;
+}
+
+#Wizard1 td:first-child table td:not([style*="font-weight"]) a:hover {
+    text-decoration: underline;
+    margin-left: -.1em;
+    margin-right: .1em;
+}
+
+.profile-picture {
+    max-width: 120%;
+    margin-left: -.5em;
+}
+
+div.iframe-loading {
+    background: url(../img/ajax-loader.gif) center center no-repeat;
+}

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://iis2.it.ilstu.edu/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://iis2.it.ilstu.edu/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://iis2.it.ilstu.edu/">
+      <s:element name="GetDistance">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sourceLat" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="sourceLong" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="destLat" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="destLong" type="s:float" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDistanceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDistanceResult" type="tns:Path" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Path">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Distance" type="tns:TextValue" />
+          <s:element minOccurs="0" maxOccurs="1" name="Duration" type="tns:TextValue" />
+          <s:element minOccurs="0" maxOccurs="1" name="SourceAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DestinationAddress" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TextValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Text" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Value" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetLocation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="street" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="city" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="zip" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLocationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLocationResult" type="tns:Geolocation" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Geolocation">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Latitude" type="s:float" />
+          <s:element minOccurs="1" maxOccurs="1" name="Longitude" type="s:float" />
+          <s:element minOccurs="0" maxOccurs="1" name="FormattedAddress" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetLocationFromAddress">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fullAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLocationFromAddressResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLocationFromAddressResult" type="tns:Geolocation" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetDistanceSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDistance" />
+  </wsdl:message>
+  <wsdl:message name="GetDistanceSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDistanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLocation" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationFromAddressSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLocationFromAddress" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationFromAddressSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLocationFromAddressResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DistanceFinderSoap">
+    <wsdl:operation name="GetDistance">
+      <wsdl:input message="tns:GetDistanceSoapIn" />
+      <wsdl:output message="tns:GetDistanceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLocation">
+      <wsdl:input message="tns:GetLocationSoapIn" />
+      <wsdl:output message="tns:GetLocationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationFromAddress">
+      <wsdl:input message="tns:GetLocationFromAddressSoapIn" />
+      <wsdl:output message="tns:GetLocationFromAddressSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DistanceFinderSoap" type="tns:DistanceFinderSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDistance">
+      <soap:operation soapAction="http://iis2.it.ilstu.edu/GetDistance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocation">
+      <soap:operation soapAction="http://iis2.it.ilstu.edu/GetLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationFromAddress">
+      <soap:operation soapAction="http://iis2.it.ilstu.edu/GetLocationFromAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DistanceFinderSoap12" type="tns:DistanceFinderSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDistance">
+      <soap12:operation soapAction="http://iis2.it.ilstu.edu/GetDistance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocation">
+      <soap12:operation soapAction="http://iis2.it.ilstu.edu/GetLocation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationFromAddress">
+      <soap12:operation soapAction="http://iis2.it.ilstu.edu/GetLocationFromAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DistanceFinder">
+    <wsdl:port name="DistanceFinderSoap" binding="tns:DistanceFinderSoap">
+      <soap:address location="http://iis2.it.ilstu.edu/17f368/it368f711/app10/DistanceFinder.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DistanceFinderSoap12" binding="tns:DistanceFinderSoap12">
+      <soap12:address location="http://iis2.it.ilstu.edu/17f368/it368f711/app10/DistanceFinder.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
